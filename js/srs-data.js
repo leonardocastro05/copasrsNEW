@@ -1,0 +1,306 @@
+// ============================================================
+// SPANISH RACING SERIES — DATA T37
+// ============================================================
+
+const SRS = {
+
+    season: { number: 37, title: 'Temporada 37' },
+
+    // ── PILOTOS (clasificación final J10) ─────────────────────
+    // clasificado: true = pasa a eliminatorias (top 17 con datos en bracket)
+    pilotos: [
+        { pos: 1, nombre: 'André Prov', equipo: 'Tortuga', puntos: 30, clasificado: true },
+        { pos: 2, nombre: 'Romus Toras', equipo: '50 Rizia Royal Racing', puntos: 27, clasificado: true },
+        { pos: 3, nombre: 'Vasvo Lao', equipo: 'Subaru F1 Team', puntos: 27, clasificado: true },
+        { pos: 4, nombre: 'Thiago Campos', equipo: 'Mercedes', puntos: 27, clasificado: true },
+        { pos: 5, nombre: 'Leoo Ferreira', equipo: '07 CRT Competition', puntos: 27, clasificado: true },
+        { pos: 6, nombre: 'Sergio Solano', equipo: '13 CRT Competition', puntos: 24, clasificado: true },
+        { pos: 7, nombre: 'Valdi CT', equipo: '77 Campos Racing F1', puntos: 21, clasificado: true },
+        { pos: 8, nombre: 'Antonio Pinillos', equipo: 'Red Bull Pinkustercia F1 Team', puntos: 21, clasificado: true },
+        { pos: 9, nombre: 'Eduardo Calvo', equipo: '72 CTC VCR Foxtrot', puntos: 21, clasificado: true },
+        { pos: 10, nombre: 'Cristian Ezpeleta', equipo: '99 Campos Racing F1', puntos: 21, clasificado: true },
+        { pos: 11, nombre: 'Roma II', equipo: '69 CRT Competition', puntos: 18, clasificado: true },
+        { pos: 12, nombre: 'Alexis Iceman', equipo: '00 CRT Competition', puntos: 18, clasificado: true },
+        { pos: 13, nombre: 'Francisco Martínez', equipo: 'Renfe Cercanías RT', puntos: 18, clasificado: true },
+        { pos: 14, nombre: 'Juan Garcia', equipo: 'Ferrari F1 Team', puntos: 18, clasificado: true },
+        { pos: 15, nombre: 'Julio Maidana', equipo: '18 BMW Team', puntos: 15, clasificado: true },
+        { pos: 16, nombre: 'Tony Crowther', equipo: '44 Patria Italia', puntos: 15, clasificado: false },
+        { pos: 17, nombre: 'Freya Anafi', equipo: 'Renfe Cercanías RT', puntos: 15, clasificado: true },
+        { pos: 18, nombre: 'Marc cr Rayo', equipo: 'Rayito Team', puntos: 15, clasificado: false },
+        { pos: 19, nombre: 'Álvaro Redondo', equipo: '36 CTC VCR FTSE', puntos: 12, clasificado: false },
+        { pos: 20, nombre: 'Giacomina Leclerc', equipo: 'Patria Italia', puntos: 12, clasificado: false },
+        { pos: 21, nombre: 'Mauro Reyes Hernández', equipo: '26 Zetta Racing', puntos: 12, clasificado: false },
+        { pos: 22, nombre: 'Pablo Mariño', equipo: 'Aston Martin F1 Team Mariño', puntos: 9, clasificado: false },
+        { pos: 23, nombre: 'Alejandro Alonso', equipo: '3 Zetta Racing', puntos: 9, clasificado: false },
+        { pos: 24, nombre: 'Stefano Cann', equipo: 'Italica Siracusa', puntos: 9, clasificado: false },
+        { pos: 25, nombre: 'Blake Ezeh', equipo: 'Ferrari HoloLive Racing Team', puntos: 9, clasificado: false },
+        { pos: 26, nombre: 'Templario VCR', equipo: 'Hispania Racing Team', puntos: 6, clasificado: false },
+        { pos: 27, nombre: 'Christian Horny', equipo: '15 Zetta Racing', puntos: 6, clasificado: false },
+        { pos: 28, nombre: 'Marco Rodríguez', equipo: '94 Pagani Renault', puntos: 3, clasificado: false },
+        { pos: 29, nombre: 'Cristóbal Farías', equipo: '18 Zetta Racing', puntos: 0, clasificado: false },
+        { pos: 30, nombre: 'Rui Acacio', equipo: 'Flamengüam', puntos: 0, clasificado: false },
+        { pos: 31, nombre: 'Sebas Srg Ramírez', equipo: "11 Ferrari McDonald's", puntos: 0, clasificado: false },
+        { pos: 32, nombre: 'Peppe Vedda', equipo: 'Iron Racing Team', puntos: 0, clasificado: false },
+    ],
+
+    // ── JORNADAS ──────────────────────────────────────────────
+    // estado: 'completada' | 'activa' | 'pendiente'
+    // Cada duelo: { g: ganador, pg: posCarrera ganador, l: perdedor, pl: posCarrera perdedor }
+    // pg/pl: null si DNS/DNF
+    jornadas: [
+        {
+            nombre: 'Jornada 1', fecha: '2025-05-12', fechaLabel: 'Lunes 12 de mayo',
+            estado: 'completada',
+            duelos: [
+                { g: 'Valdi CT', pg: 'P8', l: 'Stefano Cann', pl: 'P22' },
+                { g: 'André Prov', pg: 'P6', l: 'Julio Maidana', pl: 'DNF' },
+                { g: 'Leoo Ferreira', pg: 'P2', l: 'Marc cr Rayo', pl: 'P21' },
+                { g: 'Romus Toras', pg: 'P1', l: 'Eduardo Calvo', pl: 'P9' },
+                { g: 'Cristian Ezpeleta', pg: 'P13', l: 'Pablo Mariño', pl: 'P14' },
+                { g: 'Sergio Solano', pg: 'P5', l: 'Mauro Reyes', pl: 'P27' },
+                { g: 'Vasvo Lao', pg: 'P3', l: 'Álvaro Redondo', pl: 'P17' },
+                { g: 'Marco Rodríguez', pg: 'P16', l: 'Sebas Srg Ramírez', pl: 'DNF' },
+                { g: 'Alexis Iceman', pg: 'P11', l: 'Giacomina Leclerc', pl: 'DSQ' },
+                { g: 'Juan Garcia', pg: 'P7', l: 'Alejandro Alonso', pl: 'P18' },
+                { g: 'Tony Crowther', pg: 'P23', l: 'Christian Horny', pl: 'P25' },
+                { g: 'Antonio Pinillos', pg: 'P10', l: 'Thiago Campos', pl: 'P12' },
+                { g: 'Freya Anafi', pg: 'P19', l: 'Rui Acacio', pl: '+2L' },
+                { g: 'Blake Ezeh', pg: 'P15', l: 'Cristóbal Farías', pl: 'P26' },
+                { g: 'Francisco Martínez', pg: 'P24', l: 'Peppe Vedda', pl: 'DNF' },
+                { g: 'Roma II', pg: 'P4', l: 'Templario VCR', pl: 'P20' },
+            ]
+        },
+        {
+            nombre: 'Jornada 2', fecha: '2025-05-14', fechaLabel: 'Miércoles 14 de mayo',
+            estado: 'completada',
+            duelos: [
+                { g: 'Valdi CT', pg: 'P8', l: 'Mauro Reyes', pl: 'P30' },
+                { g: 'André Prov', pg: 'P3', l: 'Tony Crowther', pl: 'P21' },
+                { g: 'Leoo Ferreira', pg: 'P2', l: 'Templario VCR', pl: 'P20' },
+                { g: 'Eduardo Calvo', pg: 'P7', l: 'Antonio Pinillos', pl: 'P16' },
+                { g: 'Cristian Ezpeleta', pg: 'P9', l: 'Rui Acacio', pl: 'P28' },
+                { g: 'Sergio Solano', pg: 'P6', l: 'Blake Ezeh', pl: 'P27' },
+                { g: 'Vasvo Lao', pg: 'P4', l: 'Pablo Mariño', pl: 'P24' },
+                { g: 'Freya Anafi', pg: 'P13', l: 'Marco Rodríguez', pl: 'P25' },
+                { g: 'Thiago Campos', pg: 'P10', l: 'Alexis Iceman', pl: 'P11' },
+                { g: 'Juan Garcia', pg: 'P5', l: 'Francisco Martínez', pl: 'P26' },
+                { g: 'Álvaro Redondo', pg: 'P15', l: 'Sebas Srg Ramírez', pl: 'P29' },
+                { g: 'Marc cr Rayo', pg: 'P18', l: 'Julio Maidana', pl: 'P19' },
+                { g: 'Alejandro Alonso', pg: 'P17', l: 'Giacomina Leclerc', pl: 'DSQ' },
+                { g: 'Stefano Cann', pg: 'P12', l: 'Roma II', pl: 'P14' },
+                { g: 'Christian Horny', pg: 'P22', l: 'Cristóbal Farías', pl: 'P23' },
+                { g: 'Romus Toras', pg: 'P1', l: 'Peppe Vedda', pl: 'DNF' },
+            ]
+        },
+        {
+            nombre: 'Jornada 3', fecha: '2025-05-16', fechaLabel: 'Viernes 16 de mayo',
+            estado: 'completada',
+            duelos: [
+                { g: 'Valdi CT', pg: 'P1', l: 'Roma II', pl: 'P10' },
+                { g: 'André Prov', pg: 'P7', l: 'Christian Horny', pl: 'P26' },
+                { g: 'Leoo Ferreira', pg: 'P4', l: 'Alexis Iceman', pl: 'P11' },
+                { g: 'Eduardo Calvo', pg: 'P15', l: 'Cristóbal Farías', pl: 'P25' },
+                { g: 'Marc cr Rayo', pg: 'P14', l: 'Cristian Ezpeleta', pl: 'P19' },
+                { g: 'Sergio Solano', pg: 'P8', l: 'Alejandro Alonso', pl: 'P21' },
+                { g: 'Vasvo Lao', pg: 'P3', l: 'Stefano Cann', pl: 'P9' },
+                { g: 'Tony Crowther', pg: 'P12', l: 'Marco Rodríguez', pl: 'P29' },
+                { g: 'Juan Garcia', pg: 'P5', l: 'Sebas Srg Ramírez', pl: 'P28' },
+                { g: 'Romus Toras', pg: 'P6', l: 'Álvaro Redondo', pl: 'P22' },
+                { g: 'Antonio Pinillos', pg: 'P16', l: 'Peppe Vedda', pl: 'P20' },
+                { g: 'Freya Anafi', pg: 'P31', l: 'Pablo Mariño', pl: 'P32' },
+                { g: 'Julio Maidana', pg: 'P13', l: 'Giacomina Leclerc', pl: 'P17' },
+                { g: 'Thiago Campos', pg: 'P2', l: 'Blake Ezeh', pl: 'P23' },
+                { g: 'Francisco Martínez', pg: 'P24', l: 'Rui Acacio', pl: 'P30' },
+                { g: 'Mauro Reyes', pg: 'P18', l: 'Templario VCR', pl: 'P27' },
+            ]
+        },
+        {
+            nombre: 'Jornada 4', fecha: '2025-05-19', fechaLabel: 'Lunes 19 de mayo',
+            estado: 'completada',
+            duelos: [
+                { g: 'Valdi CT', pg: 'P4', l: 'Álvaro Redondo', pl: 'P17' },
+                { g: 'André Prov', pg: 'P9', l: 'Roma II', pl: 'P11' },
+                { g: 'Leoo Ferreira', pg: 'P1', l: 'Rui Acacio', pl: 'P27' },
+                { g: 'Eduardo Calvo', pg: 'P8', l: 'Blake Ezeh', pl: 'P26' },
+                { g: 'Cristian Ezpeleta', pg: 'P12', l: 'Templario VCR', pl: 'P24' },
+                { g: 'Sergio Solano', pg: 'P3', l: 'Alexis Iceman', pl: 'P10' },
+                { g: 'Vasvo Lao', pg: 'P2', l: 'Peppe Vedda', pl: 'P16' },
+                { g: 'Francisco Martínez', pg: 'P22', l: 'Marco Rodríguez', pl: 'DNF' },
+                { g: 'Juan Garcia', pg: 'P29', l: 'Julio Maidana', pl: 'DNF' },
+                { g: 'Tony Crowther', pg: 'P21', l: 'Cristóbal Farías', pl: 'P25' },
+                { g: 'Pablo Mariño', pg: 'P13', l: 'Antonio Pinillos', pl: 'P15' },
+                { g: 'Romus Toras', pg: 'P6', l: 'Marc cr Rayo', pl: 'P23' },
+                { g: 'Thiago Campos', pg: 'P5', l: 'Freya Anafi', pl: 'P28' },
+                { g: 'Giacomina Leclerc', pg: 'P7', l: 'Mauro Reyes', pl: 'P18' },
+                { g: 'Stefano Cann', pg: 'P20', l: 'Sebas Srg Ramírez', pl: 'P31' },
+                { g: 'Alejandro Alonso', pg: 'P14', l: 'Christian Horny', pl: 'P19' },
+            ]
+        },
+        {
+            nombre: 'Jornada 5', fecha: '2025-05-21', fechaLabel: 'Miércoles 21 de mayo',
+            estado: 'completada',
+            duelos: [
+                { g: 'Valdi CT', pg: 'P7', l: 'Alejandro Alonso', pl: 'P22' },
+                { g: 'André Prov', pg: 'P6', l: 'Marc cr Rayo', pl: 'P25' },
+                { g: 'Leoo Ferreira', pg: 'P5', l: 'Blake Ezeh', pl: 'P28' },
+                { g: 'Thiago Campos', pg: 'P4', l: 'Eduardo Calvo', pl: 'P10' },
+                { g: 'Cristian Ezpeleta', pg: 'P11', l: 'Juan Garcia', pl: 'P17' },
+                { g: 'Sergio Solano', pg: 'P15', l: 'Julio Maidana', pl: 'DNF' },
+                { g: 'Vasvo Lao', pg: 'P1', l: 'Christian Horny', pl: 'P19' },
+                { g: 'Roma II', pg: 'P9', l: 'Marco Rodríguez', pl: 'P31' },
+                { g: 'Alexis Iceman', pg: 'P8', l: 'Cristóbal Farías', pl: 'P26' },
+                { g: 'Tony Crowther', pg: 'P16', l: 'Templario VCR', pl: 'DNF' },
+                { g: 'Francisco Martínez', pg: 'P18', l: 'Álvaro Redondo', pl: 'P21' },
+                { g: 'Antonio Pinillos', pg: 'P14', l: 'Rui Acacio', pl: 'P27' },
+                { g: 'Freya Anafi', pg: 'P23', l: 'Peppe Vedda', pl: 'P24' },
+                { g: 'Giacomina Leclerc', pg: 'P2', l: 'Sebas Srg Ramírez', pl: 'P29' },
+                { g: 'Romus Toras', pg: 'P3', l: 'Stefano Cann', pl: 'P13' },
+                { g: 'Pablo Mariño', pg: 'P12', l: 'Mauro Reyes', pl: 'P20' },
+            ]
+        },
+        {
+            nombre: 'Jornada 6', fecha: '2025-05-23', fechaLabel: 'Viernes 23 de mayo',
+            estado: 'completada',
+            duelos: [
+                { g: 'Giacomina Leclerc', pg: 'P3', l: 'Valdi CT', pl: 'P7' },
+                { g: 'André Prov', pg: 'P1', l: 'Vasvo Lao', pl: 'P6' },
+                { g: 'Leoo Ferreira', pg: 'P5', l: 'Peppe Vedda', pl: 'DNS' },
+                { g: 'Tony Crowther', pg: 'P11', l: 'Eduardo Calvo', pl: 'P20' },
+                { g: 'Thiago Campos', pg: 'P4', l: 'Cristian Ezpeleta', pl: 'P18' },
+                { g: 'Antonio Pinillos', pg: 'P12', l: 'Sergio Solano', pl: 'P13' },
+                { g: 'Mauro Reyes', pg: 'P23', l: 'Marco Rodríguez', pl: 'DNS' },
+                { g: 'Alexis Iceman', pg: 'P8', l: 'Christian Horny', pl: 'P31' },
+                { g: 'Roma II', pg: 'P9', l: 'Juan Garcia', pl: 'P27' },
+                { g: 'Álvaro Redondo', pg: 'P14', l: 'Blake Ezeh', pl: 'P17' },
+                { g: 'Marc cr Rayo', pg: 'P16', l: 'Sebas Srg Ramírez', pl: 'DNS' },
+                { g: 'Freya Anafi', pg: 'P19', l: 'Templario VCR', pl: 'DNF' },
+                { g: 'Julio Maidana', pg: 'P15', l: 'Stefano Cann', pl: 'P21' },
+                { g: 'Francisco Martínez', pg: 'P22', l: 'Cristóbal Farías', pl: 'P24' },
+                { g: 'Romus Toras', pg: 'P2', l: 'Pablo Mariño', pl: 'P10' },
+                { g: 'Alejandro Alonso', pg: 'P25', l: 'Rui Acacio', pl: 'P26' },
+            ]
+        },
+        {
+            nombre: 'Jornada 7', fecha: '2025-05-26', fechaLabel: 'Lunes 26 de mayo',
+            estado: 'completada',
+            duelos: [
+                { g: 'Valdi CT', pg: 'P3', l: 'Sebas Srg Ramírez', pl: 'DNS' },
+                { g: 'André Prov', pg: 'P1', l: 'Templario VCR', pl: 'P13' },
+                { g: 'Leoo Ferreira', pg: 'P5', l: 'Tony Crowther', pl: 'P18' },
+                { g: 'Eduardo Calvo', pg: 'P2', l: 'Pablo Mariño', pl: 'P28' },
+                { g: 'Giacomina Leclerc', pg: 'P7', l: 'Cristian Ezpeleta', pl: 'P11' },
+                { g: 'Sergio Solano', pg: 'P10', l: 'Francisco Martínez', pl: 'P27' },
+                { g: 'Vasvo Lao', pg: 'P8', l: 'Cristóbal Farías', pl: 'P20' },
+                { g: 'Antonio Pinillos', pg: 'P19', l: 'Marco Rodríguez', pl: 'DNS' },
+                { g: 'Alexis Iceman', pg: 'P9', l: 'Rui Acacio', pl: 'P25' },
+                { g: 'Juan Garcia', pg: 'P12', l: 'Freya Anafi', pl: 'DNF' },
+                { g: 'Roma II', pg: 'P14', l: 'Álvaro Redondo', pl: 'P24' },
+                { g: 'Mauro Reyes', pg: 'P17', l: 'Marc cr Rayo', pl: 'P22' },
+                { g: 'Blake Ezeh', pg: 'P26', l: 'Peppe Vedda', pl: 'DNS' },
+                { g: 'Stefano Cann', pg: 'P16', l: 'Alejandro Alonso', pl: 'P29' },
+                { g: 'Julio Maidana', pg: 'P15', l: 'Christian Horny', pl: 'P23' },
+                { g: 'Thiago Campos', pg: 'P4', l: 'Romus Toras', pl: 'P6' },
+            ]
+        },
+        {
+            nombre: 'Jornada 8', fecha: '2025-05-28', fechaLabel: 'Miércoles 28 de mayo',
+            estado: 'completada',
+            duelos: [
+                { g: 'Thiago Campos', pg: 'P3', l: 'Valdi CT', pl: 'P10' },
+                { g: 'André Prov', pg: 'P2', l: 'Alexis Iceman', pl: 'P12' },
+                { g: 'Leoo Ferreira', pg: 'P4', l: 'Christian Horny', pl: 'P13' },
+                { g: 'Eduardo Calvo', pg: 'P5', l: 'Freya Anafi', pl: 'P20' },
+                { g: 'Cristian Ezpeleta', pg: 'P14', l: 'Julio Maidana', pl: 'P25' },
+                { g: 'Sergio Solano', pg: 'P9', l: 'Pablo Mariño', pl: 'P11' },
+                { g: 'Vasvo Lao', pg: 'P7', l: 'Juan Garcia', pl: 'P16' },
+                { g: 'Blake Ezeh', pg: 'DNF', l: 'Marco Rodríguez', pl: 'DNS' },
+                { g: 'Antonio Pinillos', pg: 'P19', l: 'Tony Crowther', pl: 'DNS' },
+                { g: 'Álvaro Redondo', pg: 'P15', l: 'Alejandro Alonso', pl: 'P18' },
+                { g: 'Marc cr Rayo', pg: 'P22', l: 'Francisco Martínez', pl: 'P23' },
+                { g: 'Roma II', pg: 'P6', l: 'Giacomina Leclerc', pl: 'P8' },
+                { g: 'Mauro Reyes', pg: 'P17', l: 'Stefano Cann', pl: 'DNS' },
+                { g: 'Romus Toras', pg: 'P1', l: 'Templario VCR', pl: 'P21' },
+            ]
+        },
+        {
+            nombre: 'Jornada 9', fecha: '2025-05-30', fechaLabel: 'Viernes 30 de mayo',
+            estado: 'completada',
+            duelos: [
+                { g: 'Romus Toras', pg: 'P1', l: 'Valdi CT', pl: 'P3' },
+                { g: 'André Prov', pg: 'P2', l: 'Pablo Mariño', pl: 'P9' },
+                { g: 'Leoo Ferreira', pg: 'P6', l: 'Antonio Pinillos', pl: 'P17' },
+                { g: 'Eduardo Calvo', pg: 'P5', l: 'Marco Rodríguez', pl: 'DNS' },
+                { g: 'Cristian Ezpeleta', pg: 'P23', l: 'Stefano Cann', pl: 'DNS' },
+                { g: 'Sergio Solano', pg: 'P7', l: 'Tony Crowther', pl: 'DNS' },
+                { g: 'Vasvo Lao', pg: 'P8', l: 'Freya Anafi', pl: 'P14' },
+                { g: 'Alexis Iceman', pg: 'P10', l: 'Templario VCR', pl: 'P28' },
+                { g: 'Juan Garcia', pg: 'P19', l: 'Blake Ezeh', pl: 'P26' },
+                { g: 'Julio Maidana', pg: 'P20', l: 'Álvaro Redondo', pl: 'DNF' },
+                { g: 'Marc cr Rayo', pg: 'P12', l: 'Roma II', pl: 'DNF' },
+                { g: 'Francisco Martínez', pg: 'P22', l: 'Giacomina Leclerc', pl: 'P29' },
+                { g: 'Christian Horny', pg: 'P11', l: 'Mauro Reyes', pl: 'P24' },
+                { g: 'Thiago Campos', pg: 'P4', l: 'Alejandro Alonso', pl: 'P25' },
+            ]
+        },
+        {
+            nombre: 'Jornada 10', fecha: '2025-06-02', fechaLabel: 'Lunes 2 de junio',
+            estado: 'completada',
+            duelos: [
+                { g: 'Valdi CT', pg: 'P2', l: 'Marco Rodríguez', pl: 'DNS' },
+                { g: 'André Prov', pg: 'P7', l: 'Freya Anafi', pl: 'P14' },
+                { g: 'Thiago Campos', pg: 'P4', l: 'Leoo Ferreira', pl: 'P5' },
+                { g: 'Eduardo Calvo', pg: 'P11', l: 'Francisco Martínez', pl: 'P23' },
+                { g: 'Cristian Ezpeleta', pg: 'P8', l: 'Christian Horny', pl: 'P16' },
+                { g: 'Roma II', pg: 'P10', l: 'Sergio Solano', pl: 'DNF' },
+                { g: 'Vasvo Lao', pg: 'P3', l: 'Giacomina Leclerc', pl: 'P6' },
+                { g: 'Alexis Iceman', pg: 'P9', l: 'Marc cr Rayo', pl: 'P18' },
+                { g: 'Romus Toras', pg: 'P1', l: 'Juan Garcia', pl: 'P13' },
+                { g: 'Pablo Mariño', pg: 'P12', l: 'Tony Crowther', pl: 'DNS' },
+                { g: 'Álvaro Redondo', pg: 'P19', l: 'Mauro Reyes', pl: 'P20' },
+                { g: 'Antonio Pinillos', pg: 'P17', l: 'Stefano Cann', pl: 'DNS' },
+                { g: 'Templario VCR', pg: 'DNF', l: 'Blake Ezeh', pl: 'DNS' },
+                { g: 'Julio Maidana', pg: 'P15', l: 'Alejandro Alonso', pl: 'P27' },
+            ]
+        },
+    ],
+
+    // ── ELIMINATORIAS ─────────────────────────────────────────
+    // Bracket simétrico: izq (oct 1-4) → cuartos izq → semis → final ← semis ← cuartos der ← oct (5-8) der
+    eliminatorias: {
+        octavos: [
+            // LEFT side (arriba→abajo)
+            { id: 'oct-1', p1: 'Romus Toras', s1: '2', pos1: 'P?', p2: 'Alexis Iceman', s2: '12', pos2: 'P?', ganador: 'Romus Toras', posG: 'P?', posL: 'P?' },
+            { id: 'oct-2', p1: 'Vasvo Lao', s1: '3', pos1: 'P?', p2: 'Eduardo Calvo', s2: '9', pos2: 'P?', ganador: 'Eduardo Calvo', posG: 'P?', posL: 'P?' },
+            { id: 'oct-3', p1: 'Juan Garcia', s1: '14', pos1: 'P?', p2: 'Sergio Solano', s2: '6', pos2: 'P?', ganador: 'Sergio Solano', posG: 'P?', posL: 'P?' },
+            { id: 'oct-4', p1: 'André Prov', s1: '1', pos1: 'P?', p2: 'Valdi CT', s2: '7', pos2: 'P?', ganador: 'André Prov', posG: 'P?', posL: 'P?' },
+            // RIGHT side (arriba→abajo)
+            { id: 'oct-5', p1: 'Leoo Ferreira', s1: '5', pos1: 'P?', p2: 'F. Martínez', s2: '13', pos2: 'P?', ganador: 'Leoo Ferreira', posG: 'P?', posL: 'P?' },
+            { id: 'oct-6', p1: 'Thiago Campos', s1: '4', pos1: 'P?', p2: 'Roma II', s2: '11', pos2: 'P?', ganador: 'Thiago Campos', posG: 'P?', posL: 'P?' },
+            { id: 'oct-7', p1: 'C. Ezpeleta', s1: '10', pos1: 'P?', p2: 'A. Pinillos', s2: '8', pos2: 'P?', ganador: 'C. Ezpeleta', posG: 'P?', posL: 'P?' },
+            { id: 'oct-8', p1: 'Freya Anafi', s1: '17', pos1: 'P?', p2: 'Julio Maidana', s2: '15', pos2: 'P?', ganador: 'Julio Maidana', posG: 'P?', posL: 'P?' },
+        ],
+        cuartos: [
+            { id: 'cua-1', p1: 'Romus Toras', s1: '2', p2: 'Eduardo Calvo', s2: '9', ganador: null, posG: null, posL: null },
+            { id: 'cua-2', p1: 'Sergio Solano', s1: '6', p2: 'André Prov', s2: '1', ganador: null, posG: null, posL: null },
+            { id: 'cua-3', p1: 'Leoo Ferreira', s1: '5', p2: 'Thiago Campos', s2: '4', ganador: null, posG: null, posL: null },
+            { id: 'cua-4', p1: 'C. Ezpeleta', s1: '10', p2: 'Julio Maidana', s2: '15', ganador: null, posG: null, posL: null },
+        ],
+        semis: [
+            { id: 'sem-1', p1: 'Gan. C1', s1: 'G', p2: 'Gan. C2', s2: 'G', ganador: null, posG: null, posL: null },
+            { id: 'sem-2', p1: 'Gan. C3', s1: 'G', p2: 'Gan. C4', s2: 'G', ganador: null, posG: null, posL: null },
+        ],
+        final: { id: 'fin-1', p1: 'Gan. S1', s1: 'G', p2: 'Gan. S2', s2: 'G', ganador: null, posG: null, posL: null },
+    },
+
+    // ── SOCIAL / REDES ────────────────────────────────────────
+    redes: [
+        { label: 'TikTok', href: 'https://www.tiktok.com/@calvo.plan?_r=1&_t=ZN-93aEsFGNWVi' },
+        { label: 'Twitch', href: 'https://www.twitch.tv/sergiote_g20' },
+        { label: 'Twitch Alt', href: 'https://www.twitch.tv/prodigss' },
+        { label: 'YouTube', href: 'https://youtube.com/@spanishracingseries?si=9LkAzkI-EK1h5c3W' },
+        { label: 'Discord', href: 'https://discord.gg/anDChwwQA' },
+        { label: 'Instagram', href: 'https://www.instagram.com/spanishracingseries_?igsh=MXZiMnczNXBraDJobw==' },
+        { label: 'WhatsApp', href: 'https://chat.whatsapp.com/KVf4sll1iDi8RmqroMjWDa' },
+    ],
+
+};

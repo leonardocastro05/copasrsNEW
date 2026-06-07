@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Racing Series — Temporada 37</title>
+    <link rel="stylesheet" href="css/srs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="ambient" aria-hidden="true"></div>
+
+    <!-- ══ HEADER ══════════════════════════════════════════════ -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="index.html">
+                <span class="brand-icon">🏁</span>
+                <span class="brand-name">SRS <span>T37</span></span>
+            </a>
+            <nav class="site-nav" aria-label="Principal">
+                <a href="index.html" class="active">Inicio</a>
+                <a href="jornadas.html">Jornadas</a>
+                <a href="eliminatorias.html">Eliminatorias</a>
+            </nav>
+            <span class="season-badge">TEMP. 37</span>
+        </div>
+    </header>
+
+    <!-- ══ HERO ════════════════════════════════════════════════ -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+
+                <!-- LEFT: copy + stats + CTAs -->
+                <div>
+                    <p class="hero-eyebrow">Spanish Racing Series · iGP Manager</p>
+                    <h1 class="hero-title">
+                        Copa<br>
+                        <span class="accent">Temporada</span><br>
+                        <span class="stroke">37</span>
+                    </h1>
+                    <p class="hero-desc">
+                        32 mánagers compiten en 10 jornadas — lunes, miércoles y viernes a las 21:00 h (hora
+                        peninsular).
+                        Los 16 mejores clasifican a la fase de eliminatorias.
+                    </p>
+
+                    <div class="hero-stats-row" id="hero-stats"></div>
+
+                    <div class="hero-ctas">
+                        <a class="btn btn--primary" href="jornadas.html">
+                            <i class="fas fa-calendar-alt"></i> Ver Jornadas
+                        </a>
+                        <a class="btn btn--outline" href="eliminatorias.html">
+                            <i class="fas fa-sitemap"></i> Eliminatorias
+                        </a>
+                    </div>
+                </div>
+
+                <!-- RIGHT: countdown -->
+                <div>
+                    <div class="countdown-panel" id="countdown-panel">
+                        <p class="countdown-label">⏱ Próxima salida oficial</p>
+                        <div class="countdown-time" id="countdown-time">--:--:--</div>
+                        <p class="countdown-note" id="countdown-note">21:00 h · Hora peninsular</p>
+                        <div class="countdown-zones" id="countdown-zones"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ CLASIFICACION ════════════════════════════════════════ -->
+    <section class="page-section">
+        <div class="container">
+            <p class="section-label">// Clasificación final · Jornada 10</p>
+            <h2 class="section-title">Tabla <em>General</em></h2>
+            <p class="section-sub">Puntos acumulados en fase de liga. Los 16 clasificados avanzan a Eliminatorias.</p>
+
+            <div style="margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:16px;" id="clas-grid">
+                <!-- filled by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ FOOTER ═══════════════════════════════════════════════ -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <span class="footer-brand">Spanish <span>Racing</span> Series · T37</span>
+            <div class="footer-links" id="footer-links"></div>
+        </div>
+    </footer>
+
+    <script src="js/srs-data.js"></script>
+    <script>
+        // ── FOOTER ────────────────────────────────────────────────
+        (function () {
+            const fl = document.getElementById('footer-links');
+            if (!fl) return;
+            fl.innerHTML = SRS.redes.map(r =>
+                `<a href="${r.href}" target="_blank" rel="noopener noreferrer">${r.label}</a>`
+            ).join('');
+        })();
+
+        // ── STATS ROW ────────────────────────────────────────────
+        (function () {
+            const el = document.getElementById('hero-stats');
+            if (!el) return;
+            const clasificados = SRS.pilotos.filter(p => p.clasificado).length;
+            const completadas = SRS.jornadas.filter(j => j.estado === 'completada').length;
+            const stats = [
+                { num: SRS.pilotos.length, lbl: 'Mánagers' },
+                { num: clasificados, lbl: 'Clasificados' },
+                { num: completadas, lbl: 'Jornadas completadas' },
+                { num: 10, lbl: 'Total jornadas' },
+            ];
+            el.innerHTML = stats.map(s =>
+                `<div class="stat-block"><span class="num">${s.num}</span><span class="lbl">${s.lbl}</span></div>`
+            ).join('');
+        })();
+
+        // ── CLASIFICACION ─────────────────────────────────────────
+        (function () {
+            const grid = document.getElementById('clas-grid');
+            if (!grid) return;
+
+            const sorted = [...SRS.pilotos].sort((a, b) => a.pos - b.pos);
+            const half = Math.ceil(sorted.length / 2);
+            const colA = sorted.slice(0, half);
+            const colB = sorted.slice(half);
+
+            function buildCol(pilotos) {
+                const panel = document.createElement('div');
+                panel.className = 'panel';
+                panel.innerHTML = `
+      <div class="panel-header">
+        <span class="panel-header-label">Pos · Piloto</span>
+      </div>
+      <div class="clasificacion-table">
+        ${pilotos.map(p => {
+                    const topCls = p.pos <= 3 ? ` top-${p.pos}` : '';
+                    const posCls = p.pos === 1 ? 'p1' : p.pos === 2 ? 'p2' : p.pos === 3 ? 'p3' : '';
+                    const iniciales = p.nombre.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+                    const ptsClass = p.clasificado ? 'clas-pts' : 'clas-pts elim';
+                    const chip = p.clasificado
+                        ? `<span class="chip chip--cyan" style="font-size:0.55rem;padding:2px 5px;">ELIM</span>`
+                        : '';
+                    return `<div class="clas-row${topCls}">
+            <span class="clas-pos ${posCls}">#${p.pos}</span>
+            <span class="clas-avatar">${iniciales}</span>
+            <div class="clas-info">
+              <strong>${p.nombre}</strong>
+              <small>${p.equipo}</small>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              ${chip}
+              <span class="${ptsClass}">${p.puntos}pts</span>
+            </div>
+          </div>`;
+                }).join('')}
+      </div>`;
+                return panel;
+            }
+
+            grid.appendChild(buildCol(colA));
+            grid.appendChild(buildCol(colB));
+        })();
+
+        // ── COUNTDOWN ─────────────────────────────────────────────
+        (function () {
+            const timeEl = document.getElementById('countdown-time');
+            const noteEl = document.getElementById('countdown-note');
+            const zonesEl = document.getElementById('countdown-zones');
+            if (!timeEl) return;
+
+            const TZ_ES = 'Europe/Madrid';
+            const TZ_CAN = 'Atlantic/Canary';
+            const TZ_ARG = 'America/Argentina/Buenos_Aires';
+            const localTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+            function getNextTarget() {
+                const now = new Date();
+                const targets = SRS.jornadas.map(j => {
+                    const [y, m, d] = j.fecha.split('-').map(Number);
+                    // Build 21:00 Madrid time
+                    const utcBase = Date.UTC(y, m - 1, d, 21, 0, 0);
+                    const guess = new Date(utcBase);
+                    // refine offset
+                    const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: TZ_ES, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+                    const parts = fmt.formatToParts(guess);
+                    const h = +parts.find(p => p.type === 'hour').value;
+                    const min = +parts.find(p => p.type === 'minute').value;
+                    const offsetMs = (h * 60 + min - 21 * 60) * 60 * 1000;
+                    return { jornada: j, date: new Date(utcBase - offsetMs) };
+                });
+                return targets.find(t => t.date > now) || null;
+            }
+
+            function fmtDur(ms) {
+                const s = Math.max(Math.floor(ms / 1000), 0);
+                const h = Math.floor(s / 3600);
+                const m = Math.floor((s % 3600) / 60);
+                const sec = s % 60;
+                return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+            }
+
+            function fmtZone(date, tz) {
+                return new Intl.DateTimeFormat('es-ES', { timeZone: tz, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(date);
+            }
+
+            function tick() {
+                const t = getNextTarget();
+                const now = new Date();
+                if (!t) {
+                    timeEl.textContent = '00:00:00';
+                    noteEl.textContent = 'Todas las jornadas han concluido.';
+                    zonesEl.innerHTML = '';
+                    return;
+                }
+                const diff = t.date - now;
+                timeEl.textContent = fmtDur(diff);
+                noteEl.textContent = diff > 0
+                    ? `${t.jornada.nombre} · ${t.jornada.fechaLabel} · 21:00 h`
+                    : `En curso: ${t.jornada.nombre}`;
+
+                const zones = [
+                    { name: 'España (Pen.)', tz: TZ_ES },
+                    { name: 'Canarias', tz: TZ_CAN },
+                    { name: 'Argentina', tz: TZ_ARG },
+                    { name: 'Tu zona', tz: localTZ },
+                ];
+                zonesEl.innerHTML = zones.map(z =>
+                    `<div class="zone-row">
+        <span class="zone-name">${z.name}</span>
+        <span class="zone-time">${fmtZone(t.date, z.tz)}</span>
+      </div>`
+                ).join('');
+            }
+
+            tick();
+            setInterval(tick, 1000);
+        })();
+    </script>
+
+</body>
+
+</html>
