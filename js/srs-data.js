@@ -1,153 +1,69 @@
 // ============================================================
-// SPANISH RACING SERIES — eliminatorias.js
-// Bracket simétrico: 4 oct-izq → cua → sem → FINAL ← sem ← cua ← 4 oct-der
-// Depende de: srs-data.js (SRS.eliminatorias)
+// SPANISH RACING SERIES — DATA T38
 // ============================================================
 
-(function () {
-    const E = SRS.eliminatorias;
+const SRS = {
 
-    // ── FOOTER ──────────────────────────────────────────────
-    const fl = document.getElementById('footer-links');
-    if (fl) {
-        fl.innerHTML = SRS.redes
-            .map(r => `<a href="${r.href}" target="_blank" rel="noopener noreferrer">${r.label}</a>`)
-            .join('');
-    }
+    season: { number: 38, title: 'Temporada 38' },
 
-    // ── HELPERS ─────────────────────────────────────────────
-    function slotClass(winIdx, myIdx) {
-        if (winIdx === null || winIdx === undefined) return 'b-slot--tbd';
-        return winIdx === myIdx ? 'b-slot--win' : 'b-slot--los';
-    }
+    // ── PILOTOS ───────────────────────────────────────────────
+    pilotos: [
+        { pos: 1,  nombre: 'Romus Toras',              equipo: '50 Rizia Royal Racing',        puntos: 809, clasificado: false },
+        { pos: 2,  nombre: 'Leoo Ferreira',             equipo: '07 CRT Competition',           puntos: 771, clasificado: false },
+        { pos: 3,  nombre: 'André Prov',                equipo: 'Tortuga',                      puntos: 728, clasificado: false },
+        { pos: 4,  nombre: 'Valdi CT',                  equipo: '77 Campos Racing F1',          puntos: 629, clasificado: false },
+        { pos: 5,  nombre: 'Vasvo Lao',                 equipo: 'Subaru F1 Team',               puntos: 595, clasificado: false },
+        { pos: 6,  nombre: 'Thiago Campos',             equipo: 'Mercedes',                     puntos: 564, clasificado: false },
+        { pos: 7,  nombre: 'Eduardo Calvo',             equipo: '72 CTC VCR Foxtrot',           puntos: 421, clasificado: false },
+        { pos: 8,  nombre: 'Sergio Solano',             equipo: '13 CRT Competition',           puntos: 393, clasificado: false },
+        { pos: 9,  nombre: 'Giacomina Leclerc',         equipo: 'Patria Italia',                puntos: 369, clasificado: false },
+        { pos: 10, nombre: 'Alexis Iceman',             equipo: '00 CRT Competition',           puntos: 341, clasificado: false },
+        { pos: 11, nombre: 'Cristian Ezpeleta',         equipo: '99 Campos Racing F1',          puntos: 278, clasificado: false },
+        { pos: 12, nombre: 'Pablo Mafias',              equipo: 'Aston Martin F1 Team Mafias',  puntos: 274, clasificado: false },
+        { pos: 13, nombre: 'Juan Garcia',               equipo: 'Ferrari F1 Team',              puntos: 222, clasificado: false },
+        { pos: 14, nombre: 'Antonio Pinillos',          equipo: 'Red Bull Pinkustercia F1 Team',puntos: 112, clasificado: false },
+        { pos: 15, nombre: 'Álvaro Redondo',            equipo: '36 CTC VCR FTSE',              puntos: 111, clasificado: false },
+        { pos: 16, nombre: 'Julio Maidana',             equipo: '18 BMW team',                  puntos: 107, clasificado: false },
+        { pos: 17, nombre: 'Freya Anafi',               equipo: 'Renfe Cercanías RT',           puntos: 105, clasificado: false },
+        { pos: 18, nombre: 'Christian Horny',           equipo: '15 Zeta Racing',               puntos: 79,  clasificado: false },
+        { pos: 19, nombre: 'Alejandro Alonso',          equipo: '3 Zetta Racing',               puntos: 53,  clasificado: false },
+        { pos: 20, nombre: 'Mauro Reyes Hernández',     equipo: '26 Zetta Racing',              puntos: 40,  clasificado: false },
+        { pos: 21, nombre: 'Marc cr Rayo',              equipo: 'Rayito Team',                  puntos: 38,  clasificado: false },
+        { pos: 22, nombre: 'Templario VCR',             equipo: 'Hispania Racing Team',         puntos: 35,  clasificado: false },
+        { pos: 23, nombre: 'Francisco Martínez',        equipo: 'Renfe Cercanías RT',           puntos: 13,  clasificado: false },
+        { pos: 24, nombre: 'Lara Williams',             equipo: 'Williams Dacia',               puntos: 11,  clasificado: false },
+        { pos: 25, nombre: 'Cristóbal Farías Galleguillos', equipo: '18 Zetta Racing',          puntos: 9,   clasificado: false },
+        { pos: 26, nombre: 'Rui Acacio',                equipo: 'Flamengüam',                   puntos: 9,   clasificado: false },
+        { pos: 27, nombre: 'José Ortiz',                equipo: 'GoldBlue Bull RT',             puntos: 7,   clasificado: false },
+        { pos: 28, nombre: 'Bongain François',          equipo: 'Porsche Racing',               puntos: 6,   clasificado: false },
+        { pos: 29, nombre: 'Johan Unquen',              equipo: 'Rolls Roys',                   puntos: 0,   clasificado: false },
+        { pos: 30, nombre: 'Frankye Fix',               equipo: 'Guelf2026',                    puntos: 0,   clasificado: false },
+        { pos: 31, nombre: 'Patria Italia',             equipo: '80 Patria Italia',             puntos: 0,   clasificado: false },
+        { pos: 32, nombre: 'Coche Médico Uno',          equipo: 'xmcbdr+f69215ljmk6190922',     puntos: 0,   clasificado: false },
+    ],
 
-    function buildMatch(m, mirror, isFinal) {
-        const cls1 = slotClass(m.ganador ? (m.p1 === m.ganador ? 0 : 1) : null, 0);
-        const cls2 = slotClass(m.ganador ? (m.p2 === m.ganador ? 1 : 0) : null, 1);
+    // ── JORNADAS ──────────────────────────────────────────────
+    jornadas: [
+        // Se añadirán conforme avance la temporada
+    ],
 
-        const headCls = isFinal
-            ? 'b-match-head--final'
-            : mirror ? 'b-match-head--right' : '';
+    // ── ELIMINATORIAS ─────────────────────────────────────────
+    eliminatorias: {
+        octavos: [],
+        cuartos: [],
+        semis:   [],
+        final:   { id: 'fin-1', p1: 'TBD', s1: 'G', p2: 'TBD', s2: 'G', ganador: null, posG: null, posL: null },
+    },
 
-        const posG = m.posG ? `<span style="margin-left:auto;font-family:'DM Mono',monospace;font-size:0.5rem;color:var(--gold);flex-shrink:0;">${m.posG}</span>` : '';
-        const posL = m.posL ? `<span style="margin-left:auto;font-family:'DM Mono',monospace;font-size:0.5rem;color:var(--text-muted);flex-shrink:0;">${m.posL}</span>` : '';
+    // ── SOCIAL / REDES ────────────────────────────────────────
+    redes: [
+        { label: 'TikTok',     href: 'https://www.tiktok.com/@calvo.plan?_r=1&_t=ZN-93aEsFGNWVi' },
+        { label: 'Twitch',     href: 'https://www.twitch.tv/sergiote_g20' },
+        { label: 'Twitch Alt', href: 'https://www.twitch.tv/prodigss' },
+        { label: 'YouTube',    href: 'https://youtube.com/@spanishracingseries?si=9LkAzkI-EK1h5c3W' },
+        { label: 'Discord',    href: 'https://discord.gg/anDChwwQA' },
+        { label: 'Instagram',  href: 'https://www.instagram.com/spanishracingseries_?igsh=MXZiMnczNXBraDJobw==' },
+        { label: 'WhatsApp',   href: 'https://chat.whatsapp.com/KVf4sll1iDi8RmqroMjWDa' },
+    ],
 
-        const pos1 = m.ganador && m.p1 === m.ganador ? posG : (m.ganador ? posL : '');
-        const pos2 = m.ganador && m.p2 === m.ganador ? posG : (m.ganador ? posL : '');
-
-        return `<div class="b-match${isFinal ? ' b-match--final' : ''}">
-      <div class="b-match-head ${headCls}">${m.id || ''}</div>
-      <div class="b-slot ${cls1}">
-        <div class="b-seed">${m.s1 || '?'}</div>
-        <span class="b-name">${m.p1}</span>${pos1}
-      </div>
-      <div class="b-vs">vs</div>
-      <div class="b-slot ${cls2}">
-        <div class="b-seed">${m.s2 || '?'}</div>
-        <span class="b-name">${m.p2}</span>${pos2}
-      </div>
-    </div>`;
-    }
-
-    // ── RENDER COLUMNAS ──────────────────────────────────────
-    const octL = E.octavos.slice(0, 4);
-    const octR = E.octavos.slice(4, 8);
-
-    document.getElementById('b-col-oct-l').innerHTML = octL.map(m => buildMatch(m, false, false)).join('');
-    document.getElementById('b-col-oct-r').innerHTML = octR.map(m => buildMatch(m, true, false)).join('');
-    document.getElementById('b-col-cua-l').innerHTML = E.cuartos.slice(0, 2).map(m => buildMatch(m, false, false)).join('');
-    document.getElementById('b-col-cua-r').innerHTML = E.cuartos.slice(2, 4).map(m => buildMatch(m, true, false)).join('');
-    document.getElementById('b-col-sem-l').innerHTML = [E.semis[0]].map(m => buildMatch(m, false, false)).join('');
-    document.getElementById('b-col-sem-r').innerHTML = [E.semis[1]].map(m => buildMatch(m, true, false)).join('');
-
-    // Final + trofeo
-    document.getElementById('b-center').innerHTML = `
-    <div class="b-trophy">🏆</div>
-    <div class="b-champ-label">Campeón<br>T37</div>
-    ${buildMatch(E.final, false, true)}`;
-
-    // ── SVG CONECTORES ───────────────────────────────────────
-    function drawConnector(connId, fromColId, toColId, direction) {
-        const connEl = document.getElementById(connId);
-        if (!connEl) return;
-
-        const fromCards = [...document.querySelectorAll(`#${fromColId} .b-match`)];
-        const toCards = [...document.querySelectorAll(`#${toColId} .b-match`)];
-        if (!fromCards.length || !toCards.length) return;
-
-        const connRect = connEl.getBoundingClientRect();
-        const H = connRect.height;
-        const W = connRect.width;
-        if (!H || !W) return;
-
-        const paths = [];
-        const pairSize = fromCards.length / toCards.length;
-
-        toCards.forEach((toCard, ti) => {
-            const toR = toCard.getBoundingClientRect();
-            const toY = (toR.top + toR.bottom) / 2 - connRect.top;
-            const x2 = direction === 'ltr' ? W : 0;
-            const x1 = direction === 'ltr' ? 0 : W;
-            const mx = W / 2;
-
-            for (let i = 0; i < pairSize; i++) {
-                const fromCard = fromCards[ti * pairSize + i];
-                if (!fromCard) return;
-                const fromR = fromCard.getBoundingClientRect();
-                const fromY = (fromR.top + fromR.bottom) / 2 - connRect.top;
-                paths.push(
-                    `<path d="M${x1},${fromY} H${mx} V${toY} H${x2}" fill="none" stroke="rgba(240,184,0,0.28)" stroke-width="1" stroke-linejoin="round"/>`
-                );
-            }
-        });
-
-        connEl.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"
-      style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
-      ${paths.join('')}
-    </svg>`;
-    }
-
-    // Conectores izquierda → centro
-    function drawFinalConn(connId, fromColId, direction) {
-        const connEl = document.getElementById(connId);
-        if (!connEl) return;
-        const fromCards = [...document.querySelectorAll(`#${fromColId} .b-match`)];
-        const toCard = document.querySelector('#b-center .b-match');
-        if (!fromCards.length || !toCard) return;
-
-        const connRect = connEl.getBoundingClientRect();
-        const H = connRect.height;
-        const W = connRect.width;
-        if (!H || !W) return;
-
-        const toR = toCard.getBoundingClientRect();
-        const toY = (toR.top + toR.bottom) / 2 - connRect.top;
-        const x2 = direction === 'ltr' ? W : 0;
-        const x1 = direction === 'ltr' ? 0 : W;
-        const mx = W / 2;
-
-        const paths = fromCards.map(fromCard => {
-            const fromR = fromCard.getBoundingClientRect();
-            const fromY = (fromR.top + fromR.bottom) / 2 - connRect.top;
-            return `<path d="M${x1},${fromY} H${mx} V${toY} H${x2}" fill="none" stroke="rgba(240,184,0,0.28)" stroke-width="1" stroke-linejoin="round"/>`;
-        });
-
-        connEl.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"
-      style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
-      ${paths.join('')}
-    </svg>`;
-    }
-
-    function redrawAll() {
-        drawConnector('b-cn-ol-cl', 'b-col-oct-l', 'b-col-cua-l', 'ltr');
-        drawConnector('b-cn-cl-sl', 'b-col-cua-l', 'b-col-sem-l', 'ltr');
-        drawFinalConn('b-cn-sl-f', 'b-col-sem-l', 'ltr');
-        drawFinalConn('b-cn-f-sr', 'b-col-sem-r', 'rtl');
-        drawConnector('b-cn-sr-cr', 'b-col-sem-r', 'b-col-cua-r', 'rtl');
-        drawConnector('b-cn-cr-or', 'b-col-cua-r', 'b-col-oct-r', 'rtl');
-    }
-
-    requestAnimationFrame(() => requestAnimationFrame(redrawAll));
-    window.addEventListener('resize', redrawAll);
-
-})();
+};
