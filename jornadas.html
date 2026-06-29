@@ -1,210 +1,228 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jornadas T38 — Spanish Racing Series</title>
+    <link rel="stylesheet" href="css/srs.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jornadas T37 — Spanish Racing Series</title>
-    <link rel="stylesheet" href="css/srs.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-
-<body>
-
+  <body>
     <div class="ambient" aria-hidden="true"></div>
 
     <!-- ══ HEADER ══════════════════════════════════════════════ -->
     <header class="site-header">
-        <div class="container header-inner">
-            <a class="brand" href="index.html">
-                <span class="brand-icon">🏁</span>
-                <span class="brand-name">SRS <span>T37</span></span>
-            </a>
-            <nav class="site-nav" aria-label="Principal">
-                <a href="index.html">Inicio</a>
-                <a href="jornadas.html" class="active">Jornadas</a>
-                <a href="eliminatorias.html">Eliminatorias</a>
-            </nav>
-            <span class="season-badge">TEMP. 37</span>
-        </div>
+      <div class="container header-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-icon">🏁</span>
+          <span class="brand-name">SRS <span>T38</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Principal">
+          <a href="index.html">Inicio</a>
+          <a href="jornadas.html" class="active">Jornadas</a>
+          <a href="eliminatorias.html">Eliminatorias</a>
+        </nav>
+        <span class="season-badge">TEMP. 38</span>
+      </div>
     </header>
 
     <!-- ══ PAGE HERO ═══════════════════════════════════════════ -->
     <div class="page-hero">
-        <div class="container page-hero-inner">
-            <div>
-                <p class="section-label">// Fase de liga · Temporada 37</p>
-                <h1 class="section-title">Jornadas <em>T37</em></h1>
-                <p class="section-sub">
-                    10 jornadas · Lunes, miércoles y viernes a las 21:00 h (hora peninsular).
-                    Las jornadas se revelan conforme avanza la temporada.
-                </p>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;" id="jornadas-chips"></div>
+      <div class="container page-hero-inner">
+        <div>
+          <p class="section-label">// Fase de liga · Temporada 38</p>
+          <h1 class="section-title">Jornadas <em>T38</em></h1>
+          <p class="section-sub">
+            10 jornadas · Lunes, miércoles y viernes a las 21:00 h (hora
+            peninsular). Las jornadas se revelan conforme avanza la temporada.
+          </p>
         </div>
+        <div
+          style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center"
+          id="jornadas-chips"
+        ></div>
+      </div>
     </div>
 
     <!-- ══ NEXT ROUND COUNTDOWN ════════════════════════════════ -->
-    <div class="container" style="position:relative;z-index:1;">
-        <div class="next-banner" id="next-banner">
-            <div>
-                <div class="next-banner-label">⏱ Próxima jornada</div>
-                <div class="next-banner-text" id="next-name">—</div>
-            </div>
-            <span id="next-time" class="next-banner-time">--:--:--</span>
+    <div class="container" style="position: relative; z-index: 1">
+      <div class="next-banner" id="next-banner">
+        <div>
+          <div class="next-banner-label">⏱ Próxima jornada</div>
+          <div class="next-banner-text" id="next-name">—</div>
         </div>
+        <span id="next-time" class="next-banner-time">--:--:--</span>
+      </div>
     </div>
 
     <!-- ══ JORNADAS GRID ════════════════════════════════════════ -->
-    <section class="page-section" style="padding-top:0;">
-        <div class="container">
-            <div class="jornada-grid" id="jornadas-grid"></div>
-        </div>
+    <section class="page-section" style="padding-top: 0">
+      <div class="container">
+        <div class="jornada-grid" id="jornadas-grid"></div>
+      </div>
     </section>
 
     <!-- ══ FOOTER ═══════════════════════════════════════════════ -->
     <footer class="site-footer">
-        <div class="container footer-inner">
-            <span class="footer-brand">Spanish <span>Racing</span> Series · T37</span>
-            <div class="footer-links" id="footer-links"></div>
-        </div>
+      <div class="container footer-inner">
+        <span class="footer-brand"
+          >Spanish <span>Racing</span> Series · T38</span
+        >
+        <div class="footer-links" id="footer-links"></div>
+      </div>
     </footer>
 
     <script src="js/srs-data.js"></script>
     <script>
-        // ── FOOTER ────────────────────────────────────────────────
-        document.getElementById('footer-links').innerHTML =
-            SRS.redes.map(r => `<a href="${r.href}" target="_blank" rel="noopener noreferrer">${r.label}</a>`).join('');
+      // ── FOOTER ────────────────────────────────────────────────
+      document.getElementById("footer-links").innerHTML = SRS.redes
+        .map(
+          (r) =>
+            `<a href="${r.href}" target="_blank" rel="noopener noreferrer">${r.label}</a>`,
+        )
+        .join("");
 
-        // ── VISIBILITY LOGIC ──────────────────────────────────────
-        // Una jornada es visible si la anterior ya ha empezado (fecha pasada) o si es la primera.
-        function isVisible(idx) {
-            if (idx === 0) return true;
-            const prev = SRS.jornadas[idx - 1];
-            const prevDate = new Date(prev.fecha + 'T21:00:00');
-            return new Date() >= prevDate;
+      // ── VISIBILITY LOGIC (CORREGIDO) ──────────────────────────
+      // Una jornada es visible si es la primera, si está completada, o si la anterior ya se completó.
+      function isVisible(idx) {
+        if (idx === 0) return true; // La J1 siempre es visible
+
+        const prev = SRS.jornadas[idx - 1];
+
+        // Si la jornada anterior está marcada como completada, la actual debe ser visible
+        if (
+          prev &&
+          (prev.completada === true || prev.estado === "completada")
+        ) {
+          return true;
         }
 
-        // ── CHIPS ─────────────────────────────────────────────────
-        (function () {
-            const el = document.getElementById('jornadas-chips');
-            SRS.jornadas.forEach((j, i) => {
-                const visible = isVisible(i);
-                const cls = j.estado === 'completada' ? 'chip--done' : j.estado === 'activa' ? 'chip--cyan' : 'chip--grey';
-                const span = document.createElement('span');
-                span.className = `chip ${cls}`;
-                span.textContent = visible ? `J${i + 1}` : `J${i + 1} 🔒`;
-                el.appendChild(span);
-            });
-        })();
+        // Por si acaso, si la propia jornada actual ya está activa o completada, la hacemos visible
+        const actual = SRS.jornadas[idx];
+        if (
+          actual &&
+          (actual.completada === true ||
+            actual.estado === "completada" ||
+            actual.estado === "activa")
+        ) {
+          return true;
+        }
 
-        // ── RENDER JORNADAS ───────────────────────────────────────
-        (function () {
-            const grid = document.getElementById('jornadas-grid');
+        return false;
+      }
 
-            SRS.jornadas.forEach((j, idx) => {
-                const visible = isVisible(idx);
-                const card = document.createElement('div');
-                card.className = 'jornada-card' + (visible ? '' : ' hidden-jornada');
+      // ── CHIPS ─────────────────────────────────────────────────
+      (function () {
+        const el = document.getElementById("jornadas-chips");
+        SRS.jornadas.forEach((j, i) => {
+          const visible = isVisible(i);
+          const cls =
+            j.estado === "completada"
+              ? "chip--done"
+              : j.estado === "activa"
+                ? "chip--cyan"
+                : "chip--grey";
+          const span = document.createElement("span");
+          span.className = `chip ${cls}`;
+          span.textContent = visible ? `J${i + 1}` : `J${i + 1} 🔒`;
+          el.appendChild(span);
+        });
+      })();
 
-                const statusChip = j.estado === 'completada'
-                    ? `<span class="chip chip--done">Completada</span>`
-                    : j.estado === 'activa'
-                        ? `<span class="chip chip--cyan">En curso</span>`
-                        : `<span class="chip chip--grey">Pendiente</span>`;
+      // ── RENDER JORNADAS ───────────────────────────────────────
+      // ── RENDER JORNADAS (CORREGIDO) ───────────────────────────
+      (function () {
+        const grid = document.getElementById("jornadas-grid");
 
-                let bodyHtml = '';
-                if (!visible) {
-                    bodyHtml = `<div class="jornada-locked">
-        <div class="jornada-locked-icon">🔒</div>
-        <p>Se revelará tras la jornada anterior</p>
-      </div>`;
-                } else if (j.duelos && j.duelos.length > 0) {
-                    bodyHtml = j.duelos.map(d => {
-                        // Determine winner / loser display
-                        const isSpecialG = d.pg && (d.pg === 'DNF' || d.pg === 'DNS' || d.pg === 'DSQ' || d.pg === '+2L');
-                        const isSpecialL = d.pl && (d.pl === 'DNF' || d.pl === 'DNS' || d.pl === 'DSQ' || d.pl === '+2L');
+        SRS.jornadas.forEach((j, idx) => {
+          const visible = isVisible(idx);
+          const card = document.createElement("div");
+          card.className = "jornada-card" + (visible ? "" : " hidden-jornada");
 
-                        const posBadgeG = d.pg
-                            ? `<span class="pos-badge w">${d.pg}</span>` : '';
-                        const posBadgeL = d.pl
-                            ? `<span class="pos-badge ${isSpecialL ? 's' : 'l'}">${d.pl}</span>` : '';
+          const statusChip =
+            j.estado === "completada" || j.completada === true
+              ? `<span class="chip chip--done">Completada</span>`
+              : j.estado === "activa"
+                ? `<span class="chip chip--cyan">En curso</span>`
+                : `<span class="chip chip--grey">Pendiente</span>`;
 
-                        return `<div class="duelo-row">
-          <span class="duelo-driver winner duelo-driver-left">${d.g}</span>
-          <div class="duelo-sep">
-            <div class="duelo-sep-scores">
-              ${posBadgeG}
-              <span class="duelo-vs">vs</span>
-              ${posBadgeL}
-            </div>
-          </div>
-          <span class="duelo-driver loser duelo-driver-right">${d.l}</span>
-        </div>`;
-                    }).join('');
-                } else {
-                    bodyHtml = `<div class="jornada-locked">
-        <div class="jornada-locked-icon">📋</div>
-        <p>Resultados pendientes</p>
-      </div>`;
-                }
+          // Intentamos unificar si viene de "duelos" o de "enfrentamientos"
+          const listaDuelos = j.duelos || j.enfrentamientos || [];
 
-                card.innerHTML = `
-      <div class="jornada-head">
-        <div>
-          <div class="jornada-name">${j.nombre}</div>
-          <div class="jornada-date">${j.fechaLabel}</div>
-        </div>
-        ${statusChip}
-      </div>
-      <div class="jornada-body">${bodyHtml}</div>`;
+          let bodyHtml = "";
+          if (!visible) {
+            bodyHtml = `<div class="jornada-locked">
+<div class="jornada-locked-icon">🔒</div>
+<p>Se revelará tras la jornada anterior</p>
+</div>`;
+          } else if (listaDuelos.length > 0) {
+            bodyHtml = listaDuelos
+              .map((d) => {
+                // Mapeo adaptativo: detecta si usa el formato antiguo (J1-J5) o el nuevo (J6+)
+                const pilotoIzq = d.g || d.equipoA;
+                const pilotoDer = d.l || d.equipoB;
+                const posIzq = d.pg !== undefined ? d.pg : d.posA;
+                const posDer = d.pl !== undefined ? d.pl : d.posB;
 
-                grid.appendChild(card);
-            });
-        })();
+                const isSpecialG =
+                  posIzq &&
+                  (posIzq === "DNF" ||
+                    posIzq === "DNS" ||
+                    posIzq === "DSQ" ||
+                    posIzq === "+2L");
+                const isSpecialL =
+                  posDer &&
+                  (posDer === "DNF" ||
+                    posDer === "DNS" ||
+                    posDer === "DSQ" ||
+                    posDer === "+2L");
 
-        // ── COUNTDOWN (banner) ─────────────────────────────────────
-        (function () {
-            const banner = document.getElementById('next-banner');
-            const nameEl = document.getElementById('next-name');
-            const timeEl = document.getElementById('next-time');
-            const TZ_ES = 'Europe/Madrid';
-            const localTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const posBadgeG =
+                  posIzq !== undefined
+                    ? `<span class="pos-badge w">${posIzq}</span>`
+                    : "";
+                const posBadgeL =
+                  posDer !== undefined
+                    ? `<span class="pos-badge ${isSpecialL ? "s" : "l"}">${posDer}</span>`
+                    : "";
 
-            function getNext() {
-                const now = new Date();
-                for (const j of SRS.jornadas) {
-                    const d = new Date(j.fecha + 'T21:00:00');
-                    if (d > now) return { j, d };
-                }
-                return null;
-            }
+                return `<div class="duelo-row">
+  <span class="duelo-driver winner duelo-driver-left">${pilotoIzq}</span>
+  <div class="duelo-sep">
+    <div class="duelo-sep-scores">
+      ${posBadgeG}
+      <span class="duelo-vs">vs</span>
+      ${posBadgeL}
+    </div>
+  </div>
+  <span class="duelo-driver loser duelo-driver-right">${pilotoDer}</span>
+</div>`;
+              })
+              .join("");
+          } else {
+            bodyHtml = `<div class="jornada-locked">
+<div class="jornada-locked-icon">📋</div>
+<p>Resultados pendientes</p>
+</div>`;
+          }
 
-            function fmtDur(ms) {
-                const s = Math.max(Math.floor(ms / 1000), 0);
-                const h = Math.floor(s / 3600);
-                const m = Math.floor((s % 3600) / 60);
-                const sec = s % 60;
-                return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
-            }
+          card.innerHTML = `
+<div class="jornada-head">
+<div>
+  <div class="jornada-name">${j.nombre || "Jornada " + j.numero}</div>
+  <div class="jornada-date">${j.fechaLabel || j.circuito}</div>
+</div>
+${statusChip}
+</div>
+<div class="jornada-body">${bodyHtml}</div>`;
 
-            function tick() {
-                const t = getNext();
-                if (!t) {
-                    nameEl.textContent = 'Temporada finalizada';
-                    timeEl.textContent = '—';
-                    return;
-                }
-                const diff = t.d - new Date();
-                nameEl.textContent = `${t.j.nombre} · ${t.j.fechaLabel}`;
-                timeEl.textContent = fmtDur(diff);
-            }
-
-            tick();
-            setInterval(tick, 1000);
-        })();
+          grid.appendChild(card);
+        });
+      })();
     </script>
-
-</body>
-
+  </body>
 </html>
