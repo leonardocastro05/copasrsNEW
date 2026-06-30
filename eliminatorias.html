@@ -1,139 +1,136 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Spanish Racing Series — Eliminatorias T37</title>
-    <link rel="stylesheet" href="css/srs.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="css/srs.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
 
-<body>
-
+  <body>
     <div class="ambient" aria-hidden="true"></div>
 
     <!-- ══ HEADER ══════════════════════════════════════════════ -->
     <header class="site-header">
-        <div class="container header-inner">
-            <a class="brand" href="index.html">
-                <span class="brand-icon">🏁</span>
-                <span class="brand-name">SRS <span>T38</span></span>
-            </a>
-            <nav class="site-nav" aria-label="Principal">
-                <a href="index.html">Inicio</a>
-                <a href="jornadas.html">Jornadas</a>
-                <a href="eliminatorias.html" class="active">Eliminatorias</a>
-            </nav>
-            <span class="season-badge">TEMP. 38</span>
-        </div>
+      <div class="container header-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-icon">🏁</span>
+          <span class="brand-name">SRS <span>T38</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Principal">
+          <a href="index.html">Inicio</a>
+          <a href="jornadas.html">Jornadas</a>
+          <a href="eliminatorias.html" class="active">Eliminatorias</a>
+        </nav>
+        <span class="season-badge">TEMP. 38</span>
+      </div>
     </header>
 
     <!-- ══ MAIN ════════════════════════════════════════════════ -->
     <main>
-        <section class="elim-section">
-            <div class="container">
+      <section class="elim-section">
+        <div class="container">
+          <!-- Cabecera -->
+          <div class="elim-header">
+            <p class="elim-kicker">Fase final · Temporada 38</p>
+            <h1 class="elim-title">Eliminatorias</h1>
+            <p class="elim-sub">32 → 16 → 8 → 4 → 2 → Campeón</p>
+          </div>
 
-                <!-- Cabecera -->
-                <div class="elim-header">
-                    <p class="elim-kicker">Fase final · Temporada 38</p>
-                    <h1 class="elim-title">Eliminatorias</h1>
-                    <p class="elim-sub">32 → 16 → 8 → 4 → 2 → Campeón</p>
-                </div>
-
-                <!-- Phase pills -->
-                <div class="elim-phases">
-                    <div class="elim-phase-pill">
-                        <div class="elim-phase-name">Octavos</div>
-                        <div class="elim-phase-count">16 partidas</div>
-                    </div>
-                    <div class="elim-phase-pill">
-                        <div class="elim-phase-name">Cuartos</div>
-                        <div class="elim-phase-count">8 partidas</div>
-                    </div>
-                    <div class="elim-phase-pill">
-                        <div class="elim-phase-name">Semis</div>
-                        <div class="elim-phase-count">4 partidas</div>
-                    </div>
-                    <div class="elim-phase-pill elim-phase-pill--final">
-                        <div class="elim-phase-name">Final</div>
-                        <div class="elim-phase-count">Gran Final</div>
-                    </div>
-                </div>
-
-                <!-- Bracket -->
-                <div class="bracket-outer">
-
-                    <!-- Labels de fase -->
-                    <div class="bracket-phase-labels">
-                        <div class="bpl">Octavos</div>
-                        <div class="bpl"></div>
-                        <div class="bpl">Cuartos</div>
-                        <div class="bpl"></div>
-                        <div class="bpl">Semis</div>
-                        <div class="bpl"></div>
-                        <div class="bpl bpl--final">Final</div>
-                        <div class="bpl"></div>
-                        <div class="bpl">Semis</div>
-                        <div class="bpl"></div>
-                        <div class="bpl">Cuartos</div>
-                        <div class="bpl"></div>
-                        <div class="bpl">Octavos</div>
-                    </div>
-
-                    <!-- Grid del bracket -->
-                    <div class="bracket-grid">
-
-                        <!-- Octavos izquierda (P1-P4) -->
-                        <div class="b-col" id="b-col-oct-l"></div>
-                        <div class="b-conn" id="b-cn-ol-cl"></div>
-
-                        <!-- Cuartos izquierda (C1-C2) -->
-                        <div class="b-col" id="b-col-cua-l"></div>
-                        <div class="b-conn" id="b-cn-cl-sl"></div>
-
-                        <!-- Semifinal izquierda (S1) -->
-                        <div class="b-col" id="b-col-sem-l"></div>
-                        <div class="b-conn" id="b-cn-sl-f"></div>
-
-                        <!-- FINAL + trofeo -->
-                        <div class="b-center" id="b-center"></div>
-
-                        <!-- Semi derecha ← conector -->
-                        <div class="b-conn" id="b-cn-f-sr"></div>
-                        <div class="b-col" id="b-col-sem-r"></div>
-
-                        <!-- Cuartos derecha ← conector -->
-                        <div class="b-conn" id="b-cn-sr-cr"></div>
-                        <div class="b-col" id="b-col-cua-r"></div>
-
-                        <!-- Octavos derecha ← conector -->
-                        <div class="b-conn" id="b-cn-cr-or"></div>
-                        <div class="b-col" id="b-col-oct-r"></div>
-
-                    </div>
-                </div>
-
-                <p class="bracket-note">
-                    Los emparejamientos de octavos se generan de forma aleatoria entre los 16 mejores &nbsp;·&nbsp;
-                    <strong>Spanish Racing Series · Temporada 38</strong>
-                </p>
-
+          <!-- Phase pills -->
+          <div class="elim-phases">
+            <div class="elim-phase-pill">
+              <div class="elim-phase-name">Octavos</div>
+              <div class="elim-phase-count">16 partidas</div>
             </div>
-        </section>
+            <div class="elim-phase-pill">
+              <div class="elim-phase-name">Cuartos</div>
+              <div class="elim-phase-count">8 partidas</div>
+            </div>
+            <div class="elim-phase-pill">
+              <div class="elim-phase-name">Semis</div>
+              <div class="elim-phase-count">4 partidas</div>
+            </div>
+            <div class="elim-phase-pill elim-phase-pill--final">
+              <div class="elim-phase-name">Final</div>
+              <div class="elim-phase-count">Gran Final</div>
+            </div>
+          </div>
+
+          <!-- Bracket -->
+          <div class="bracket-outer">
+            <!-- Labels de fase -->
+            <div class="bracket-phase-labels">
+              <div class="bpl">Octavos</div>
+              <div class="bpl"></div>
+              <div class="bpl">Cuartos</div>
+              <div class="bpl"></div>
+              <div class="bpl">Semis</div>
+              <div class="bpl"></div>
+              <div class="bpl bpl--final">Final</div>
+              <div class="bpl"></div>
+              <div class="bpl">Semis</div>
+              <div class="bpl"></div>
+              <div class="bpl">Cuartos</div>
+              <div class="bpl"></div>
+              <div class="bpl">Octavos</div>
+            </div>
+
+            <!-- Grid del bracket -->
+            <div class="bracket-grid">
+              <!-- Octavos izquierda (P1-P4) -->
+              <div class="b-col" id="b-col-oct-l"></div>
+              <div class="b-conn" id="b-cn-ol-cl"></div>
+
+              <!-- Cuartos izquierda (C1-C2) -->
+              <div class="b-col" id="b-col-cua-l"></div>
+              <div class="b-conn" id="b-cn-cl-sl"></div>
+
+              <!-- Semifinal izquierda (S1) -->
+              <div class="b-col" id="b-col-sem-l"></div>
+              <div class="b-conn" id="b-cn-sl-f"></div>
+
+              <!-- FINAL + trofeo -->
+              <div class="b-center" id="b-center"></div>
+
+              <!-- Semi derecha ← conector -->
+              <div class="b-conn" id="b-cn-f-sr"></div>
+              <div class="b-col" id="b-col-sem-r"></div>
+
+              <!-- Cuartos derecha ← conector -->
+              <div class="b-conn" id="b-cn-sr-cr"></div>
+              <div class="b-col" id="b-col-cua-r"></div>
+
+              <!-- Octavos derecha ← conector -->
+              <div class="b-conn" id="b-cn-cr-or"></div>
+              <div class="b-col" id="b-col-oct-r"></div>
+            </div>
+          </div>
+
+          <p class="bracket-note">
+            Los emparejamientos de octavos se generan de forma aleatoria entre
+            los 16 mejores &nbsp;·&nbsp;
+            <strong>Spanish Racing Series · Temporada 38</strong>
+          </p>
+        </div>
+      </section>
     </main>
 
     <!-- ══ FOOTER ═══════════════════════════════════════════════ -->
     <footer class="site-footer">
-        <div class="container footer-inner">
-            <span class="footer-brand">Spanish <span>Racing</span> Series · T38</span>
-            <div class="footer-links" id="footer-links"></div>
-        </div>
+      <div class="container footer-inner">
+        <span class="footer-brand"
+          >Spanish <span>Racing</span> Series · T38</span
+        >
+        <div class="footer-links" id="footer-links"></div>
+      </div>
     </footer>
 
     <script src="js/srs-data.js"></script>
     <script src="js/eliminatorias.js"></script>
-
-</body>
-
+  </body>
 </html>
