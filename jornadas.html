@@ -162,44 +162,68 @@
           } else if (listaDuelos.length > 0) {
             bodyHtml = listaDuelos
               .map((d) => {
-                // Mapeo adaptativo: detecta si usa el formato antiguo (J1-J5) o el nuevo (J6+)
-                const pilotoIzq = d.g || d.equipoA;
-                const pilotoDer = d.l || d.equipoB;
-                const posIzq = d.pg !== undefined ? d.pg : d.posA;
-                const posDer = d.pl !== undefined ? d.pl : d.posB;
+                // Mapeo adaptativo: formato antiguo (J1-J5) o nuevo (J6+)
+                const nombreA = d.g || d.equipoA;
+                const nombreB = d.l || d.equipoB;
+                const posA = d.pg !== undefined ? d.pg : d.posA;
+                const posB = d.pl !== undefined ? d.pl : d.posB;
 
-                const isSpecialG =
-                  posIzq &&
-                  (posIzq === "DNF" ||
-                    posIzq === "DNS" ||
-                    posIzq === "DSQ" ||
-                    posIzq === "+2L");
-                const isSpecialL =
-                  posDer &&
-                  (posDer === "DNF" ||
-                    posDer === "DNS" ||
-                    posDer === "DSQ" ||
-                    posDer === "+2L");
+                // ── ESTO es lo que faltaba antes: leer quién ganó de verdad ──
+                // ganador 'A' => nombreA es el ganador; 'B' => nombreB es el ganador
+                const aGano = d.ganador === "A";
+                const bGano = d.ganador === "B";
 
-                const posBadgeG =
-                  posIzq !== undefined
-                    ? `<span class="pos-badge w">${posIzq}</span>`
-                    : "";
-                const posBadgeL =
-                  posDer !== undefined
-                    ? `<span class="pos-badge ${isSpecialL ? "s" : "l"}">${posDer}</span>`
-                    : "";
+                const pilotoGanador = aGano ? nombreA : bGano ? nombreB : null;
+                const pilotoPerdedor = aGano ? nombreB : bGano ? nombreA : null;
+                const posGanador = aGano ? posA : bGano ? posB : null;
+                const posPerdedor = aGano ? posB : bGano ? posA : null;
+
+                // Si no hay ganador definido (jornada futura sin resultado),
+                // mostramos ambos como neutros, sin marcar a nadie.
+                const sinGanador = !aGano && !bGano;
+
+                if (sinGanador) {
+                  const inicialA = nombreA
+                    ? nombreA.trim().charAt(0).toUpperCase()
+                    : "?";
+                  const inicialB = nombreB
+                    ? nombreB.trim().charAt(0).toUpperCase()
+                    : "?";
+                  return `<div class="duelo-row">
+  <div class="duelo-piloto">
+    <span class="duelo-piloto-avatar">${inicialA}</span>
+    <span class="duelo-piloto-name">${nombreA ?? "TBD"}</span>
+    ${posA !== undefined && posA !== null ? `<span class="duelo-piloto-pos">P${posA}</span>` : ""}
+  </div>
+  <span class="duelo-vs-mini">VS</span>
+  <div class="duelo-piloto">
+    <span class="duelo-piloto-avatar">${inicialB}</span>
+    <span class="duelo-piloto-name">${nombreB ?? "TBD"}</span>
+    ${posB !== undefined && posB !== null ? `<span class="duelo-piloto-pos">P${posB}</span>` : ""}
+  </div>
+</div>`;
+                }
+
+                const inicialesGanador = pilotoGanador
+                  ? pilotoGanador.trim().charAt(0).toUpperCase()
+                  : "?";
+                const inicialesPerdedor = pilotoPerdedor
+                  ? pilotoPerdedor.trim().charAt(0).toUpperCase()
+                  : "?";
 
                 return `<div class="duelo-row">
-  <span class="duelo-driver winner duelo-driver-left">${pilotoIzq}</span>
-  <div class="duelo-sep">
-    <div class="duelo-sep-scores">
-      ${posBadgeG}
-      <span class="duelo-vs">vs</span>
-      ${posBadgeL}
-    </div>
+  <div class="duelo-piloto duelo-piloto--win">
+    <span class="duelo-medal">🏆</span>
+    <span class="duelo-piloto-avatar">${inicialesGanador}</span>
+    <span class="duelo-piloto-name">${pilotoGanador}</span>
+    <span class="duelo-piloto-pos">P${posGanador}</span>
   </div>
-  <span class="duelo-driver loser duelo-driver-right">${pilotoDer}</span>
+  <span class="duelo-vs-mini">VS</span>
+  <div class="duelo-piloto duelo-piloto--lose">
+    <span class="duelo-piloto-avatar">${inicialesPerdedor}</span>
+    <span class="duelo-piloto-name">${pilotoPerdedor}</span>
+    <span class="duelo-piloto-pos">P${posPerdedor}</span>
+  </div>
 </div>`;
               })
               .join("");
