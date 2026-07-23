@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spanish Racing Series</title>
+    <title>Spanish Racing Series — Copa de Verano T39</title>
     <link rel="stylesheet" href="css/srs.css" />
     <link
       rel="stylesheet"
@@ -33,17 +33,16 @@
     <section class="hero">
       <div class="container">
         <div class="hero-grid">
-          <!-- LEFT: copy + stats + CTAs -->
           <div>
             <p class="hero-eyebrow">Spanish Racing Series · iGP Manager</p>
             <h1 class="hero-title">
-              Copa<br />
-              <span class="accent">Temporada</span><br />
-              <span class="stroke" id="hero-season-num">38</span>
+              Copa de<br />
+              <span class="accent">Verano</span><br />
+              <span class="stroke" id="hero-season-num">39</span>
             </h1>
             <p class="hero-desc">
-              32 mánagers compiten en jornadas regulares. Los mejores clasifican
-              a la fase de eliminatorias.
+              32 mánagers, 22 carreras, una carrera al día. Los mejores de cada
+              fase avanzan hasta los 16 que disputarán el playoff final.
             </p>
 
             <div class="hero-stats-row" id="hero-stats"></div>
@@ -58,7 +57,6 @@
             </div>
           </div>
 
-          <!-- RIGHT: próxima jornada -->
           <div>
             <div class="countdown-panel" id="countdown-panel">
               <p class="countdown-label">🏎 Próxima jornada</p>
@@ -72,17 +70,30 @@
       </div>
     </section>
 
+    <!-- ══ FASES DE LA COPA ════════════════════════════════════ -->
+    <section class="page-section" style="padding-top: 0">
+      <div class="container">
+        <p class="section-label">// Formato Copa de Verano</p>
+        <h2 class="section-title">Fases <em>de la Copa</em></h2>
+        <div class="elim-phases" id="fases-copa"></div>
+      </div>
+    </section>
+
     <!-- ══ CLASIFICACION ════════════════════════════════════════ -->
-<p class="section-label">// Clasificación de la Copa</p>
-<h2 class="section-title">Tabla <em>General</em></h2>
-<p class="section-sub">
-  3 puntos por jornada ganada. Empates se resuelven por nº de
-  victorias y, en último caso, por posición media en carrera.
-</p>
+    <section class="page-section" style="padding-top: 0">
+      <div class="container">
+        <p class="section-label">// Clasificación acumulada</p>
+        <h2 class="section-title">Tabla <em>General</em></h2>
+        <p class="section-sub">
+          Puntos acumulados de todas las jornadas disputadas. Los colores
+          indican el estado de cada equipo en la Copa.
+        </p>
+
+        <div class="copa-leyenda" id="copa-leyenda"></div>
 
         <div
           style="
-            margin-top: 28px;
+            margin-top: 20px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
@@ -101,6 +112,7 @@
     </footer>
 
     <script src="js/srs-data.js"></script>
+    <script src="js/copa.js"></script>
     <script>
       // ── FOOTER ────────────────────────────────────────────────
       (function () {
@@ -114,17 +126,23 @@
           .join("");
       })();
 
+      const COPA = window.SRS_COPA || SRS.calcularCopa();
+
       // ── STATS ROW ─────────────────────────────────────────────
       (function () {
         const el = document.getElementById("hero-stats");
         if (!el) return;
-        const clasificados = SRS.pilotos.filter((p) => p.clasificado).length;
+
         const completadas = SRS.jornadas.filter(
           (j) => j.completada === true,
         ).length;
+
+        const faseLabel =
+          COPA.faseActual === 4 ? "Fase Final" : `Fase ${COPA.faseActual}`;
+
         const stats = [
-          { num: SRS.copa.participantes.length, lbl: "Mánagers" },
-          { num: clasificados, lbl: "Clasificados" },
+          { num: 32, lbl: "Mánagers" },
+          { num: faseLabel, lbl: "Fase actual" },
           {
             num: `${completadas}/${SRS.jornadas.length}`,
             lbl: "Jornadas completadas",
@@ -141,56 +159,110 @@
           .join("");
       })();
 
-      // ── CLASIFICACION ─────────────────────────────────────────
+      // ── FASES DE LA COPA (pills) ────────────────────────────────
+      (function () {
+        const el = document.getElementById("fases-copa");
+        if (!el) return;
+
+        const fases = [
+          {
+            nombre: "Fase 1",
+            rango: "J1-J8",
+            detalle: "Top 8 clasifican directos",
+          },
+          {
+            nombre: "Fase 2",
+            rango: "J9-J10",
+            detalle: "Corte: -4 eliminados",
+          },
+          {
+            nombre: "Fase 3",
+            rango: "J11-J18",
+            detalle: "Corte: -4 eliminados → 16",
+          },
+          {
+            nombre: "Fase Final",
+            rango: "J19-J22",
+            detalle: "Octavos → Campeón",
+          },
+        ];
+
+        el.innerHTML = fases
+          .map((f, i) => {
+            const numeroFase = i + 1;
+            const activa = COPA.faseActual === numeroFase;
+            const superada = COPA.faseActual > numeroFase;
+            const cls = activa
+              ? "elim-phase-pill elim-phase-pill--final"
+              : "elim-phase-pill";
+            const estadoTxt = superada
+              ? "✅ Completada"
+              : activa
+                ? "▶ En curso"
+                : "⏳ Pendiente";
+            return `<div class="${cls}">
+                <div class="elim-phase-name">${f.nombre}</div>
+                <div class="elim-phase-count">${f.rango} · ${f.detalle}</div>
+                <div class="elim-phase-count">${estadoTxt}</div>
+            </div>`;
+          })
+          .join("");
+      })();
+
+      // ── LEYENDA DE COLORES ──────────────────────────────────────
+      (function () {
+        const el = document.getElementById("copa-leyenda");
+        if (!el) return;
+        el.innerHTML = `
+          <span><i style="background:#22c55e"></i> Clasificado directo (Top 8, F1)</span>
+          <span><i style="background:#3b82f6"></i> Sigue en liza</span>
+          <span><i style="background:#f97316"></i> Eliminado en Fase 2</span>
+          <span><i style="background:#ef4444"></i> Eliminado en Fase 3</span>
+          <span><i style="background:#ffd700"></i> Clasificado a la Fase Final</span>
+        `;
+      })();
+
+      // ── CLASIFICACION (tabla en vivo, coloreada) ─────────────────
       (function () {
         const grid = document.getElementById("clas-grid");
         if (!grid) return;
 
-        const sorted = [...SRS.pilotos].sort((a, b) => a.pos - b.pos);
-        const half = Math.ceil(sorted.length / 2);
+        const tabla = SRS.tablaEnVivo(); // acumulado de todas las jornadas con resultados
+        const half = Math.ceil(tabla.length / 2);
 
-        function buildCol(pilotos) {
+        function buildCol(lista, offset) {
           const panel = document.createElement("div");
           panel.className = "panel";
           panel.innerHTML = `
                     <div class="panel-header">
-                        <span class="panel-header-label">Pos · Piloto · Puntos</span>
+                        <span class="panel-header-label">Pos · Equipo · Puntos</span>
                     </div>
                     <div class="clasificacion-table">
-                        ${pilotos
-                          .map((p) => {
-                            const topCls = p.pos <= 3 ? ` top-${p.pos}` : "";
+                        ${lista
+                          .map((r, i) => {
+                            const pos = offset + i + 1;
+                            const estado = SRS.estadoCopa(r.equipo, COPA);
                             const posCls =
-                              p.pos === 1
+                              pos === 1
                                 ? "p1"
-                                : p.pos === 2
+                                : pos === 2
                                   ? "p2"
-                                  : p.pos === 3
+                                  : pos === 3
                                     ? "p3"
                                     : "";
-                            const iniciales = p.nombre
+                            const iniciales = r.equipo
                               .split(" ")
                               .map((w) => w[0])
                               .join("")
                               .slice(0, 2)
                               .toUpperCase();
-                            const chip = p.clasificado
-                              ? `<span class="chip chip--cyan" style="font-size:0.55rem;padding:2px 5px;">ELIM</span>`
-                              : "";
-                            const ptsCls = p.clasificado
-                              ? "clas-pts"
-                              : "clas-pts elim";
-                            return `<div class="clas-row${topCls}">
-                                <span class="clas-pos ${posCls}">#${p.pos}</span>
+                            return `<div class="clas-row tabla-fila--${estado}">
+                                <span class="clas-pos ${posCls}">#${pos}</span>
                                 <span class="clas-avatar">${iniciales}</span>
                                 <div class="clas-info">
-                                    <strong>${p.nombre}</strong>
-                                    <small>${p.equipo}</small>
+                                    <strong>${r.equipo}</strong>
                                 </div>
-                                <div style="display:flex;align-items:center;gap:6px;">
-                                    ${chip}
-                                    <span class="${ptsCls}">${p.puntos}pts</span>
-                                </div>
+                                <span class="clas-pts">${r.pts}pts</span>
                             </div>`;
                           })
                           .join("")}
@@ -198,11 +270,11 @@
           return panel;
         }
 
-        grid.appendChild(buildCol(sorted.slice(0, half)));
-        grid.appendChild(buildCol(sorted.slice(half)));
+        grid.appendChild(buildCol(tabla.slice(0, half), 0));
+        grid.appendChild(buildCol(tabla.slice(half), half));
       })();
 
-      // ── PRÓXIMA JORNADA (sin fecha, por orden) ─────────────────
+      // ── PRÓXIMA JORNADA ──────────────────────────────────────────
       (function () {
         const timeEl = document.getElementById("countdown-time");
         const noteEl = document.getElementById("countdown-note");
@@ -211,7 +283,7 @@
         const siguiente = SRS.jornadas.find((j) => !j.completada);
 
         if (!siguiente) {
-          timeEl.textContent = "Temporada finalizada";
+          timeEl.textContent = "Copa finalizada";
           noteEl.textContent = "Todas las jornadas completadas";
           return;
         }

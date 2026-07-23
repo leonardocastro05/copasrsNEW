@@ -1,18 +1,7 @@
 // ============================================================
 // SPANISH RACING SERIES — ELIMINATORIAS (bracket de 16)
 // ============================================================
-// Lee SRS.eliminatorias = { octavos, cuartos, semis, final }
-// Cada partido tiene la forma:
-//   { id, p1, s1, p2, s2, ganador, posG, posL }
-//     p1 / p2  -> nombre del equipo (o 'TBD' si aún no está definido)
-//     s1 / s2  -> seed / cabeza de serie (opcional, 'G' = genérico)
-//     ganador  -> 1 | 2 | null
-//     posG/posL -> posiciones finales de carrera del ganador/perdedor (opcional)
-//
-// Si SRS.eliminatorias.octavos está vacío (todavía no hay 16 clasificados),
-// se pintan 8 partidos "TBD vs TBD" para que el bracket se vea desde ya.
-
-(function () {
+function renderBracket() {
   function vacioOcho() {
     return Array.from({ length: 8 }, (_, i) => ({
       id: `oct-${i + 1}`,
@@ -61,17 +50,13 @@
     posL: null,
   };
 
-  // Octavos: 8 partidos repartidos 4 a la izquierda / 4 a la derecha
   const octL = octavos.slice(0, 4);
   const octR = octavos.slice(4, 8);
-  // Cuartos: 4 partidos, 2 a cada lado
   const cuaL = cuartos.slice(0, 2);
   const cuaR = cuartos.slice(2, 4);
-  // Semis: 1 a cada lado
   const semL = semis.slice(0, 1);
   const semR = semis.slice(1, 2);
 
-  // ── RENDER DE UN PARTIDO ───────────────────────────────────
   function renderMatch(m, opts = {}) {
     const { headLabel = "", alignRight = false, isFinal = false } = opts;
 
@@ -83,11 +68,6 @@
 
     const tbd1 = !m.p1 || m.p1 === "TBD";
     const tbd2 = !m.p2 || m.p2 === "TBD";
-
-    const posTag = (pos) =>
-      pos !== null && pos !== undefined
-        ? `<span class="b-seed">${pos}</span>`
-        : `<span class="b-seed">${m.s1 || m.s2 || "·"}</span>`;
 
     const slot1 = `<div class="${slotClass(m.ganador === 1, tbd1)}">
             <span class="b-seed">${tbd1 ? "·" : m.ganador === 1 ? (m.posG ?? m.s1 ?? "·") : m.ganador === 2 ? (m.posL ?? m.s1 ?? "·") : (m.s1 ?? "·")}</span>
@@ -121,7 +101,6 @@
       .join("");
   }
 
-  // ── PINTAR COLUMNAS ─────────────────────────────────────────
   renderCol("b-col-oct-l", octL, { label: "Octavos", alignRight: false });
   renderCol("b-col-oct-r", octR, { label: "Octavos", alignRight: true });
   renderCol("b-col-cua-l", cuaL, { label: "Cuartos", alignRight: false });
@@ -129,14 +108,11 @@
   renderCol("b-col-sem-l", semL, { label: "Semis", alignRight: false });
   renderCol("b-col-sem-r", semR, { label: "Semis", alignRight: true });
 
-  // ── CENTRO: FINAL + TROFEO ──────────────────────────────────
   (function () {
     const el = document.getElementById("b-center");
     if (!el) return;
-
     const campeon =
       final.ganador === 1 ? final.p1 : final.ganador === 2 ? final.p2 : null;
-
     el.innerHTML = `
             <div class="b-trophy">🏆</div>
             ${renderMatch(final, { label: "Final", headLabel: "Gran Final", isFinal: true })}
@@ -144,7 +120,6 @@
         `;
   })();
 
-  // ── CONECTORES (líneas simples entre columnas) ───────────────
   (function () {
     const ids = [
       "b-cn-ol-cl",
@@ -164,4 +139,7 @@
             </svg>`;
     });
   })();
-})();
+}
+
+renderBracket();
+window.renderBracket = renderBracket;

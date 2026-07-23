@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jornadas T38 — Spanish Racing Series</title>
+    <title>Jornadas T39 — Spanish Racing Series</title>
     <link rel="stylesheet" href="css/srs.css" />
     <link
       rel="stylesheet"
@@ -19,14 +19,14 @@
       <div class="container header-inner">
         <a class="brand" href="index.html">
           <span class="brand-icon">🏁</span>
-          <span class="brand-name">SRS <span>T38</span></span>
+          <span class="brand-name">SRS <span>T39</span></span>
         </a>
         <nav class="site-nav" aria-label="Principal">
           <a href="index.html">Inicio</a>
           <a href="jornadas.html" class="active">Jornadas</a>
           <a href="eliminatorias.html">Eliminatorias</a>
         </nav>
-        <span class="season-badge">TEMP. 38</span>
+        <span class="season-badge">COPA VERANO</span>
       </div>
     </header>
 
@@ -34,11 +34,11 @@
     <div class="page-hero">
       <div class="container page-hero-inner">
         <div>
-          <p class="section-label">// Fase de liga · Temporada 38</p>
-          <h1 class="section-title">Jornadas <em>T38</em></h1>
+          <p class="section-label">// Copa de Verano · Temporada 39</p>
+          <h1 class="section-title">Jornadas <em>T39</em></h1>
           <p class="section-sub">
-            10 jornadas · Lunes, miércoles y viernes a las 21:00 h (hora
-            peninsular). Las jornadas se revelan conforme avanza la temporada.
+            22 carreras, una por día, sin descansos. Fase 1 (J1-J8) · Fase 2
+            (J9-J10) · Fase 3 (J11-J18) · Fase Final (J19-J22).
           </p>
         </div>
         <div
@@ -59,24 +59,23 @@
       </div>
     </div>
 
-    <!-- ══ JORNADAS GRID ════════════════════════════════════════ -->
-    <section class="page-section" style="padding-top: 0">
-      <div class="container">
-        <div class="jornada-grid" id="jornadas-grid"></div>
-      </div>
+    <!-- ══ JORNADAS POR FASE ═══════════════════════════════════ -->
+    <section class="page-section" style="padding-top: 0" id="jornadas-por-fase">
+      <!-- se rellena por JS: un bloque por fase, cada uno con su grid -->
     </section>
 
     <!-- ══ FOOTER ═══════════════════════════════════════════════ -->
     <footer class="site-footer">
       <div class="container footer-inner">
         <span class="footer-brand"
-          >Spanish <span>Racing</span> Series · T38</span
+          >Spanish <span>Racing</span> Series · T39</span
         >
         <div class="footer-links" id="footer-links"></div>
       </div>
     </footer>
 
     <script src="js/srs-data.js"></script>
+    <script src="js/copa.js"></script>
     <script>
       // ── FOOTER ────────────────────────────────────────────────
       document.getElementById("footer-links").innerHTML = SRS.redes
@@ -86,33 +85,27 @@
         )
         .join("");
 
-      // ── VISIBILITY LOGIC (CORREGIDO) ──────────────────────────
-      // Una jornada es visible si es la primera, si está completada, o si la anterior ya se completó.
+      const COPA = window.SRS_COPA || SRS.calcularCopa();
+
+      // ── DEFINICIÓN DE FASES (según reglas T39) ───────────────────
+      const FASES = [
+        { nombre: "Fase 1 · Clasificación directa", desde: 1, hasta: 8 },
+        { nombre: "Fase 2 · Primer corte", desde: 9, hasta: 10 },
+        { nombre: "Fase 3 · Última oportunidad", desde: 11, hasta: 18 },
+        { nombre: "Fase Final", desde: 19, hasta: 22 },
+      ];
+
+      function faseDeJornada(numero) {
+        return FASES.find((f) => numero >= f.desde && numero <= f.hasta);
+      }
+
+      // Una jornada es visible si es la primera o la anterior ya se completó
       function isVisible(idx) {
-        if (idx === 0) return true; // La J1 siempre es visible
-
+        if (idx === 0) return true;
         const prev = SRS.jornadas[idx - 1];
-
-        // Si la jornada anterior está marcada como completada, la actual debe ser visible
-        if (
-          prev &&
-          (prev.completada === true || prev.estado === "completada")
-        ) {
-          return true;
-        }
-
-        // Por si acaso, si la propia jornada actual ya está activa o completada, la hacemos visible
+        if (prev && prev.completada === true) return true;
         const actual = SRS.jornadas[idx];
-        if (
-          actual &&
-          (actual.completada === true ||
-            actual.estado === "completada" ||
-            actual.estado === "activa")
-        ) {
-          return true;
-        }
-
-        return false;
+        return actual && actual.completada === true;
       }
 
       // ── CHIPS ─────────────────────────────────────────────────
@@ -120,132 +113,124 @@
         const el = document.getElementById("jornadas-chips");
         SRS.jornadas.forEach((j, i) => {
           const visible = isVisible(i);
-          const cls =
-            j.estado === "completada"
-              ? "chip--done"
-              : j.estado === "activa"
-                ? "chip--cyan"
-                : "chip--grey";
+          const cls = j.completada ? "chip--done" : "chip--grey";
           const span = document.createElement("span");
           span.className = `chip ${cls}`;
-          span.textContent = visible ? `J${i + 1}` : `J${i + 1} 🔒`;
+          span.textContent = visible ? `J${j.numero}` : `J${j.numero} 🔒`;
           el.appendChild(span);
         });
       })();
 
-      // ── RENDER JORNADAS ───────────────────────────────────────
-      // ── RENDER JORNADAS (CORREGIDO) ───────────────────────────
+      // ── TARJETA DE UNA JORNADA (tabla de resultados, sin duelos) ──
+      function renderJornadaCard(j, visible) {
+        const card = document.createElement("div");
+        card.className = "jornada-card" + (visible ? "" : " hidden-jornada");
+
+        const statusChip = j.completada
+          ? `<span class="chip chip--done">Completada</span>`
+          : `<span class="chip chip--grey">Pendiente</span>`;
+
+        let bodyHtml;
+        if (!visible) {
+          bodyHtml = `<div class="jornada-locked">
+              <div class="jornada-locked-icon">🔒</div>
+              <p>Se revelará tras la jornada anterior</p>
+            </div>`;
+        } else if (j.resultados && j.resultados.length > 0) {
+          // Mostramos el Top 8 de la carrera (posición, equipo, puntos)
+          const top = j.resultados.slice(0, 8);
+          bodyHtml = `<div class="jornada-resultados-mini">
+              ${top
+                .map(
+                  (
+                    r,
+                  ) => `<div class="duelo-row" style="justify-content:space-between;">
+                    <div class="duelo-piloto">
+                      <span class="duelo-piloto-avatar">${r.pos}</span>
+                      <span class="duelo-piloto-name">${r.equipo}</span>
+                    </div>
+                    <span class="clas-pts" style="font-size:0.85rem;">${r.pts}pts</span>
+                  </div>`,
+                )
+                .join("")}
+            </div>`;
+        } else {
+          bodyHtml = `<div class="jornada-locked">
+              <div class="jornada-locked-icon">📋</div>
+              <p>Resultados pendientes</p>
+            </div>`;
+        }
+
+        card.innerHTML = `
+          <div class="jornada-head">
+            <div>
+              <div class="jornada-name">Jornada ${j.numero}</div>
+              <div class="jornada-date">${j.circuito || ""}</div>
+            </div>
+            ${statusChip}
+          </div>
+          <div class="jornada-body">${bodyHtml}</div>`;
+
+        return card;
+      }
+
+      // ── RENDER AGRUPADO POR FASE ──────────────────────────────
       (function () {
-        const grid = document.getElementById("jornadas-grid");
+        const contenedor = document.getElementById("jornadas-por-fase");
 
-        SRS.jornadas.forEach((j, idx) => {
-          const visible = isVisible(idx);
-          const card = document.createElement("div");
-          card.className = "jornada-card" + (visible ? "" : " hidden-jornada");
+        FASES.forEach((fase) => {
+          const jornadasFase = SRS.jornadas.filter(
+            (j) => j.numero >= fase.desde && j.numero <= fase.hasta,
+          );
+          if (jornadasFase.length === 0) return;
 
-          const statusChip =
-            j.estado === "completada" || j.completada === true
-              ? `<span class="chip chip--done">Completada</span>`
-              : j.estado === "activa"
-                ? `<span class="chip chip--cyan">En curso</span>`
-                : `<span class="chip chip--grey">Pendiente</span>`;
+          const bloque = document.createElement("div");
+          bloque.className = "container";
+          bloque.style.marginBottom = "40px";
 
-          // Intentamos unificar si viene de "duelos" o de "enfrentamientos"
-          const listaDuelos = j.duelos || j.enfrentamientos || [];
+          const completadasFase = jornadasFase.filter(
+            (j) => j.completada,
+          ).length;
 
-          let bodyHtml = "";
-          if (!visible) {
-            bodyHtml = `<div class="jornada-locked">
-<div class="jornada-locked-icon">🔒</div>
-<p>Se revelará tras la jornada anterior</p>
-</div>`;
-          } else if (listaDuelos.length > 0) {
-            bodyHtml = listaDuelos
-              .map((d) => {
-                // Mapeo adaptativo: formato antiguo (J1-J5) o nuevo (J6+)
-                const nombreA = d.g || d.equipoA;
-                const nombreB = d.l || d.equipoB;
-                const posA = d.pg !== undefined ? d.pg : d.posA;
-                const posB = d.pl !== undefined ? d.pl : d.posB;
+          bloque.innerHTML = `
+            <p class="section-label">// ${fase.nombre}</p>
+            <h2 class="section-title" style="font-size:1.6rem;">
+              J${fase.desde}${fase.desde !== fase.hasta ? "–J" + fase.hasta : ""}
+              <em>(${completadasFase}/${jornadasFase.length})</em>
+            </h2>
+          `;
 
-                // ── ESTO es lo que faltaba antes: leer quién ganó de verdad ──
-                // ganador 'A' => nombreA es el ganador; 'B' => nombreB es el ganador
-                const aGano = d.ganador === "A";
-                const bGano = d.ganador === "B";
+          const grid = document.createElement("div");
+          grid.className = "jornada-grid";
 
-                const pilotoGanador = aGano ? nombreA : bGano ? nombreB : null;
-                const pilotoPerdedor = aGano ? nombreB : bGano ? nombreA : null;
-                const posGanador = aGano ? posA : bGano ? posB : null;
-                const posPerdedor = aGano ? posB : bGano ? posA : null;
+          jornadasFase.forEach((j) => {
+            const idxGlobal = SRS.jornadas.findIndex(
+              (x) => x.numero === j.numero,
+            );
+            const visible = isVisible(idxGlobal);
+            grid.appendChild(renderJornadaCard(j, visible));
+          });
 
-                // Si no hay ganador definido (jornada futura sin resultado),
-                // mostramos ambos como neutros, sin marcar a nadie.
-                const sinGanador = !aGano && !bGano;
-
-                if (sinGanador) {
-                  const inicialA = nombreA
-                    ? nombreA.trim().charAt(0).toUpperCase()
-                    : "?";
-                  const inicialB = nombreB
-                    ? nombreB.trim().charAt(0).toUpperCase()
-                    : "?";
-                  return `<div class="duelo-row">
-  <div class="duelo-piloto">
-    <span class="duelo-piloto-avatar">${inicialA}</span>
-    <span class="duelo-piloto-name">${nombreA ?? "TBD"}</span>
-    ${posA !== undefined && posA !== null ? `<span class="duelo-piloto-pos">P${posA}</span>` : ""}
-  </div>
-  <span class="duelo-vs-mini">VS</span>
-  <div class="duelo-piloto">
-    <span class="duelo-piloto-avatar">${inicialB}</span>
-    <span class="duelo-piloto-name">${nombreB ?? "TBD"}</span>
-    ${posB !== undefined && posB !== null ? `<span class="duelo-piloto-pos">P${posB}</span>` : ""}
-  </div>
-</div>`;
-                }
-
-                const inicialesGanador = pilotoGanador
-                  ? pilotoGanador.trim().charAt(0).toUpperCase()
-                  : "?";
-                const inicialesPerdedor = pilotoPerdedor
-                  ? pilotoPerdedor.trim().charAt(0).toUpperCase()
-                  : "?";
-
-                return `<div class="duelo-row">
-  <div class="duelo-piloto duelo-piloto--win">
-    <span class="duelo-medal">🏆</span>
-    <span class="duelo-piloto-avatar">${inicialesGanador}</span>
-    <span class="duelo-piloto-name">${pilotoGanador}</span>
-    <span class="duelo-piloto-pos">P${posGanador}</span>
-  </div>
-  <span class="duelo-vs-mini">VS</span>
-  <div class="duelo-piloto duelo-piloto--lose">
-    <span class="duelo-piloto-avatar">${inicialesPerdedor}</span>
-    <span class="duelo-piloto-name">${pilotoPerdedor}</span>
-    <span class="duelo-piloto-pos">P${posPerdedor}</span>
-  </div>
-</div>`;
-              })
-              .join("");
-          } else {
-            bodyHtml = `<div class="jornada-locked">
-<div class="jornada-locked-icon">📋</div>
-<p>Resultados pendientes</p>
-</div>`;
-          }
-
-          card.innerHTML = `
-<div class="jornada-head">
-<div>
-  <div class="jornada-name">${j.nombre || "Jornada " + j.numero}</div>
-  <div class="jornada-date">${j.fechaLabel || j.circuito}</div>
-</div>
-${statusChip}
-</div>
-<div class="jornada-body">${bodyHtml}</div>`;
-
-          grid.appendChild(card);
+          bloque.appendChild(grid);
+          contenedor.appendChild(bloque);
         });
+      })();
+
+      // ── PRÓXIMA JORNADA ──────────────────────────────────────────
+      (function () {
+        const nameEl = document.getElementById("next-name");
+        const timeEl = document.getElementById("next-time");
+        if (!nameEl) return;
+
+        const siguiente = SRS.jornadas.find((j) => !j.completada);
+        if (!siguiente) {
+          nameEl.textContent = "Copa finalizada";
+          timeEl.textContent = "—";
+          return;
+        }
+        const fase = faseDeJornada(siguiente.numero);
+        nameEl.textContent = `J${siguiente.numero} · ${siguiente.circuito || "por confirmar"} (${fase ? fase.nombre : ""})`;
+        timeEl.textContent = "por confirmar";
       })();
     </script>
   </body>

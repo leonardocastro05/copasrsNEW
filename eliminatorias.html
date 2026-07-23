@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spanish Racing Series — Eliminatorias T37</title>
+    <title>Spanish Racing Series — Eliminatorias T39</title>
     <link rel="stylesheet" href="css/srs.css" />
     <link
       rel="stylesheet"
@@ -19,14 +19,14 @@
       <div class="container header-inner">
         <a class="brand" href="index.html">
           <span class="brand-icon">🏁</span>
-          <span class="brand-name">SRS <span>T38</span></span>
+          <span class="brand-name">SRS <span>T39</span></span>
         </a>
         <nav class="site-nav" aria-label="Principal">
           <a href="index.html">Inicio</a>
           <a href="jornadas.html">Jornadas</a>
           <a href="eliminatorias.html" class="active">Eliminatorias</a>
         </nav>
-        <span class="season-badge">TEMP. 38</span>
+        <span class="season-badge">TEMP. 39</span>
       </div>
     </header>
 
@@ -36,7 +36,7 @@
         <div class="container">
           <!-- Cabecera -->
           <div class="elim-header">
-            <p class="elim-kicker">Fase final · Temporada 38</p>
+            <p class="elim-kicker">Fase final · Temporada 39</p>
             <h1 class="elim-title">Eliminatorias</h1>
             <p class="elim-sub">32 → 16 → 8 → 4 → 2 → Campeón</p>
           </div>
@@ -114,23 +114,44 @@
           <p class="bracket-note">
             Los emparejamientos de octavos se generan de forma aleatoria entre
             los 16 mejores &nbsp;·&nbsp;
-            <strong>Spanish Racing Series · Temporada 38</strong>
+            <strong>Spanish Racing Series · Temporada 39</strong>
           </p>
         </div>
       </section>
     </main>
 
+    <div class="sorteo-panel">
+      <button id="btn-generar-sorteo" class="btn-sorteo">
+        🎲 Generar sorteo
+      </button>
+      <button
+        id="btn-reiniciar-sorteo"
+        class="btn-sorteo btn-sorteo--secundario"
+      >
+        ↺ Reiniciar
+      </button>
+
+      <div id="sorteo-ruleta" class="sorteo-ruleta" hidden>
+        <p class="sorteo-ruleta-label" id="sorteo-contador">Bola 1 de 16</p>
+        <div class="sorteo-ruleta-nombre" id="sorteo-nombre-actual">—</div>
+      </div>
+
+      <div id="sorteo-reveladas" class="sorteo-reveladas" hidden></div>
+    </div>
+
     <!-- ══ FOOTER ═══════════════════════════════════════════════ -->
     <footer class="site-footer">
       <div class="container footer-inner">
         <span class="footer-brand"
-          >Spanish <span>Racing</span> Series · T38</span
+          >Spanish <span>Racing</span> Series · T39</span
         >
         <div class="footer-links" id="footer-links"></div>
       </div>
     </footer>
 
     <script src="js/srs-data.js"></script>
+    <script src="js/copa.js"></script>
     <script src="js/eliminatorias.js"></script>
+    <script src="js/sorteo.js"></script>
   </body>
 </html>

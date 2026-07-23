@@ -1,13 +1,38 @@
-/* ============================================================
+/* ================================================================
    SPANISH RACING SERIES — SRS.CSS
    Paleta: Rojo SRS / Dorado / Negro carbono
-   Fonts: Barlow Condensed (display) + DM Mono (data)
-   ============================================================ */
+   Fonts: Barlow Condensed (display) + DM Mono (data) + Barlow (body)
+
+   ÍNDICE
+   01. Fuentes y variables (design tokens)
+   02. Reset y base
+   03. Fondo / textura / ambient glow
+   04. Layout utilities (container)
+   05. Header
+   06. Footer
+   07. Botones
+   08. Utilidades de sección (labels, títulos, panels, chips)
+   09. Home — Hero
+   10. Home — Countdown
+   11. Clasificación / Tabla General
+   12. Copa — estados de fase (colores por fila + leyenda)
+   13. Jornadas — grid y tarjetas
+   14. Jornadas — duelo row (formato card)
+   15. Page hero genérico + next-round banner
+   16. Eliminatorias — cabecera y phase pills
+   17. Eliminatorias — bracket (grid, columnas, conectores)
+   18. Eliminatorias — match card y slots
+   19. Eliminatorias — centro (trofeo + final)
+   20. Responsive
+   ================================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,900;1,700&family=DM+Mono:wght@400;500&family=Barlow:wght@400;500;600&display=swap");
 
+/* ================================================================
+   01. FUENTES Y VARIABLES (DESIGN TOKENS)
+   ================================================================ */
 :root {
-  /* ── Core brand palette (colores bandera española / SRS) */
+  /* Carbón / fondos */
   --carbon: #0c0c0c;
   --carbon-2: #141414;
   --carbon-3: #1c1c1c;
@@ -15,13 +40,13 @@
   --carbon-5: #2e2e2e;
   --panel: rgba(20, 20, 20, 0.94);
 
-  /* Rojo SRS — extraído del banner */
+  /* Rojo SRS */
   --red: #d41e1e;
   --red-bright: #e83030;
   --red-dim: rgba(212, 30, 30, 0.18);
   --red-glow: rgba(212, 30, 30, 0.4);
 
-  /* Dorado / amarillo — de la bandera española */
+  /* Dorado / amarillo (bandera española) */
   --gold: #f0b800;
   --gold-bright: #ffd000;
   --gold-dim: rgba(240, 184, 0, 0.15);
@@ -40,7 +65,7 @@
   --border-bright: rgba(240, 184, 0, 0.45);
   --winner-bg: rgba(240, 184, 0, 0.07);
 
-  /* Radii */
+  /* Radios */
   --r-sm: 3px;
   --r-md: 6px;
   --r-lg: 10px;
@@ -48,6 +73,9 @@
   --transition: all 0.2s ease;
 }
 
+/* ================================================================
+   02. RESET Y BASE
+   ================================================================ */
 *,
 *::before,
 *::after {
@@ -69,8 +97,11 @@ body {
   overflow-x: hidden;
 }
 
-/* ── TEXTURA DIAGONAL (sutil, fibra de carbono) ─────────── */
+/* ================================================================
+   03. FONDO / TEXTURA / AMBIENT GLOW
+   ================================================================ */
 body::before {
+  /* Textura diagonal sutil, efecto fibra de carbono */
   content: "";
   position: fixed;
   inset: 0;
@@ -85,7 +116,6 @@ body::before {
   );
 }
 
-/* ── AMBIENT GLOW ─────────────────────────────────────────── */
 .ambient {
   position: fixed;
   inset: 0;
@@ -109,7 +139,9 @@ body::before {
     );
 }
 
-/* ── CONTAINER ────────────────────────────────────────────── */
+/* ================================================================
+   04. LAYOUT UTILITIES
+   ================================================================ */
 .container {
   width: min(1280px, calc(100% - 2rem));
   margin-inline: auto;
@@ -117,9 +149,9 @@ body::before {
   z-index: 1;
 }
 
-/* ══════════════════════════════════════════════════════
-   HEADER
-══════════════════════════════════════════════════════ */
+/* ================================================================
+   05. HEADER
+   ================================================================ */
 .site-header {
   position: sticky;
   top: 0;
@@ -129,8 +161,8 @@ body::before {
   border-bottom: 1px solid rgba(240, 184, 0, 0.2);
 }
 
-/* Franja dorada fina en el header */
 .site-header::after {
+  /* Franja dorada/roja fina bajo el header */
   content: "";
   position: absolute;
   bottom: 0;
@@ -231,9 +263,9 @@ body::before {
   flex-shrink: 0;
 }
 
-/* ══════════════════════════════════════════════════════
-   FOOTER
-══════════════════════════════════════════════════════ */
+/* ================================================================
+   06. FOOTER
+   ================================================================ */
 .site-footer {
   border-top: 1px solid rgba(240, 184, 0, 0.15);
   background: var(--carbon-2);
@@ -288,9 +320,63 @@ body::before {
   background: var(--gold-dim);
 }
 
-/* ══════════════════════════════════════════════════════
-   SECTION UTILITY
-══════════════════════════════════════════════════════ */
+/* ================================================================
+   07. BOTONES
+   ================================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--r-sm);
+  padding: 10px 20px;
+  transition: var(--transition);
+  cursor: pointer;
+  border: none;
+}
+
+.btn--primary {
+  background: var(--red);
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.btn--primary:hover {
+  background: var(--red-bright);
+  transform: translateY(-1px);
+}
+
+.btn--secondary {
+  background: var(--gold);
+  color: #0c0c0c;
+  border: 1px solid transparent;
+}
+
+.btn--secondary:hover {
+  background: var(--gold-bright);
+  transform: translateY(-1px);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--silver-faint);
+}
+
+.btn--outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-dim);
+}
+
+/* ================================================================
+   08. UTILIDADES DE SECCIÓN (labels, títulos, panels, chips)
+   ================================================================ */
 .page-section {
   padding: 56px 0;
   position: relative;
@@ -328,7 +414,6 @@ body::before {
   max-width: 52ch;
 }
 
-/* ── PANEL CARDS ──────────────────────────────────────── */
 .panel {
   background: var(--carbon-2);
   border: 1px solid var(--border);
@@ -353,7 +438,6 @@ body::before {
   color: var(--gold);
 }
 
-/* ── CHIPS ────────────────────────────────────────────── */
 .chip {
   font-family: "DM Mono", monospace;
   font-size: 0.65rem;
@@ -386,9 +470,9 @@ body::before {
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* ══════════════════════════════════════════════════════
-   INDEX PAGE — HERO
-══════════════════════════════════════════════════════ */
+/* ================================================================
+   09. HOME — HERO
+   ================================================================ */
 .hero {
   padding: 64px 0 48px;
   position: relative;
@@ -485,59 +569,9 @@ body::before {
   flex-wrap: wrap;
 }
 
-/* ── BOTONES ──────────────────────────────────────────── */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: "Barlow Condensed", sans-serif;
-  font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: var(--r-sm);
-  padding: 10px 20px;
-  transition: var(--transition);
-  cursor: pointer;
-  border: none;
-}
-
-.btn--primary {
-  background: var(--red);
-  color: #fff;
-  border: 1px solid transparent;
-}
-
-.btn--primary:hover {
-  background: var(--red-bright);
-  transform: translateY(-1px);
-}
-
-.btn--secondary {
-  background: var(--gold);
-  color: #0c0c0c;
-  border: 1px solid transparent;
-}
-
-.btn--secondary:hover {
-  background: var(--gold-bright);
-  transform: translateY(-1px);
-}
-
-.btn--outline {
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--silver-faint);
-}
-
-.btn--outline:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: var(--gold-dim);
-}
-
-/* ── COUNTDOWN ────────────────────────────────────────── */
+/* ================================================================
+   10. HOME — COUNTDOWN
+   ================================================================ */
 .countdown-panel {
   background: var(--carbon-3);
   border: 1px solid rgba(240, 184, 0, 0.2);
@@ -547,8 +581,8 @@ body::before {
   overflow: hidden;
 }
 
-/* Franja roja lateral */
 .countdown-panel::before {
+  /* Franja lateral degradada oro → rojo */
   content: "";
   position: absolute;
   left: 0;
@@ -614,7 +648,9 @@ body::before {
   font-weight: 500;
 }
 
-/* ── CLASIFICACION ────────────────────────────────────── */
+/* ================================================================
+   11. CLASIFICACIÓN / TABLA GENERAL
+   ================================================================ */
 .clasificacion-table {
   width: 100%;
 }
@@ -637,6 +673,9 @@ body::before {
   background: rgba(240, 184, 0, 0.04);
 }
 
+/* Nota: .top-1/.top-2/.top-3 quedaron sin uso en index.html desde que
+   la Tabla General pasó a colorearse por fase de Copa (ver sección 12).
+   Se conservan aquí por si se reutilizan en otra tabla de podio. */
 .clas-row.top-1 {
   background: linear-gradient(
     90deg,
@@ -732,9 +771,85 @@ body::before {
   color: var(--text-muted);
 }
 
-/* ══════════════════════════════════════════════════════
-   JORNADAS PAGE
-══════════════════════════════════════════════════════ */
+/* ================================================================
+   12. COPA — ESTADOS DE FASE (colores por fila + leyenda)
+   Usado en la Tabla General de index.html junto a SRS.estadoCopa()
+   ================================================================ */
+.tabla-fila--directo {
+  border-left: 4px solid #22c55e;
+  background: rgba(34, 197, 94, 0.08);
+}
+
+.tabla-fila--final-16 {
+  border-left: 4px solid #ffd700;
+  background: rgba(255, 215, 0, 0.08);
+}
+
+.tabla-fila--en-liza {
+  border-left: 4px solid #3b82f6;
+  background: rgba(59, 130, 246, 0.06);
+}
+
+.tabla-fila--eliminado-f2 {
+  border-left: 4px solid #f97316;
+  background: rgba(249, 115, 22, 0.06);
+  opacity: 0.75;
+}
+
+.tabla-fila--eliminado-f3 {
+  border-left: 4px solid #ef4444;
+  background: rgba(239, 68, 68, 0.06);
+  opacity: 0.75;
+}
+
+.tabla-fila--pendiente {
+  border-left: 4px solid transparent;
+}
+
+.copa-leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0;
+  font-size: 0.85rem;
+}
+
+.copa-leyenda span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.copa-leyenda i {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.leyenda-directo {
+  background: #22c55e;
+}
+
+.leyenda-final-16 {
+  background: #ffd700;
+}
+
+.leyenda-en-liza {
+  background: #3b82f6;
+}
+
+.leyenda-eliminado-f2 {
+  background: #f97316;
+}
+
+.leyenda-eliminado-f3 {
+  background: #ef4444;
+}
+
+/* ================================================================
+   13. JORNADAS — GRID Y TARJETAS
+   ================================================================ */
 .jornada-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -789,10 +904,28 @@ body::before {
   padding: 0;
 }
 
-/* ══════════════════════════════════════════════════════
-   DUELO ROW v2 — formato "card" con badge/medalla
-   (reemplaza el viejo formato de columnas tipo Excel)
-══════════════════════════════════════════════════════ */
+.jornada-locked {
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.jornada-locked-icon {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+  opacity: 0.4;
+}
+
+.jornada-locked p {
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ================================================================
+   14. JORNADAS — DUELO ROW (formato card con badge/medalla)
+   ================================================================ */
 .duelo-row {
   display: flex;
   align-items: center;
@@ -805,7 +938,6 @@ body::before {
   border-bottom: none;
 }
 
-/* ── BLOQUE PILOTO (avatar + nombre + posición) ───────── */
 .duelo-piloto {
   display: flex;
   align-items: center;
@@ -850,8 +982,8 @@ body::before {
   padding-left: 4px;
 }
 
-/* ── GANADOR: badge medalla + fondo sutil ─────────────── */
 .duelo-piloto--win {
+  /* Ganador: badge medalla + fondo sutil */
   background: var(--winner-bg);
   border: 1px solid rgba(240, 184, 0, 0.18);
 }
@@ -878,8 +1010,8 @@ body::before {
   filter: drop-shadow(0 0 4px var(--gold-glow));
 }
 
-/* ── PERDEDOR: discreto, sin caja ─────────────────────── */
 .duelo-piloto--lose {
+  /* Perdedor: discreto, sin caja */
   opacity: 0.65;
 }
 
@@ -887,7 +1019,6 @@ body::before {
   font-weight: 500;
 }
 
-/* ── SEPARADOR CENTRAL ─────────────────────────────────── */
 .duelo-vs-mini {
   font-family: "DM Mono", monospace;
   font-size: 0.55rem;
@@ -897,48 +1028,14 @@ body::before {
   padding: 0 2px;
 }
 
-/* ── HOVER en toda la fila ─────────────────────────────── */
 .duelo-row:hover .duelo-piloto--win {
   border-color: rgba(240, 184, 0, 0.35);
   background: rgba(240, 184, 0, 0.1);
 }
 
-@media (max-width: 420px) {
-  .duelo-row {
-    flex-wrap: wrap;
-  }
-
-  .duelo-piloto {
-    flex-basis: 100%;
-  }
-
-  .duelo-vs-mini {
-    flex-basis: 100%;
-    text-align: center;
-    padding: 2px 0;
-  }
-}
-
-.jornada-locked {
-  padding: 24px 16px;
-  text-align: center;
-  color: var(--text-muted);
-}
-
-.jornada-locked-icon {
-  font-size: 1.6rem;
-  margin-bottom: 8px;
-  opacity: 0.4;
-}
-
-.jornada-locked p {
-  font-family: "DM Mono", monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-/* ── PAGE HERO ────────────────────────────────────────── */
+/* ================================================================
+   15. PAGE HERO GENÉRICO + NEXT-ROUND BANNER
+   ================================================================ */
 .page-hero {
   padding: 40px 0 32px;
   border-bottom: 1px solid rgba(240, 184, 0, 0.12);
@@ -955,7 +1052,6 @@ body::before {
   flex-wrap: wrap;
 }
 
-/* ── NEXT ROUND BANNER ────────────────────────────────── */
 .next-banner {
   background: linear-gradient(90deg, var(--carbon-3), var(--carbon-4));
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -993,50 +1089,15 @@ body::before {
   font-variant-numeric: tabular-nums;
 }
 
-/* ── RESPONSIVE ───────────────────────────────────────── */
-@media (max-width: 960px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .countdown-panel {
-    max-width: 480px;
-  }
-}
-
-@media (max-width: 640px) {
-  .site-nav a {
-    padding: 5px 10px;
-    font-size: 0.78rem;
-  }
-
-  .hero-title {
-    font-size: 2.8rem;
-  }
-
-  .footer-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .countdown-zones {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ══════════════════════════════════════════════════════
-   --- ELIMINATORIAS ---
-   Bracket simétrico: oct-izq → cua → sem → FINAL ← sem ← cua ← oct-der
-══════════════════════════════════════════════════════ */
-
-/* ── SECCIÓN WRAPPER ──────────────────────────────────── */
+/* ================================================================
+   16. ELIMINATORIAS — CABECERA Y PHASE PILLS
+   ================================================================ */
 .elim-section {
   padding: 44px 0 60px;
   position: relative;
   z-index: 1;
 }
 
-/* ── CABECERA ─────────────────────────────────────────── */
 .elim-header {
   margin-bottom: 32px;
 }
@@ -1079,7 +1140,6 @@ body::before {
   color: var(--text-dim);
 }
 
-/* ── PHASE PILLS ──────────────────────────────────────── */
 .elim-phases {
   display: flex;
   gap: 10px;
@@ -1139,7 +1199,10 @@ body::before {
   margin-top: 2px;
 }
 
-/* ── BRACKET OUTER ────────────────────────────────────── */
+/* ================================================================
+   17. ELIMINATORIAS — BRACKET (grid, columnas, conectores)
+   Bracket simétrico: oct-izq → cua → sem → FINAL ← sem ← cua ← oct-der
+   ================================================================ */
 .bracket-outer {
   overflow-x: auto;
   padding-bottom: 6px;
@@ -1161,7 +1224,6 @@ body::before {
   border-radius: 2px;
 }
 
-/* ── PHASE LABELS ROW ─────────────────────────────────── */
 .bracket-phase-labels {
   display: grid;
   grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 110px 28px 1fr 28px 1fr 28px 1fr;
@@ -1194,7 +1256,6 @@ body::before {
   color: var(--red-bright);
 }
 
-/* ── BRACKET GRID ─────────────────────────────────────── */
 .bracket-grid {
   display: grid;
   grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 110px 28px 1fr 28px 1fr 28px 1fr;
@@ -1203,7 +1264,6 @@ body::before {
   gap: 0;
 }
 
-/* ── COLUMNAS DE PARTIDOS ─────────────────────────────── */
 .b-col {
   display: flex;
   flex-direction: column;
@@ -1212,7 +1272,6 @@ body::before {
   padding: 3px 0;
 }
 
-/* ── COLUMNAS DE CONECTORES ───────────────────────────── */
 .b-conn {
   position: relative;
   align-self: stretch;
@@ -1226,7 +1285,9 @@ body::before {
   overflow: visible;
 }
 
-/* ── MATCH CARD ───────────────────────────────────────── */
+/* ================================================================
+   18. ELIMINATORIAS — MATCH CARD Y SLOTS
+   ================================================================ */
 .b-match {
   background: var(--carbon-2);
   border: 1px solid var(--border);
@@ -1349,7 +1410,9 @@ body::before {
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-/* ── COLUMNA CENTRAL (trofeo + final) ─────────────────── */
+/* ================================================================
+   19. ELIMINATORIAS — CENTRO (trofeo + final)
+   ================================================================ */
 .b-center {
   display: flex;
   flex-direction: column;
@@ -1397,7 +1460,6 @@ body::before {
   line-height: 1.2;
 }
 
-/* ── BRACKET NOTE ─────────────────────────────────────── */
 .bracket-note {
   margin-top: 20px;
   padding-top: 14px;
@@ -1411,7 +1473,19 @@ body::before {
   z-index: 1;
 }
 
-/* ── RESPONSIVE ───────────────────────────────────────── */
+/* ================================================================
+   20. RESPONSIVE
+   ================================================================ */
+@media (max-width: 960px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .countdown-panel {
+    max-width: 480px;
+  }
+}
+
 @media (max-width: 768px) {
   .elim-phases {
     gap: 8px;
@@ -1420,5 +1494,41 @@ body::before {
   .elim-phase-pill {
     min-width: 95px;
     padding: 8px 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-nav a {
+    padding: 5px 10px;
+    font-size: 0.78rem;
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .countdown-zones {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .duelo-row {
+    flex-wrap: wrap;
+  }
+
+  .duelo-piloto {
+    flex-basis: 100%;
+  }
+
+  .duelo-vs-mini {
+    flex-basis: 100%;
+    text-align: center;
+    padding: 2px 0;
   }
 }
