@@ -1,112 +1,240 @@
-// ============================================================
-// SPANISH RACING SERIES — DATA T38
-// Compactado: objetos en una línea para reducir el tamaño del
-// archivo. Estructura corregida: eliminatorias/redes vuelven a
-// estar al mismo nivel que jornadas. Resultados de J8, J9 y J10
-// restaurados (se habían perdido al fusionar el archivo).
-// ============================================================
-
 const SRS = {
   season: { number: 39, title: "Temporada 39" },
 
-  // ── PILOTOS / CLASIFICACIÓN FINAL DE LA FASE DE LIGA (tras J10 · Singapur) ──
-  // puntos = 3 × jornadas ganadas por el equipo (J1–J10 completadas).
-// ── PILOTOS / EQUIPOS — TEMPORADA 39 (29/32 confirmados) ────
+// ── PILOTOS / EQUIPOS — TEMPORADA 39 (28 confirmados) ───────
   pilotos: [
-    { pos: 1, nombre: "Romus Toras", equipo: "50 Rizia Royal Racing", puntos: 0 },
-    { pos: 2, nombre: "Valdi CT", equipo: "Kimoa Racing F1 Team", puntos: 0 },
-    { pos: 3, nombre: "André Prov", equipo: "Tortuga", puntos: 0 },
-    { pos: 4, nombre: "Álvaro Molinelli", equipo: "49 Honda Repsol", puntos: 0 },
-    { pos: 5, nombre: "Vasvo Lao", equipo: "Subaru F1 Team", puntos: 0 },
-    { pos: 6, nombre: "Andres Greniuk", equipo: "63 CRT Competition", puntos: 0 },
-    { pos: 7, nombre: "Sergio Solano", equipo: "13 CRT Competition", puntos: 0 },
-    { pos: 8, nombre: "Giacomina Leclerc", equipo: "23 Foxtrot GP", puntos: 0 },
-    { pos: 9, nombre: "Cristian Ezpeleta", equipo: "99 Campos Racing F1", puntos: 0 },
-    { pos: 10, nombre: "Alexis Iceman", equipo: "00 CRT Competition", puntos: 0 },
-{ pos: 11, nombre: "Leoo Ferreira", equipo: "07 Foxtrot GP", puntos: 0 },
-    { pos: 12, nombre: "Juan Garcia", equipo: "Williams F1", puntos: 0 },
-    { pos: 13, nombre: "Bongain François", equipo: "83 Campos Racing F1", puntos: 0 },
-    { pos: 14, nombre: "José Ortiz", equipo: "43 Campos Racing F1", puntos: 0 },
-    { pos: 15, nombre: "Fran White Academy", equipo: "F. W. A.", puntos: 0 },
-    { pos: 16, nombre: "Julio Maidana", equipo: "50 Kimoa Racing F1 Team", puntos: 0 },
-    { pos: 17, nombre: "Antonio Pinillos", equipo: "Red Bull Pinkustercia F1 Team", puntos: 0 },
-    { pos: 18, nombre: "Lara Williams", equipo: "13 Hispania Racing Team", puntos: 0 },
-    { pos: 19, nombre: "Cristóbal Farías Galleguillos", equipo: "Zetta RT", puntos: 0 },
-    { pos: 20, nombre: "Alejandro Alonso", equipo: "3 Zetta Racing", puntos: 0 },
-    { pos: 21, nombre: "SUELIN Brauner de Ávila", equipo: "61877324754035", puntos: 0 },
-    { pos: 22, nombre: "Nelson David Quiroz", equipo: "9 ART Grand prix", puntos: 0 },
-    { pos: 23, nombre: "Christian Horny", equipo: "15 Zeta Racing", puntos: 0 },
-    { pos: 24, nombre: "Rui Ferrari", equipo: "Aston Martin F1", puntos: 0 },
-    { pos: 25, nombre: "Saúl González", equipo: "99 León Racing team", puntos: 0 },
-    { pos: 26, nombre: "Eduardo Calvo", equipo: "72 Foxtrot GP", puntos: 0 },
-    { pos: 27, nombre: "Alan Campos", equipo: "Williams Racing", puntos: 0 },
-    { pos: 28, nombre: "Carlos Ruiz Mateos", equipo: "53 Red Bull Racing Fly Emirates", puntos: 0 },
-    { pos: 29, nombre: "Samuel Guevara Salazar", equipo: "211 Subaru Powered By 555", puntos: 0 },
+    { pos: 1, nombre: "Romus Toras", equipo: "50 Rizia Royal Racing" },
+    { pos: 2, nombre: "Valdi CT", equipo: "Kimoa Racing F1 Team" },
+    { pos: 3, nombre: "André Prov", equipo: "Tortuga" },
+    { pos: 4, nombre: "Álvaro Molinelli", equipo: "49 Honda Repsol" },
+    { pos: 5, nombre: "Vasvo Lao", equipo: "55 Williams F1 Team" },
+    { pos: 6, nombre: "Andres Greniuk", equipo: "63 CRT Competition" },
+    { pos: 7, nombre: "Sergio Solano", equipo: "13 CRT Competition" },
+    { pos: 8, nombre: "Giacomina Leclerc", equipo: "23 Foxtrot GP" },
+    { pos: 9, nombre: "Cristian Ezpeleta", equipo: "99 Campos Racing F1" },
+    { pos: 10, nombre: "Alexis Iceman", equipo: "00 CRT Competition" },
+    { pos: 11, nombre: "Leoo Ferreira", equipo: "07 Foxtrot GP" },
+    { pos: 12, nombre: "Juan Garcia", equipo: "Williams F1" },
+    { pos: 13, nombre: "Bongain François", equipo: "83 Campos Racing F1" },
+    { pos: 14, nombre: "José Ortiz", equipo: "43 Campos Racing F1" },
+    { pos: 15, nombre: "Fran White Academy", equipo: "F. W. A." },
+    { pos: 16, nombre: "Julio Maidana", equipo: "50 Kimoa Racing F1 Team" },
+    { pos: 17, nombre: "Antonio Pinillos", equipo: "Red Bull Pinkustercia F1 Team" },
+    { pos: 18, nombre: "Lara Williams", equipo: "13 WILLIAMS Racing" },
+    { pos: 19, nombre: "Cristóbal Farías Galleguillos", equipo: "Zenith Motorsport" },
+    { pos: 20, nombre: "Alejandro Alonso", equipo: "3 Zetta Racing" },
+    { pos: 21, nombre: "Nelson David Quiroz", equipo: "9 Scuderia Ferrari" },
+    { pos: 22, nombre: "Christian Horny", equipo: "15 Zenith Motorsport" },
+    { pos: 23, nombre: "Rui Ferrari", equipo: "Aston Martin F1" },
+    { pos: 24, nombre: "Saúl González", equipo: "Foxtrot GP" },
+    { pos: 25, nombre: "Eduardo Calvo", equipo: "72 Foxtrot GP" },
+    { pos: 26, nombre: "Alan Campos", equipo: "Williams Racing" },
+    { pos: 27, nombre: "Carlos Ruiz Mateos", equipo: "53 Red Bull Racing Fly Emirates" },
+    { pos: 28, nombre: "Samuel Guevara Salazar", equipo: "211 Scuderia Ferrari" },
   ],
 
-  // ── PARTICIPANTES DE LA COPA (29/32 confirmados) ────────────
-  copa: {
-    participantes: [
-      { pos: 1, nombre: "Romus Toras" }, { pos: 2, nombre: "Valdi CT" }, { pos: 3, nombre: "André Prov" },
-      { pos: 4, nombre: "Álvaro Molinelli" }, { pos: 5, nombre: "Vasvo Lao" }, { pos: 6, nombre: "Andres Greniuk" },
-      { pos: 7, nombre: "Sergio Solano" }, { pos: 8, nombre: "Giacomina Leclerc" }, { pos: 9, nombre: "Cristian Ezpeleta" },
-      { pos: 10, nombre: "Alexis Iceman" }, { pos: 11, nombre: "Leoo Ferreira" }, { pos: 12, nombre: "Juan Garcia" },
-      { pos: 13, nombre: "Bongain François" }, { pos: 14, nombre: "José Ortiz" }, { pos: 15, nombre: "Fran White Academy" },
-      { pos: 16, nombre: "Julio Maidana" }, { pos: 17, nombre: "Antonio Pinillos" }, { pos: 18, nombre: "Lara Williams" },
-      { pos: 19, nombre: "Cristóbal Farías Galleguillos" }, { pos: 20, nombre: "Alejandro Alonso" }, { pos: 21, nombre: "SUELIN Brauner de Ávila" },
-      { pos: 22, nombre: "Nelson David Quiroz" }, { pos: 23, nombre: "Christian Horny" }, { pos: 24, nombre: "Rui Ferrari" },
-      { pos: 25, nombre: "Saúl González" }, { pos: 26, nombre: "Eduardo Calvo" }, { pos: 27, nombre: "Alan Campos" },
-      { pos: 28, nombre: "Carlos Ruiz Mateos" }, { pos: 29, nombre: "Samuel Guevara Salazar" },
-    ],
-  },
-
-  // ── PARTICIPANTES DE LA COPA (32 managers) ──────────────────
-  copa: {
-    participantes: [
-      { pos: 1, nombre: "Romus Toras" }, { pos: 2, nombre: "Valdi CT" }, { pos: 3, nombre: "Álvaro Molinelli" },
-      { pos: 4, nombre: "André Prov" }, { pos: 5, nombre: "Giacomina Leclerc" }, { pos: 6, nombre: "Andres Greniuk" },
-      { pos: 7, nombre: "Sergio Solano" }, { pos: 8, nombre: "Vasvo Lao" }, { pos: 9, nombre: "Luis Reynoso" },
-      { pos: 10, nombre: "Cristian Ezpeleta" }, { pos: 11, nombre: "Leo Ferreira" }, { pos: 12, nombre: "Javier Martín" },
-      { pos: 13, nombre: "Thiago Campos" }, { pos: 14, nombre: "Alexis Iceman" }, { pos: 15, nombre: "Eduardo Calvo" },
-      { pos: 16, nombre: "Bongain François" }, { pos: 17, nombre: "Fran White Academy" }, { pos: 18, nombre: "Freya Anafi" },
-      { pos: 19, nombre: "José Ortiz" }, { pos: 20, nombre: "Álvaro Redondo" }, { pos: 21, nombre: "Marco Rodríguez" },
-      { pos: 22, nombre: "Julio Maidana" }, { pos: 23, nombre: "Cristóbal Farías Galleguillos" }, { pos: 24, nombre: "Antonio Pinillos" },
-      { pos: 25, nombre: "Alejandro Alonso" }, { pos: 26, nombre: "Templario VCR" }, { pos: 27, nombre: "Lara Williams" },
-      { pos: 28, nombre: "Marc cr Rayo" }, { pos: 29, nombre: "Rui Acacio" }, { pos: 30, nombre: "Francisco Martínez" },
-      { pos: 31, nombre: "Christian Horny" }, { pos: 32, nombre: "Leandro Fernández" },
-    ],
-  },
-
-  // ── JORNADAS ─────────────────────────────────────────────────
-  // enfrentamiento: { equipoA, posA, equipoB, posB, ganador: 'A'|'B'|null }
-  // resultados: clasificación individual de la carrera (null si no disponible)
-
+// ── JORNADAS — FASE 1 (J1-J8) ───────────────────────────────
+  // 28 mánagers, 14 duelos 1v1 por jornada, sin descanso (28 es par).
+  // Emparejamientos generados aleatoriamente; posA/posB/ganador se
+  // rellenan al llegar el resultado real de cada carrera.
   jornadas: [
-    { numero: 1, circuito: "", completada: false, resultados: null },
-    { numero: 2, circuito: "", completada: false, resultados: null },
-    { numero: 3, circuito: "", completada: false, resultados: null },
-    { numero: 4, circuito: "", completada: false, resultados: null },
-    { numero: 5, circuito: "", completada: false, resultados: null },
-    { numero: 6, circuito: "", completada: false, resultados: null },
-    { numero: 7, circuito: "", completada: false, resultados: null },
-    { numero: 8, circuito: "", completada: false, resultados: null },
-    { numero: 9, circuito: "", completada: false, resultados: null },
-    { numero: 10, circuito: "", completada: false, resultados: null },
-    { numero: 11, circuito: "", completada: false, resultados: null },
-    { numero: 12, circuito: "", completada: false, resultados: null },
-    { numero: 13, circuito: "", completada: false, resultados: null },
-    { numero: 14, circuito: "", completada: false, resultados: null },
-    { numero: 15, circuito: "", completada: false, resultados: null },
-    { numero: 16, circuito: "", completada: false, resultados: null },
-    { numero: 17, circuito: "", completada: false, resultados: null },
-    { numero: 18, circuito: "", completada: false, resultados: null },
-    { numero: 19, circuito: "", completada: false, resultados: null },
-    { numero: 20, circuito: "", completada: false, resultados: null },
-    { numero: 21, circuito: "", completada: false, resultados: null },
-    { numero: 22, circuito: "", completada: false, resultados: null },
+{
+      numero: 1,
+      circuito: "Malasia",
+      completada: true,
+      descansa: null,
+      enfrentamientos: [
+        { equipoA: "Zenith Motorsport", posA: 28, equipoB: "Red Bull Pinkustercia F1 Team", posB: 21, ganador: "B" },
+        { equipoA: "23 Foxtrot GP", posA: 18, equipoB: "50 Kimoa Racing F1 Team", posB: 24, ganador: "A" },
+        { equipoA: "07 Foxtrot GP", posA: 4, equipoB: "43 Campos Racing F1", posB: 22, ganador: "A" },
+        { equipoA: "55 Williams F1 Team", posA: 16, equipoB: "13 CRT Competition", posB: 8, ganador: "B" },
+        { equipoA: "211 Scuderia Ferrari", posA: 15, equipoB: "Foxtrot GP", posB: 27, ganador: "A" },
+        { equipoA: "Tortuga", posA: 7, equipoB: "13 WILLIAMS Racing", posB: 23, ganador: "A" },
+        { equipoA: "3 Zetta Racing", posA: 25, equipoB: "Williams Racing", posB: 5, ganador: "B" },
+        { equipoA: "Aston Martin F1", posA: 1, equipoB: "99 Campos Racing F1", posB: 13, ganador: "A" },
+        { equipoA: "F. W. A.", posA: 19, equipoB: "63 CRT Competition", posB: 2, ganador: "B" },
+        { equipoA: "53 Red Bull Racing Fly Emirates", posA: 6, equipoB: "Williams F1", posB: 12, ganador: "A" },
+        { equipoA: "49 Honda Repsol", posA: 9, equipoB: "72 Foxtrot GP", posB: 11, ganador: "A" },
+        { equipoA: "83 Campos Racing F1", posA: 17, equipoB: "Kimoa Racing F1 Team", posB: 10, ganador: "B" },
+        { equipoA: "9 Scuderia Ferrari", posA: 26, equipoB: "15 Zenith Motorsport", posB: 20, ganador: "B" },
+        { equipoA: "00 CRT Competition", posA: 14, equipoB: "50 Rizia Royal Racing", posB: 3, ganador: "B" },
+      ],
+    },
+{
+      numero: 2,
+      circuito: "Singapur",
+      completada: true,
+      descansa: null,
+      enfrentamientos: [
+        { equipoA: "53 Red Bull Racing Fly Emirates", posA: 18, equipoB: "Foxtrot GP", posB: 25, ganador: "A" },
+        { equipoA: "55 Williams F1 Team", posA: 1, equipoB: "F. W. A.", posB: 27, ganador: "A" },
+        { equipoA: "211 Scuderia Ferrari", posA: 23, equipoB: "63 CRT Competition", posB: 9, ganador: "B" },
+        { equipoA: "Aston Martin F1", posA: 17, equipoB: "3 Zetta Racing", posB: 20, ganador: "A" },
+        { equipoA: "43 Campos Racing F1", posA: 5, equipoB: "13 CRT Competition", posB: 7, ganador: "A" },
+        { equipoA: "13 WILLIAMS Racing", posA: 13, equipoB: "72 Foxtrot GP", posB: 3, ganador: "B" },
+        { equipoA: "99 Campos Racing F1", posA: 11, equipoB: "07 Foxtrot GP", posB: 16, ganador: "A" },
+        { equipoA: "15 Zenith Motorsport", posA: 21, equipoB: "Williams F1", posB: 22, ganador: "A" },
+        { equipoA: "49 Honda Repsol", posA: 4, equipoB: "9 Scuderia Ferrari", posB: 6, ganador: "A" },
+        { equipoA: "Zenith Motorsport", posA: 26, equipoB: "Williams Racing", posB: 8, ganador: "B" },
+        { equipoA: "Tortuga", posA: 10, equipoB: "83 Campos Racing F1", posB: 12, ganador: "A" },
+        { equipoA: "23 Foxtrot GP", posA: 28, equipoB: "Red Bull Pinkustercia F1 Team", posB: 19, ganador: "B" },
+        { equipoA: "00 CRT Competition", posA: 24, equipoB: "50 Kimoa Racing F1 Team", posB: 14, ganador: "B" },
+        { equipoA: "50 Rizia Royal Racing", posA: 2, equipoB: "Kimoa Racing F1 Team", posB: 15, ganador: "A" },
+      ],
+    },
+    {
+      numero: 3,
+      circuito: "Canadá",
+      completada: false,
+      descansa: null,
+      enfrentamientos: [
+        { equipoA: "00 CRT Competition", posA: null, equipoB: "Red Bull Pinkustercia F1 Team", posB: null, ganador: null },
+        { equipoA: "Tortuga", posA: null, equipoB: "63 CRT Competition", posB: null, ganador: null },
+        { equipoA: "Williams F1", posA: null, equipoB: "99 Campos Racing F1", posB: null, ganador: null },
+        { equipoA: "Aston Martin F1", posA: null, equipoB: "13 WILLIAMS Racing", posB: null, ganador: null },
+        { equipoA: "53 Red Bull Racing Fly Emirates", posA: null, equipoB: "72 Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "83 Campos Racing F1", posA: null, equipoB: "9 Scuderia Ferrari", posB: null, ganador: null },
+        { equipoA: "Foxtrot GP", posA: null, equipoB: "43 Campos Racing F1", posB: null, ganador: null },
+        { equipoA: "50 Kimoa Racing F1 Team", posA: null, equipoB: "07 Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "13 CRT Competition", posA: null, equipoB: "15 Zenith Motorsport", posB: null, ganador: null },
+        { equipoA: "211 Scuderia Ferrari", posA: null, equipoB: "49 Honda Repsol", posB: null, ganador: null },
+        { equipoA: "Williams Racing", posA: null, equipoB: "F. W. A.", posB: null, ganador: null },
+        { equipoA: "Kimoa Racing F1 Team", posA: null, equipoB: "Zenith Motorsport", posB: null, ganador: null },
+        { equipoA: "55 Williams F1 Team", posA: null, equipoB: "23 Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "3 Zetta Racing", posA: null, equipoB: "50 Rizia Royal Racing", posB: null, ganador: null },
+      ],
+    },
+    {
+      numero: 4,
+      circuito: "España",
+      completada: false,
+      descansa: null,
+      enfrentamientos: [
+        { equipoA: "Aston Martin F1", posA: null, equipoB: "3 Zetta Racing", posB: null, ganador: null },
+        { equipoA: "211 Scuderia Ferrari", posA: null, equipoB: "F. W. A.", posB: null, ganador: null },
+        { equipoA: "9 Scuderia Ferrari", posA: null, equipoB: "Williams F1", posB: null, ganador: null },
+        { equipoA: "49 Honda Repsol", posA: null, equipoB: "Williams Racing", posB: null, ganador: null },
+        { equipoA: "50 Kimoa Racing F1 Team", posA: null, equipoB: "55 Williams F1 Team", posB: null, ganador: null },
+        { equipoA: "53 Red Bull Racing Fly Emirates", posA: null, equipoB: "99 Campos Racing F1", posB: null, ganador: null },
+        { equipoA: "63 CRT Competition", posA: null, equipoB: "Red Bull Pinkustercia F1 Team", posB: null, ganador: null },
+        { equipoA: "Kimoa Racing F1 Team", posA: null, equipoB: "50 Rizia Royal Racing", posB: null, ganador: null },
+        { equipoA: "13 WILLIAMS Racing", posA: null, equipoB: "13 CRT Competition", posB: null, ganador: null },
+        { equipoA: "Zenith Motorsport", posA: null, equipoB: "Tortuga", posB: null, ganador: null },
+        { equipoA: "83 Campos Racing F1", posA: null, equipoB: "72 Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "23 Foxtrot GP", posA: null, equipoB: "15 Zenith Motorsport", posB: null, ganador: null },
+        { equipoA: "43 Campos Racing F1", posA: null, equipoB: "07 Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "00 CRT Competition", posA: null, equipoB: "Foxtrot GP", posB: null, ganador: null },
+      ],
+    },
+    {
+      numero: 5,
+      circuito: "México",
+      completada: false,
+      descansa: null,
+      enfrentamientos: [
+        { equipoA: "13 CRT Competition", posA: null, equipoB: "3 Zetta Racing", posB: null, ganador: null },
+        { equipoA: "53 Red Bull Racing Fly Emirates", posA: null, equipoB: "55 Williams F1 Team", posB: null, ganador: null },
+        { equipoA: "72 Foxtrot GP", posA: null, equipoB: "15 Zenith Motorsport", posB: null, ganador: null },
+        { equipoA: "Red Bull Pinkustercia F1 Team", posA: null, equipoB: "13 WILLIAMS Racing", posB: null, ganador: null },
+        { equipoA: "Williams F1", posA: null, equipoB: "Kimoa Racing F1 Team", posB: null, ganador: null },
+        { equipoA: "50 Rizia Royal Racing", posA: null, equipoB: "9 Scuderia Ferrari", posB: null, ganador: null },
+        { equipoA: "F. W. A.", posA: null, equipoB: "49 Honda Repsol", posB: null, ganador: null },
+        { equipoA: "43 Campos Racing F1", posA: null, equipoB: "50 Kimoa Racing F1 Team", posB: null, ganador: null },
+        { equipoA: "63 CRT Competition", posA: null, equipoB: "23 Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "Tortuga", posA: null, equipoB: "Zenith Motorsport", posB: null, ganador: null },
+        { equipoA: "07 Foxtrot GP", posA: null, equipoB: "Aston Martin F1", posB: null, ganador: null },
+        { equipoA: "83 Campos Racing F1", posA: null, equipoB: "Williams Racing", posB: null, ganador: null },
+        { equipoA: "99 Campos Racing F1", posA: null, equipoB: "Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "00 CRT Competition", posA: null, equipoB: "211 Scuderia Ferrari", posB: null, ganador: null },
+      ],
+    },
+    {
+      numero: 6,
+      circuito: "Europa",
+      completada: false,
+      descansa: null,
+      enfrentamientos: [
+        { equipoA: "83 Campos Racing F1", posA: null, equipoB: "50 Rizia Royal Racing", posB: null, ganador: null },
+        { equipoA: "53 Red Bull Racing Fly Emirates", posA: null, equipoB: "Tortuga", posB: null, ganador: null },
+        { equipoA: "15 Zenith Motorsport", posA: null, equipoB: "49 Honda Repsol", posB: null, ganador: null },
+        { equipoA: "3 Zetta Racing", posA: null, equipoB: "43 Campos Racing F1", posB: null, ganador: null },
+        { equipoA: "9 Scuderia Ferrari", posA: null, equipoB: "07 Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "23 Foxtrot GP", posA: null, equipoB: "13 WILLIAMS Racing", posB: null, ganador: null },
+        { equipoA: "72 Foxtrot GP", posA: null, equipoB: "211 Scuderia Ferrari", posB: null, ganador: null },
+        { equipoA: "55 Williams F1 Team", posA: null, equipoB: "00 CRT Competition", posB: null, ganador: null },
+        { equipoA: "63 CRT Competition", posA: null, equipoB: "13 CRT Competition", posB: null, ganador: null },
+        { equipoA: "Williams Racing", posA: null, equipoB: "50 Kimoa Racing F1 Team", posB: null, ganador: null },
+        { equipoA: "Red Bull Pinkustercia F1 Team", posA: null, equipoB: "Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "Williams F1", posA: null, equipoB: "Kimoa Racing F1 Team", posB: null, ganador: null },
+        { equipoA: "F. W. A.", posA: null, equipoB: "Aston Martin F1", posB: null, ganador: null },
+        { equipoA: "Zenith Motorsport", posA: null, equipoB: "99 Campos Racing F1", posB: null, ganador: null },
+      ],
+    },
+    {
+      numero: 7,
+      circuito: "Turquía",
+      completada: false,
+      descansa: null,
+      enfrentamientos: [
+        { equipoA: "23 Foxtrot GP", posA: null, equipoB: "15 Zenith Motorsport", posB: null, ganador: null },
+        { equipoA: "211 Scuderia Ferrari", posA: null, equipoB: "9 Scuderia Ferrari", posB: null, ganador: null },
+        { equipoA: "F. W. A.", posA: null, equipoB: "72 Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "99 Campos Racing F1", posA: null, equipoB: "Kimoa Racing F1 Team", posB: null, ganador: null },
+        { equipoA: "43 Campos Racing F1", posA: null, equipoB: "50 Kimoa Racing F1 Team", posB: null, ganador: null },
+        { equipoA: "00 CRT Competition", posA: null, equipoB: "07 Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "49 Honda Repsol", posA: null, equipoB: "Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "Williams Racing", posA: null, equipoB: "50 Rizia Royal Racing", posB: null, ganador: null },
+        { equipoA: "Aston Martin F1", posA: null, equipoB: "Zenith Motorsport", posB: null, ganador: null },
+        { equipoA: "53 Red Bull Racing Fly Emirates", posA: null, equipoB: "55 Williams F1 Team", posB: null, ganador: null },
+        { equipoA: "Tortuga", posA: null, equipoB: "Red Bull Pinkustercia F1 Team", posB: null, ganador: null },
+        { equipoA: "13 WILLIAMS Racing", posA: null, equipoB: "Williams F1", posB: null, ganador: null },
+        { equipoA: "83 Campos Racing F1", posA: null, equipoB: "3 Zetta Racing", posB: null, ganador: null },
+        { equipoA: "13 CRT Competition", posA: null, equipoB: "63 CRT Competition", posB: null, ganador: null },
+      ],
+    },
+    {
+      numero: 8,
+      circuito: "Austria",
+      completada: false,
+      descansa: null,
+      enfrentamientos: [
+        { equipoA: "Tortuga", posA: null, equipoB: "50 Kimoa Racing F1 Team", posB: null, ganador: null },
+        { equipoA: "13 CRT Competition", posA: null, equipoB: "50 Rizia Royal Racing", posB: null, ganador: null },
+        { equipoA: "Kimoa Racing F1 Team", posA: null, equipoB: "Red Bull Pinkustercia F1 Team", posB: null, ganador: null },
+        { equipoA: "99 Campos Racing F1", posA: null, equipoB: "Williams F1", posB: null, ganador: null },
+        { equipoA: "15 Zenith Motorsport", posA: null, equipoB: "72 Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "Foxtrot GP", posA: null, equipoB: "55 Williams F1 Team", posB: null, ganador: null },
+        { equipoA: "13 WILLIAMS Racing", posA: null, equipoB: "49 Honda Repsol", posB: null, ganador: null },
+        { equipoA: "00 CRT Competition", posA: null, equipoB: "23 Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "63 CRT Competition", posA: null, equipoB: "83 Campos Racing F1", posB: null, ganador: null },
+        { equipoA: "Williams Racing", posA: null, equipoB: "F. W. A.", posB: null, ganador: null },
+        { equipoA: "43 Campos Racing F1", posA: null, equipoB: "211 Scuderia Ferrari", posB: null, ganador: null },
+        { equipoA: "Aston Martin F1", posA: null, equipoB: "Zenith Motorsport", posB: null, ganador: null },
+        { equipoA: "3 Zetta Racing", posA: null, equipoB: "07 Foxtrot GP", posB: null, ganador: null },
+        { equipoA: "53 Red Bull Racing Fly Emirates", posA: null, equipoB: "9 Scuderia Ferrari", posB: null, ganador: null },
+      ],
+    },
+
+    // ── jornadas 9 a 22 (Fase 2, 3 y Fase Final) — sin cambios, se
+    //    generarán/rellenarán cuando toque ──
+    { numero: 9, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 10, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 11, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 12, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 13, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 14, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 15, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 16, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 17, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 18, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 19, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 20, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 21, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
+    { numero: 22, circuito: "", completada: false, descansa: null, enfrentamientos: [] },
   ],
   
-copaT39: {
+
+  copaT39: {
     temporada: 39,
     fases: [
       { numero: 1, desde: 1, hasta: 8, tipo: "directa", cupo: 8 },
@@ -120,6 +248,21 @@ copaT39: {
     cuartos: [],
     semis: [],
     final: null,
+  },
+
+  // ── BONOS DE PUNTOS ──────────────────────────────────────────
+  // Tortuga (André Prov) descansa en J1 por ser campeón de T38;
+  // se le suman 3 pts de salida (el valor de una jornada ganada).
+  // No corre en J1 — sus resultados no deben incluirle esa jornada.
+  bonos: {
+    Tortuga: 3,
+  },
+
+  // ── SUPERCOPA ────────────────────────────────────────────────
+  // Trofeo aparte, no cuenta para la Copa de Verano ni sus fases.
+  supercopa: {
+    temporada: 39,
+    campeon: "50 Rizia Royal Racing", // Romus Toras
   },
 
   // ── SOCIAL / REDES ───────────────────────────────────────────

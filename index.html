@@ -41,7 +41,7 @@
               <span class="stroke" id="hero-season-num">39</span>
             </h1>
             <p class="hero-desc">
-              32 mánagers, 22 carreras, una carrera al día. Los mejores de cada
+              29 mánagers, 22 carreras, una carrera al día. Los mejores de cada
               fase avanzan hasta los 16 que disputarán el playoff final.
             </p>
 
@@ -141,7 +141,7 @@
           COPA.faseActual === 4 ? "Fase Final" : `Fase ${COPA.faseActual}`;
 
         const stats = [
-          { num: 32, lbl: "Mánagers" },
+          { num: SRS.pilotos.length, lbl: "Mánagers" },
           { num: faseLabel, lbl: "Fase actual" },
           {
             num: `${completadas}/${SRS.jornadas.length}`,

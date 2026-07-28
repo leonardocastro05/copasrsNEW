@@ -121,7 +121,7 @@
         });
       })();
 
-      // ── TARJETA DE UNA JORNADA (tabla de resultados, sin duelos) ──
+      // ── TARJETA DE UNA JORNADA (14 duelos 1v1 + descanso) ─────
       function renderJornadaCard(j, visible) {
         const card = document.createElement("div");
         card.className = "jornada-card" + (visible ? "" : " hidden-jornada");
@@ -136,28 +136,62 @@
               <div class="jornada-locked-icon">🔒</div>
               <p>Se revelará tras la jornada anterior</p>
             </div>`;
-        } else if (j.resultados && j.resultados.length > 0) {
-          // Mostramos el Top 8 de la carrera (posición, equipo, puntos)
-          const top = j.resultados.slice(0, 8);
-          bodyHtml = `<div class="jornada-resultados-mini">
-              ${top
-                .map(
-                  (
-                    r,
-                  ) => `<div class="duelo-row" style="justify-content:space-between;">
+        } else if (j.enfrentamientos && j.enfrentamientos.length > 0) {
+          const descansoHtml = j.descansa
+            ? `<div class="duelo-row" style="justify-content:center;opacity:.7;">
+                 <span class="duelo-piloto-name">😴 ${j.descansa} descansa esta jornada (+3 pts)</span>
+               </div>`
+            : "";
+
+          bodyHtml =
+            descansoHtml +
+            j.enfrentamientos
+              .map((d) => {
+                const aGano = d.ganador === "A";
+                const bGano = d.ganador === "B";
+                const sinGanador = !aGano && !bGano;
+
+                if (sinGanador) {
+                  return `<div class="duelo-row">
                     <div class="duelo-piloto">
-                      <span class="duelo-piloto-avatar">${r.pos}</span>
-                      <span class="duelo-piloto-name">${r.equipo}</span>
+                      <span class="duelo-piloto-avatar">${d.equipoA.charAt(0).toUpperCase()}</span>
+                      <span class="duelo-piloto-name">${d.equipoA}</span>
+                      ${d.posA != null ? `<span class="duelo-piloto-pos">P${d.posA}</span>` : ""}
                     </div>
-                    <span class="clas-pts" style="font-size:0.85rem;">${r.pts}pts</span>
-                  </div>`,
-                )
-                .join("")}
-            </div>`;
+                    <span class="duelo-vs-mini">VS</span>
+                    <div class="duelo-piloto">
+                      <span class="duelo-piloto-avatar">${d.equipoB.charAt(0).toUpperCase()}</span>
+                      <span class="duelo-piloto-name">${d.equipoB}</span>
+                      ${d.posB != null ? `<span class="duelo-piloto-pos">P${d.posB}</span>` : ""}
+                    </div>
+                  </div>`;
+                }
+
+                const ganador = aGano ? d.equipoA : d.equipoB;
+                const perdedor = aGano ? d.equipoB : d.equipoA;
+                const posGanador = aGano ? d.posA : d.posB;
+                const posPerdedor = aGano ? d.posB : d.posA;
+
+                return `<div class="duelo-row">
+                  <div class="duelo-piloto duelo-piloto--win">
+                    <span class="duelo-medal">🏆</span>
+                    <span class="duelo-piloto-avatar">${ganador.charAt(0).toUpperCase()}</span>
+                    <span class="duelo-piloto-name">${ganador}</span>
+                    <span class="duelo-piloto-pos">P${posGanador}</span>
+                  </div>
+                  <span class="duelo-vs-mini">VS</span>
+                  <div class="duelo-piloto duelo-piloto--lose">
+                    <span class="duelo-piloto-avatar">${perdedor.charAt(0).toUpperCase()}</span>
+                    <span class="duelo-piloto-name">${perdedor}</span>
+                    <span class="duelo-piloto-pos">P${posPerdedor}</span>
+                  </div>
+                </div>`;
+              })
+              .join("");
         } else {
           bodyHtml = `<div class="jornada-locked">
               <div class="jornada-locked-icon">📋</div>
-              <p>Resultados pendientes</p>
+              <p>Emparejamientos pendientes</p>
             </div>`;
         }
 
