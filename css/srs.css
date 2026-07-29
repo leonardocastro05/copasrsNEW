@@ -806,6 +806,26 @@ body::before {
   border-left: 4px solid transparent;
 }
 
+/* Estados PROVISIONALES — mismo color, borde discontinuo = aún puede cambiar */
+.tabla-fila--directo-preview {
+  border-left: 4px dashed #22c55e;
+  background: rgba(34, 197, 94, 0.05);
+}
+.tabla-fila--eliminado-f2-preview {
+  border-left: 4px dashed #f97316;
+  background: rgba(249, 115, 22, 0.04);
+  opacity: 0.85;
+}
+.tabla-fila--eliminado-f3-preview {
+  border-left: 4px dashed #ef4444;
+  background: rgba(239, 68, 68, 0.04);
+  opacity: 0.85;
+}
+.tabla-fila--final-16-preview {
+  border-left: 4px dashed #ffd700;
+  background: rgba(255, 215, 0, 0.05);
+}
+
 .copa-leyenda {
   display: flex;
   flex-wrap: wrap;
