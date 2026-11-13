@@ -25,14 +25,9 @@
   <script src="js/web.js"></script>
   <script>
     pintarHeader("jornadas.html");
-    var actual = 0;
-    var indice = 0;
-    SRS.jornadas.forEach(function (j, i) {
-      if (!j.completada && j.enfrentamientos.length > 0 && actual === 0) {
-        actual = i;
-        indice = i;
-      }
-    });
+    var actual = SRS.jornadas.findIndex(function (j) { return !j.completada; });
+    if (actual < 0) actual = SRS.jornadas.length - 1;
+    var indice = actual;
 
     function nombreDe(equipo) {
       var p = buscarPorEquipo(equipo);
@@ -41,7 +36,8 @@
 
     function pintarJornada() {
       var j = SRS.jornadas[indice];
-      document.getElementById("titulo-j").innerHTML = j.nombre || ("Jornada " + j.numero) + (j.circuito ? " · " + j.circuito : "");
+      document.getElementById("titulo-j").innerHTML = (j.nombre || ("Jornada " + j.numero)) +
+        (j.circuito ? " · " + j.circuito : "") + (j.fecha ? " · " + j.fecha : "");
       var estado = j.completada ? "Finalizada" : indice === actual ? "Jornada actual" : "Próximamente";
       document.getElementById("estado").innerHTML = estado;
       var html = "";
@@ -60,12 +56,14 @@
       document.getElementById("duelos").innerHTML = html;
     }
 
-    document.getElementById("prev").addEventListener("click", function () {
-      if (indice > 0) indice--;
-      pintarJornada();
-    });
+    document.getElementById("prev").disabled = true;
+    document.getElementById("prev").setAttribute("aria-label", "Solo se muestra la jornada actual");
+    document.getElementById("prev").addEventListener("click", function () {});
     document.getElementById("next").addEventListener("click", function () {
-      if (indice < SRS.jornadas.length - 1) indice++;
+      var jornada = SRS.jornadas[indice];
+      if (!jornada.completada || indice >= SRS.jornadas.length - 1) return;
+      indice++;
+      actual = indice;
       pintarJornada();
     });
     pintarJornada();

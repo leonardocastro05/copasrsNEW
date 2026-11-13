@@ -75,6 +75,7 @@ main.ancho { max-width: 1440px; }
 .sub { color: var(--accent-dark); font-size: .72rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
 .flecha { background: var(--surface); border: 1px solid var(--line); border-radius: 50%; cursor: pointer; font-size: 1.5rem; height: 44px; width: 44px; }
 .flecha:hover { background: var(--accent); border-color: var(--accent); }
+.flecha:disabled { cursor: not-allowed; opacity: .35; }
 .duelos { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
 .duelo, .match { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
 .duelo { display: flex; }

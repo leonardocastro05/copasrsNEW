@@ -41,21 +41,7 @@
   // 28 mÃ¡nagers, 14 duelos 1v1 por jornada, sin descanso (28 es par).
   // Emparejamientos generados aleatoriamente; posA/posB/ganador se
   // rellenan al llegar el resultado real de cada carrera.
-  jornadas: [
-    {
-      numero: 1,
-      nombre: "Prueba",
-      circuito: "Circuito de prueba",
-      completada: false,
-      descansa: null,
-      enfrentamientos: [
-        { equipoA: "55 Williams F1 Team", equipoB: "01 FORD MUSTANG", posA: null, posB: null, ganador: null },
-        { equipoA: "00 CRT Competition", equipoB: "11 Racing Club", posA: null, posB: null, ganador: null },
-        { equipoA: "50 Rizia Royal Racing", equipoB: "Red Bull Argen", posA: null, posB: null, ganador: null },
-        { equipoA: "Williams Racing", equipoB: "99 Campos Racing F1", posA: null, posB: null, ganador: null },
-      ],
-    },
-  ],
+  jornadas: [],
   copaT39: {
     temporada: 39,
     fases: [
@@ -98,3 +84,56 @@
     { label: "WhatsApp", href: "https://chat.whatsapp.com/KVf4sll1iDi8RmqroMjWDa" },
   ],
 };
+
+function crearJornadasTemporada() {
+  var circuitos = [
+    ["China", "16/11"],
+    ["Japón", "23/11"],
+    ["Bahréin", "30/11"],
+    ["Arabia Saudí", "07/12"],
+    ["Miami", "14/12"],
+    ["Emilia-Romaña", "21/12"],
+    ["Mónaco", "28/12"],
+    ["España", "04/01"],
+    ["Canadá", "11/01"],
+    ["Austria", "18/01"],
+    ["Gran Bretaña", "25/01"],
+    ["Bélgica", "01/02"],
+    ["Hungría", "08/02"],
+  ];
+  var equipos = SRS.pilotos.map(function (p) { return p.equipo; });
+  var jornadas = [];
+
+  circuitos.forEach(function (circuito, ronda) {
+    var orden = equipos.slice();
+    var enfrentamientos = [];
+    for (var i = 0; i < orden.length / 2; i++) {
+      enfrentamientos.push({
+        equipoA: orden[i],
+        equipoB: orden[orden.length - 1 - i],
+        posA: null,
+        posB: null,
+        ganador: null,
+        vueltaRapida: null,
+        sancion: null,
+      });
+    }
+    var fijo = orden.shift();
+    var ultimo = orden.pop();
+    orden.splice(ronda % orden.length, 0, ultimo);
+    orden.unshift(fijo);
+    equipos = orden;
+    jornadas.push({
+      numero: ronda + 1,
+      nombre: "Jornada " + (ronda + 1),
+      circuito: circuito[0],
+      fecha: circuito[1],
+      completada: false,
+      descansa: null,
+      enfrentamientos: enfrentamientos,
+    });
+  });
+  return jornadas;
+}
+
+SRS.jornadas = crearJornadasTemporada();

@@ -43,7 +43,7 @@
       return html + "</div></section>";
     }
 
-    var final = BRACKET.final;
+    var final = BRACKET.final || [null, null, null];
     var html = pintarRama(BRACKET.upper, "Upper bracket") + pintarRama(BRACKET.lower, "Lower bracket");
     html += '<section class="bracket-final"><h2>Gran final</h2><div class="match final">' +
       '<div class="slot">' + (final[0] === "Por definir" ? "<em>Por definir</em>" : linkManager(final[0])) + "</div>" +

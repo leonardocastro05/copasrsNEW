@@ -84,38 +84,12 @@ var BRACKET = {
   upper: {
     nombres: ["Dieciseisavos", "Octavos", "Cuartos", "Semifinales"],
     cantidad: [16, 8, 4, 2],
-    cruces: [
-      [
-        ["Vasvo Lao", "Lorena Portillo", null],
-        ["Alexis Iceman", "Fab Man", null],
-        ["Bruno Leal", "Cesar Garcia roco alvarez", null],
-        ["Romus Toras", "Юрий Клинский", null],
-        ["Carlos Fragoso", "Cristian Ezpeleta", null],
-        ["Gonzalo Matias Salinas", "Bongain François", null],
-        ["Jorge Pell", "Eduardo Calvo", null],
-        ["André Prov", "Rui Ferrari", null],
-        ["Alan Campos", "José Ortiz", null],
-        ["Chema Burgués", "Julio Maidana", null],
-        ["Omar De Leon", "Aimar Pedreira Sanchez", null],
-        ["Jorge Fernández", "Roma Dos", null],
-        ["Ruben Ramirez", "Leoo Ferreira", null],
-        ["Antonio Pinillos", "1C3M4N .", null],
-        ["Dionysis Kalamakis", "Samuel Guevara Salazar", null],
-        ["Valdi CT", "Pablinho Da Silva", null],
-      ],
-      [], [], [],
-    ],
+    cruces: [[], [], [], []],
   },
   lower: {
     nombres: ["Lower round 1", "Lower round 2", "Lower final"],
     cantidad: [4, 2, 1],
-    cruces: [
-      [
-        ["Alan Campos", "José Ortiz", null],
-        ["Chema Burgués", "Julio Maidana", null],
-      ],
-      [], [],
-    ],
+    cruces: [[], [], []],
   },
-  final: ["Por definir", "Por definir", null],
+  final: null,
 };
