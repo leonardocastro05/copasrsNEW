@@ -82,7 +82,7 @@ var COCHES = {
 var BRACKET = {
   ronda: 0,
   upper: {
-    nombres: ["Dieciseisavos", "Octavos", "Cuartos", "Semifinales"],
+    nombres: ["Octavos", "Cuartos", "Semis"],
     cantidad: [16, 8, 4, 2],
     cruces: [[], [], [], []],
   },
