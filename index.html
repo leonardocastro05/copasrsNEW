@@ -1,302 +1,64 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spanish Racing Series — Copa de Verano T39</title>
-    <link rel="stylesheet" href="css/srs.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-  </head>
-
-  <body>
-    <div class="ambient" aria-hidden="true"></div>
-
-    <!-- ══ HEADER ══════════════════════════════════════════════ -->
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="brand" href="index.html">
-          <span class="brand-icon">🏁</span>
-          <span class="brand-name">Spanish <span>Racing Series</span></span>
-        </a>
-        <nav class="site-nav" aria-label="Principal">
-          <a href="index.html" class="active">Inicio</a>
-          <a href="jornadas.html">Jornadas</a>
-          <a href="eliminatorias.html">Eliminatorias</a>
-        </nav>
-      </div>
-    </header>
-
-    <!-- ══ HERO ════════════════════════════════════════════════ -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spanish Racing Series · Copa</title>
+  <link rel="icon" href="img/banner.webp" type="image/webp" />
+  <link rel="stylesheet" href="css/srs.css" />
+</head>
+<body>
+  <div id="header"></div>
+  <main>
     <section class="hero">
-      <div class="container">
-        <div class="hero-grid">
-          <div>
-            <p class="hero-eyebrow">Spanish Racing Series · iGP Manager</p>
-            <h1 class="hero-title">
-              Copa de<br />
-              <span class="accent">Verano</span><br />
-              <span class="stroke" id="hero-season-num">39</span>
-            </h1>
-            <p class="hero-desc">
-              29 mánagers, 22 carreras, una carrera al día. Los mejores de cada
-              fase avanzan hasta los 16 que disputarán el playoff final.
-            </p>
-
-            <div class="hero-stats-row" id="hero-stats"></div>
-
-            <div class="hero-ctas">
-              <a class="btn btn--primary" href="jornadas.html">
-                <i class="fas fa-calendar-alt"></i> Ver Jornadas
-              </a>
-              <a class="btn btn--outline" href="eliminatorias.html">
-                <i class="fas fa-sitemap"></i> Eliminatorias
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <div class="countdown-panel" id="countdown-panel">
-              <p class="countdown-label">🏎 Próxima jornada</p>
-              <div class="countdown-time" id="countdown-time">—</div>
-              <p class="countdown-note" id="countdown-note">
-                Pendiente de fecha
-              </p>
-            </div>
-          </div>
+      <div class="hero-copy">
+        <p class="eyebrow">Temporada 42 · Copa SRS</p>
+        <h1>La carrera empieza<br><em>en la parrilla.</em></h1>
+        <p class="hero-text">Sigue los cruces, descubre a los mánagers y vive cada jornada de la Spanish Racing Series.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="jornadas.html">Ver jornadas <span>→</span></a>
+          <a class="button button-quiet" href="eliminatorias.html">Ver cuadro</a>
         </div>
       </div>
-    </section>
-
-    <!-- ══ FASES DE LA COPA ════════════════════════════════════ -->
-    <section class="page-section" style="padding-top: 0">
-      <div class="container">
-        <p class="section-label">// Formato Copa de Verano</p>
-        <h2 class="section-title">Fases <em>de la Copa</em></h2>
-        <div class="elim-phases" id="fases-copa"></div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="hero-number">42</span>
+        <span class="hero-label">SRS<br>SEASON</span>
       </div>
     </section>
-
-    <!-- ══ CLASIFICACION ════════════════════════════════════════ -->
-    <section class="page-section" style="padding-top: 0">
-      <div class="container">
-        <p class="section-label">// Clasificación acumulada</p>
-        <h2 class="section-title">Tabla <em>General</em></h2>
-        <p class="section-sub">
-          Puntos acumulados de todas las jornadas disputadas. Los colores
-          indican el estado de cada equipo en la Copa.
-        </p>
-
-        <div class="copa-leyenda" id="copa-leyenda"></div>
-        <p
-          style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px"
-        >
-          Borde discontinuo = posición provisional (la fase sigue en curso,
-          puede cambiar)
-        </p>
-
-        <div
-          style="
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-          "
-          id="clas-grid"
-        ></div>
+    <section class="section-heading">
+      <div>
+        <p class="eyebrow">La parrilla</p>
+        <h2 class="titulo">Mánagers y equipos</h2>
       </div>
+      <label class="search">
+        <span>⌕</span>
+        <input id="buscar" type="search" placeholder="Buscar mánager o equipo" aria-label="Buscar mánager o equipo">
+      </label>
     </section>
-
-    <!-- ══ FOOTER ═══════════════════════════════════════════════ -->
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <span class="footer-brand">Spanish <span>Racing</span> Series</span>
-        <div class="footer-links" id="footer-links"></div>
-      </div>
-    </footer>
-
-    <script src="js/srs-data.js"></script>
-    <script src="js/copa.js"></script>
-    <script>
-      // ── FOOTER ────────────────────────────────────────────────
-      (function () {
-        const fl = document.getElementById("footer-links");
-        if (!fl) return;
-        fl.innerHTML = SRS.redes
-          .map(
-            (r) =>
-              `<a href="${r.href}" target="_blank" rel="noopener noreferrer">${r.label}</a>`,
-          )
-          .join("");
-      })();
-
-      const COPA = window.SRS_COPA || SRS.calcularCopa();
-
-      // ── STATS ROW ─────────────────────────────────────────────
-      (function () {
-        const el = document.getElementById("hero-stats");
-        if (!el) return;
-
-        const completadas = SRS.jornadas.filter(
-          (j) => j.completada === true,
-        ).length;
-
-        const faseLabel =
-          COPA.faseActual === 4 ? "Fase Final" : `Fase ${COPA.faseActual}`;
-
-        const stats = [
-          { num: SRS.pilotos.length, lbl: "Mánagers" },
-          { num: faseLabel, lbl: "Fase actual" },
-          {
-            num: `${completadas}/${SRS.jornadas.length}`,
-            lbl: "Jornadas completadas",
-          },
-        ];
-        el.innerHTML = stats
-          .map(
-            (s) =>
-              `<div class="stat-block">
-                    <span class="num">${s.num}</span>
-                    <span class="lbl">${s.lbl}</span>
-                </div>`,
-          )
-          .join("");
-      })();
-
-      // ── FASES DE LA COPA (pills) ────────────────────────────────
-      (function () {
-        const el = document.getElementById("fases-copa");
-        if (!el) return;
-
-        const fases = [
-          {
-            nombre: "Fase 1",
-            rango: "J1-J8",
-            detalle: "Top 8 clasifican directos",
-          },
-          {
-            nombre: "Fase 2",
-            rango: "J9-J10",
-            detalle: "Corte: -4 eliminados",
-          },
-          {
-            nombre: "Fase 3",
-            rango: "J11-J18",
-            detalle: "Corte: -4 eliminados → 16",
-          },
-          {
-            nombre: "Fase Final",
-            rango: "J19-J22",
-            detalle: "Octavos → Campeón",
-          },
-        ];
-
-        el.innerHTML = fases
-          .map((f, i) => {
-            const numeroFase = i + 1;
-            const activa = COPA.faseActual === numeroFase;
-            const superada = COPA.faseActual > numeroFase;
-            const cls = activa
-              ? "elim-phase-pill elim-phase-pill--final"
-              : "elim-phase-pill";
-            const estadoTxt = superada
-              ? "✅ Completada"
-              : activa
-                ? "▶ En curso"
-                : "⏳ Pendiente";
-            return `<div class="${cls}">
-                <div class="elim-phase-name">${f.nombre}</div>
-                <div class="elim-phase-count">${f.rango} · ${f.detalle}</div>
-                <div class="elim-phase-count">${estadoTxt}</div>
-            </div>`;
-          })
-          .join("");
-      })();
-
-      // ── LEYENDA DE COLORES ──────────────────────────────────────
-      (function () {
-        const el = document.getElementById("copa-leyenda");
-        if (!el) return;
-        el.innerHTML = `
-          <span><i style="background:#22c55e"></i> Clasificado directo (Top 8, F1)</span>
-          <span><i style="background:#3b82f6"></i> Sigue en liza</span>
-          <span><i style="background:#f97316"></i> Eliminado en Fase 2</span>
-          <span><i style="background:#ef4444"></i> Eliminado en Fase 3</span>
-          <span><i style="background:#ffd700"></i> Clasificado a la Fase Final</span>
-        `;
-      })();
-
-      // ── CLASIFICACION (tabla en vivo, coloreada) ─────────────────
-      (function () {
-        const grid = document.getElementById("clas-grid");
-        if (!grid) return;
-
-        const tabla = SRS.tablaEnVivo(); // acumulado de todas las jornadas con resultados
-        const half = Math.ceil(tabla.length / 2);
-
-        function buildCol(lista, offset) {
-          const panel = document.createElement("div");
-          panel.className = "panel";
-          panel.innerHTML = `
-                    <div class="panel-header">
-                        <span class="panel-header-label">Pos · Equipo · Puntos</span>
-                    </div>
-                    <div class="clasificacion-table">
-                        ${lista
-                          .map((r, i) => {
-                            const pos = offset + i + 1;
-                            const estado = SRS.estadoCopa(r.equipo, COPA);
-                            const posCls =
-                              pos === 1
-                                ? "p1"
-                                : pos === 2
-                                  ? "p2"
-                                  : pos === 3
-                                    ? "p3"
-                                    : "";
-                            const iniciales = r.equipo
-                              .split(" ")
-                              .map((w) => w[0])
-                              .join("")
-                              .slice(0, 2)
-                              .toUpperCase();
-                            return `<div class="clas-row tabla-fila--${estado}">
-                                <span class="clas-pos ${posCls}">#${pos}</span>
-                                <span class="clas-avatar">${iniciales}</span>
-                                <div class="clas-info">
-                                    <strong>${r.equipo}</strong>
-                                </div>
-                                <span class="clas-pts">${r.pts}pts</span>
-                            </div>`;
-                          })
-                          .join("")}
-                    </div>`;
-          return panel;
-        }
-
-        grid.appendChild(buildCol(tabla.slice(0, half), 0));
-        grid.appendChild(buildCol(tabla.slice(half), half));
-      })();
-
-      // ── PRÓXIMA JORNADA ──────────────────────────────────────────
-      (function () {
-        const timeEl = document.getElementById("countdown-time");
-        const noteEl = document.getElementById("countdown-note");
-        if (!timeEl) return;
-
-        const siguiente = SRS.jornadas.find((j) => !j.completada);
-
-        if (!siguiente) {
-          timeEl.textContent = "Copa finalizada";
-          noteEl.textContent = "Todas las jornadas completadas";
-          return;
-        }
-
-        timeEl.textContent = `J${siguiente.numero}`;
-        noteEl.textContent = `${siguiente.circuito} · por confirmar fecha`;
-      })();
-    </script>
-  </body>
+    <p class="section-note"><strong id="total">32</strong> participantes confirmados · selecciona uno para abrir su perfil en iGP Manager.</p>
+    <div class="grid-mgr" id="managers"></div>
+  </main>
+  <script src="js/srs-data.js"></script>
+  <script src="js/perfiles.js"></script>
+  <script src="js/web.js"></script>
+  <script>
+    pintarHeader("index.html");
+    document.getElementById("total").innerHTML = SRS.pilotos.length;
+    var html = "";
+    SRS.pilotos.forEach(function (p, i) {
+      html += '<a class="card-mgr" href="' + urlManager(p.nombre) + '" target="_blank" rel="noopener">' +
+        '<span class="card-top"><span class="num">' + String(i + 1).padStart(2, "0") + "</span><span class=\"arrow\">↗</span></span>" +
+        '<span class="nom">' + p.nombre + "</span>" +
+        '<span class="eq">' + p.equipo + "</span>" + fichaManager(p.nombre, p.equipo) + "</a>";
+    });
+    document.getElementById("managers").innerHTML = html;
+    document.getElementById("buscar").addEventListener("input", function (e) {
+      var query = e.target.value.toLowerCase().trim();
+      document.querySelectorAll(".card-mgr").forEach(function (card) {
+        card.hidden = query && !card.textContent.toLowerCase().includes(query);
+      });
+    });
+    infoPrimeraVisita();
+  </script>
+</body>
 </html>

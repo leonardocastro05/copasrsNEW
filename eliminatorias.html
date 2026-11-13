@@ -1,163 +1,54 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spanish Racing Series — Eliminatorias T39</title>
-    <link rel="stylesheet" href="css/srs.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-  </head>
-
-  <body>
-    <div class="ambient" aria-hidden="true"></div>
-
-    <!-- ══ HEADER ══════════════════════════════════════════════ -->
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="brand" href="index.html">
-          <span class="brand-icon">🏁</span>
-          <span class="brand-name">SRS <span>T39</span></span>
-        </a>
-        <nav class="site-nav" aria-label="Principal">
-          <a href="index.html">Inicio</a>
-          <a href="jornadas.html">Jornadas</a>
-          <a href="eliminatorias.html" class="active">Eliminatorias</a>
-        </nav>
-        <span class="season-badge">TEMP. 39</span>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eliminatorias · SRS</title>
+  <link rel="icon" href="img/banner.webp" type="image/webp" />
+  <link rel="stylesheet" href="css/srs.css" />
+</head>
+<body>
+  <div id="header"></div>
+  <main class="ancho">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Temporada 42 · doble eliminación</p>
+        <h1 class="titulo">Cuadro de <em>eliminatorias</em></h1>
       </div>
-    </header>
-
-    <!-- ══ MAIN ════════════════════════════════════════════════ -->
-    <main>
-      <section class="elim-section">
-        <div class="container">
-          <!-- Cabecera -->
-          <div class="elim-header">
-            <p class="elim-kicker">Fase final · Temporada 39</p>
-            <h1 class="elim-title">Eliminatorias</h1>
-            <p class="elim-sub">29 → 16 → 8 → 4 → 2 → Campeón</p>
-          </div>
-
-          <!-- Phase pills -->
-          <div class="elim-phases">
-            <div class="elim-phase-pill">
-              <div class="elim-phase-name">Octavos</div>
-              <div class="elim-phase-count">16 partidas</div>
-            </div>
-            <div class="elim-phase-pill">
-              <div class="elim-phase-name">Cuartos</div>
-              <div class="elim-phase-count">8 partidas</div>
-            </div>
-            <div class="elim-phase-pill">
-              <div class="elim-phase-name">Semis</div>
-              <div class="elim-phase-count">4 partidas</div>
-            </div>
-            <div class="elim-phase-pill elim-phase-pill--final">
-              <div class="elim-phase-name">Final</div>
-              <div class="elim-phase-count">Gran Final</div>
-            </div>
-          </div>
-
-          <!-- Bracket -->
-          <div class="bracket-outer">
-            <!-- Labels de fase -->
-            <div class="bracket-phase-labels">
-              <div class="bpl">Octavos</div>
-              <div class="bpl"></div>
-              <div class="bpl">Cuartos</div>
-              <div class="bpl"></div>
-              <div class="bpl">Semis</div>
-              <div class="bpl"></div>
-              <div class="bpl bpl--final">Final</div>
-              <div class="bpl"></div>
-              <div class="bpl">Semis</div>
-              <div class="bpl"></div>
-              <div class="bpl">Cuartos</div>
-              <div class="bpl"></div>
-              <div class="bpl">Octavos</div>
-            </div>
-
-            <!-- Grid del bracket -->
-            <div class="bracket-grid">
-              <!-- Octavos izquierda (P1-P4) -->
-              <div class="b-col" id="b-col-oct-l"></div>
-              <div class="b-conn" id="b-cn-ol-cl"></div>
-
-              <!-- Cuartos izquierda (C1-C2) -->
-              <div class="b-col" id="b-col-cua-l"></div>
-              <div class="b-conn" id="b-cn-cl-sl"></div>
-
-              <!-- Semifinal izquierda (S1) -->
-              <div class="b-col" id="b-col-sem-l"></div>
-              <div class="b-conn" id="b-cn-sl-f"></div>
-
-              <!-- FINAL + trofeo -->
-              <div class="b-center" id="b-center"></div>
-
-              <!-- Semi derecha ← conector -->
-              <div class="b-conn" id="b-cn-f-sr"></div>
-              <div class="b-col" id="b-col-sem-r"></div>
-
-              <!-- Cuartos derecha ← conector -->
-              <div class="b-conn" id="b-cn-sr-cr"></div>
-              <div class="b-col" id="b-col-cua-r"></div>
-
-              <!-- Octavos derecha ← conector -->
-              <div class="b-conn" id="b-cn-cr-or"></div>
-              <div class="b-col" id="b-col-oct-r"></div>
-            </div>
-          </div>
-
-          <p class="bracket-note">
-            Los emparejamientos de octavos se generan de forma aleatoria entre
-            los 16 mejores &nbsp;·&nbsp;
-            <strong>Spanish Racing Series · Temporada 39</strong>
-          </p>
-        </div>
-      </section>
-    </main>
-
-    <div class="sorteo-panel">
-      <button id="btn-generar-sorteo" class="btn-sorteo">
-        🎲 Generar sorteo
-      </button>
-      <button
-        id="btn-reiniciar-sorteo"
-        class="btn-sorteo btn-sorteo--secundario"
-      >
-        ↺ Reiniciar
-      </button>
-
-      <div id="sorteo-ruleta" class="sorteo-ruleta" hidden>
-        <p class="sorteo-ruleta-label" id="sorteo-contador">Bola 1 de 16</p>
-        <div class="sorteo-ruleta-nombre" id="sorteo-nombre-actual">—</div>
-      </div>
-
-      <div id="sorteo-reveladas" class="sorteo-reveladas" hidden></div>
+      <p class="section-note">La upper bracket conduce a la final. La lower bracket ofrece una segunda oportunidad.</p>
     </div>
+    <div id="brackets"></div>
+  </main>
+  <script src="js/srs-data.js"></script>
+  <script src="js/perfiles.js"></script>
+  <script src="js/web.js"></script>
+  <script>
+    pintarHeader("eliminatorias.html");
+    function pintarRama(rama, titulo) {
+      var html = '<section class="bracket-zone"><div class="bracket-zone-head"><h2>' + titulo + '</h2><span>En curso</span></div><div class="arbol">';
+      rama.nombres.forEach(function (nombre, r) {
+        var estado = r < BRACKET.ronda ? "off" : "";
+        html += '<div class="col ' + estado + '"><h3>' + nombre + "</h3><div class=\"partidos\">";
+        for (var i = 0; i < rama.cantidad[r]; i++) {
+          var c = rama.cruces[r] && rama.cruces[r][i];
+          var a = c ? c[0] : null;
+          var b = c ? c[1] : null;
+          var g = c ? c[2] : null;
+          html += '<div class="match">' +
+            '<div class="slot ' + (g === "A" ? "gana" : g === "B" ? "pierde" : "") + '">' + (a ? linkManager(a) : "<em>Por definir</em>") + "</div>" +
+            '<div class="slot ' + (g === "B" ? "gana" : g === "A" ? "pierde" : "") + '">' + (b ? linkManager(b) : "<em>Por definir</em>") + "</div></div>";
+        }
+        html += "</div></div>";
+      });
+      return html + "</div></section>";
+    }
 
-    <!-- ══ FOOTER ═══════════════════════════════════════════════ -->
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <span class="footer-brand"
-          >Spanish <span>Racing</span> Series · T39</span
-        >
-        <div class="footer-links" id="footer-links"></div>
-      </div>
-    </footer>
-
-    <script src="js/srs-data.js"></script>
-    <script src="js/copa.js"></script>
-    <script src="js/eliminatorias.js"></script>
-    <script src="js/sorteo.js"></script>
-    <script src="js/srs-data.js"></script>
-<script src="js/copa.js"></script>
-<script src="js/jornada-generator.js"></script>
-<!-- solo en eliminatorias.html añade además: -->
-<!-- <script src="js/eliminatorias.js"></script>
-<script src="js/sorteo.js"></script> -->
-  </body>
+    var final = BRACKET.final;
+    var html = pintarRama(BRACKET.upper, "Upper bracket") + pintarRama(BRACKET.lower, "Lower bracket");
+    html += '<section class="bracket-final"><h2>Gran final</h2><div class="match final">' +
+      '<div class="slot">' + (final[0] === "Por definir" ? "<em>Por definir</em>" : linkManager(final[0])) + "</div>" +
+      '<div class="slot">' + (final[1] === "Por definir" ? "<em>Por definir</em>" : linkManager(final[1])) + "</div></div></section>";
+    document.getElementById("brackets").innerHTML = html;
+  </script>
+</body>
 </html>
