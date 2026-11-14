@@ -81,3 +81,73 @@ function infoPrimeraVisita() {
   }
   abrirInfo();
 }
+
+var PREMIOS = {
+  jornada: 50000,
+  octavos: 70000,
+  cuartos: 80000,
+  semis: 90000,
+  final: 100000,
+};
+
+function puntosEnfrentamiento(enfrentamiento, lado) {
+  var puntos = enfrentamiento.ganador === lado ? 3 : 0;
+  if (enfrentamiento.vueltaRapida === lado) puntos += 1;
+  var sancion = enfrentamiento["sancion" + lado];
+  if (sancion === "NC") puntos -= 5;
+  if (sancion === "combustible") puntos -= 2;
+  return puntos;
+}
+
+function ganadorDeCruce(cruce) {
+  if (!cruce || (cruce[2] !== "A" && cruce[2] !== "B")) return null;
+  return cruce[cruce[2] === "A" ? 0 : 1];
+}
+
+function premioPorRonda(indice) {
+  return [PREMIOS.octavos, PREMIOS.cuartos, PREMIOS.semis][indice] || 0;
+}
+
+function dineroDeEliminatorias(nombre) {
+  var dinero = 0;
+  var upper = BRACKET && BRACKET.upper;
+  if (upper && upper.cruces) {
+    upper.cruces.forEach(function (ronda, indice) {
+      ronda.forEach(function (cruce) {
+        if (ganadorDeCruce(cruce) === nombre) dinero += premioPorRonda(indice);
+      });
+    });
+  }
+  if (BRACKET && BRACKET.finalGanador === nombre) dinero += PREMIOS.final;
+  return dinero;
+}
+
+function crearClasificacion() {
+  return SRS.pilotos.map(function (piloto) {
+    var puntos = 0;
+    var jornadasJugadas = 0;
+    SRS.jornadas.forEach(function (jornada) {
+      if (!jornada.completada) return;
+      var jugo = false;
+      jornada.enfrentamientos.forEach(function (enfrentamiento) {
+        if (enfrentamiento.equipoA === piloto.equipo) {
+          puntos += puntosEnfrentamiento(enfrentamiento, "A");
+          jugo = true;
+        }
+        if (enfrentamiento.equipoB === piloto.equipo) {
+          puntos += puntosEnfrentamiento(enfrentamiento, "B");
+          jugo = true;
+        }
+      });
+      if (jugo) jornadasJugadas++;
+    });
+    return {
+      nombre: piloto.nombre,
+      puntos: puntos,
+      dinero: jornadasJugadas * PREMIOS.jornada + dineroDeEliminatorias(piloto.nombre),
+      posicionInicial: piloto.pos,
+    };
+  }).sort(function (a, b) {
+    return b.puntos - a.puntos || b.dinero - a.dinero || a.posicionInicial - b.posicionInicial;
+  });
+}

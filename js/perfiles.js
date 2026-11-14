@@ -92,4 +92,5 @@ var BRACKET = {
     cruces: [[], [], []],
   },
   final: null,
+  finalGanador: null,
 };

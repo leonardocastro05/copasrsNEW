@@ -99,7 +99,8 @@ function crearJornadasTemporada() {
         posB: null,
         ganador: null,
         vueltaRapida: null,
-        sancion: null,
+        sancionA: null,
+        sancionB: null,
       });
     }
     var fijo = orden.shift();

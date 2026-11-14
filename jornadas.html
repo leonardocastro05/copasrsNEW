@@ -19,6 +19,21 @@
       <button type="button" id="next" class="flecha">›</button>
     </div>
     <div class="duelos" id="duelos"></div>
+    <section class="clasificacion" aria-labelledby="titulo-clasificacion">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Seguimiento</p>
+          <h2 class="titulo" id="titulo-clasificacion">Clasificación</h2>
+        </div>
+        <p class="section-note">Premios acumulados por mánager</p>
+      </div>
+      <div class="tabla-wrap">
+        <table>
+          <thead><tr><th>Pos.</th><th>Mánager</th><th>Puntos</th><th>Dinero acumulado</th></tr></thead>
+          <tbody id="clasificacion"></tbody>
+        </table>
+      </div>
+    </section>
   </main>
   <script src="js/srs-data.js"></script>
   <script src="js/perfiles.js"></script>
@@ -54,6 +69,12 @@
       });
       if (j.enfrentamientos.length === 0) html = '<p class="vacio">Emparejamientos pendientes</p>';
       document.getElementById("duelos").innerHTML = html;
+      var filas = "";
+      crearClasificacion().forEach(function (fila, i) {
+        filas += "<tr><td>" + (i + 1) + "</td><td>" + linkManager(fila.nombre) +
+          "</td><td>" + fila.puntos + "</td><td>" + fila.dinero.toLocaleString("es-ES") + " €</td></tr>";
+      });
+      document.getElementById("clasificacion").innerHTML = filas;
     }
 
     document.getElementById("prev").disabled = true;
