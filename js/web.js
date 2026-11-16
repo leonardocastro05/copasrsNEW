@@ -125,26 +125,24 @@ function dineroDeEliminatorias(nombre) {
 function crearClasificacion() {
   return SRS.pilotos.map(function (piloto) {
     var puntos = 0;
-    var jornadasJugadas = 0;
+    var duelosGanados = 0;
     SRS.jornadas.forEach(function (jornada) {
       if (!jornada.completada) return;
-      var jugo = false;
       jornada.enfrentamientos.forEach(function (enfrentamiento) {
         if (enfrentamiento.equipoA === piloto.equipo) {
           puntos += puntosEnfrentamiento(enfrentamiento, "A");
-          jugo = true;
+          if (enfrentamiento.ganador === "A") duelosGanados++;
         }
         if (enfrentamiento.equipoB === piloto.equipo) {
           puntos += puntosEnfrentamiento(enfrentamiento, "B");
-          jugo = true;
+          if (enfrentamiento.ganador === "B") duelosGanados++;
         }
       });
-      if (jugo) jornadasJugadas++;
     });
     return {
       nombre: piloto.nombre,
       puntos: puntos,
-      dinero: jornadasJugadas * PREMIOS.jornada + dineroDeEliminatorias(piloto.nombre),
+      dinero: duelosGanados * PREMIOS.jornada + dineroDeEliminatorias(piloto.nombre),
       posicionInicial: piloto.pos,
     };
   }).sort(function (a, b) {
