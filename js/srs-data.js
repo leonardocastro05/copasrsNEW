@@ -122,3 +122,74 @@ function crearJornadasTemporada() {
 }
 
 SRS.jornadas = crearJornadasTemporada();
+
+// Resultado importado de iGP Manager: J1 China (id 70355083).
+var RESULTADO_J1_CHINA = {
+  posiciones: {
+    "10 Scuderia Ferrari": 1,
+    "43 Williams Racing": 2,
+    "Tortuga": 3,
+    "211 Scuderia Ferrari": 4,
+    "17 Jordan Grand Prix": 5,
+    "01 FORD MUSTANG": 6,
+    "TheGoat Ferreira": 7,
+    "Roma Astur": 8,
+    "11 Racing Club": 9,
+    "777 Cadillac Saint Laurent Kimoa": 10,
+    "25 Kimoa Racing F1 Team": 11,
+    "00 FoxTrot GP": 12,
+    "55 Williams F1 Team": 13,
+    "Infiniti Red Bull Racing F1 Team": 14,
+    "Сектор Газ": 15,
+    "00 CRT Competition": 16,
+    "50 Rizia Royal Racing": 17,
+    "24 Andretti William Hill F2": 18,
+    "ruiFerrari": 19,
+    "Titán F1 Team": 20,
+    "89 WILLIAMS RACING TEAM": 21,
+    "Red Bull Argen": 22,
+    "99 Campos Racing F1": 23,
+    "21 Titan F1 Team by Vitality Motorsports": 24,
+    "Red Bull Racing F1 Team": 25,
+    "Williams Racing": 26,
+    "43 Campos Racing F1": 27,
+    "PREMA RACING": 28,
+    "12 Kimoa Racing F1 Team": 29,
+    "50 Titan F1 Team": 30,
+    "83 Lotus Cars": 31,
+    "72 Foxtrot GP": 32,
+  },
+  vueltaRapida: "11 Racing Club",
+  combustible: "72 Foxtrot GP",
+  fuente: "https://igpmanager.com/app/d=result&id=70355083&tab=race",
+};
+
+function aplicarResultado(jornada, resultado) {
+  jornada.enfrentamientos.forEach(function (enfrentamiento) {
+    var posA = resultado.posiciones[enfrentamiento.equipoA];
+    var posB = resultado.posiciones[enfrentamiento.equipoB];
+    if (!posA || !posB) return;
+    enfrentamiento.posA = posA;
+    enfrentamiento.posB = posB;
+    enfrentamiento.ganador = posA < posB ? "A" : "B";
+    enfrentamiento.vueltaRapida =
+      resultado.vueltaRapida === enfrentamiento.equipoA
+        ? "A"
+        : resultado.vueltaRapida === enfrentamiento.equipoB
+          ? "B"
+          : null;
+    enfrentamiento.sancionA =
+      resultado.combustible === enfrentamiento.equipoA ? "combustible" : null;
+    enfrentamiento.sancionB =
+      resultado.combustible === enfrentamiento.equipoB ? "combustible" : null;
+  });
+  jornada.completada = jornada.enfrentamientos.every(function (enfrentamiento) {
+    return enfrentamiento.posA && enfrentamiento.posB;
+  });
+  jornada.resultado = {
+    fuente: resultado.fuente,
+    importado: true,
+  };
+}
+
+aplicarResultado(SRS.jornadas[0], RESULTADO_J1_CHINA);
