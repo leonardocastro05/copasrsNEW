@@ -179,9 +179,15 @@ function aplicarResultado(jornada, resultado) {
           ? "B"
           : null;
     enfrentamiento.sancionA =
-      resultado.combustible === enfrentamiento.equipoA ? "combustible" : null;
+      resultado.combustible === enfrentamiento.equipoA ||
+      (resultado.sancionados && resultado.sancionados.includes(enfrentamiento.equipoA))
+        ? "combustible"
+        : null;
     enfrentamiento.sancionB =
-      resultado.combustible === enfrentamiento.equipoB ? "combustible" : null;
+      resultado.combustible === enfrentamiento.equipoB ||
+      (resultado.sancionados && resultado.sancionados.includes(enfrentamiento.equipoB))
+        ? "combustible"
+        : null;
   });
   jornada.completada = jornada.enfrentamientos.every(function (enfrentamiento) {
     return enfrentamiento.posA && enfrentamiento.posB;
@@ -193,3 +199,47 @@ function aplicarResultado(jornada, resultado) {
 }
 
 aplicarResultado(SRS.jornadas[0], RESULTADO_J1_CHINA);
+
+// Resultado importado de iGP Manager: J2 Japon (id 70355084).
+var RESULTADO_J2_JAPON = {
+  posiciones: {
+    "777 Cadillac Saint Laurent Kimoa": 1,
+    "43 Williams Racing": 2,
+    "11 Racing Club": 3,
+    "Сектор Газ": 4,
+    "50 Rizia Royal Racing": 5,
+    "25 Kimoa Racing F1 Team": 6,
+    "89 WILLIAMS RACING TEAM": 7,
+    "Infiniti Red Bull Racing F1 Team": 8,
+    "24 Andretti William Hill F2": 9,
+    "10 Scuderia Ferrari": 10,
+    "Tortuga": 11,
+    "99 Campos Racing F1": 12,
+    "Williams Racing": 13,
+    "Red Bull Argen": 14,
+    "43 Campos Racing F1": 15,
+    "ruiFerrari": 16,
+    "00 CRT Competition": 17,
+    "Titán F1 Team": 18,
+    "55 Williams F1 Team": 19,
+    "12 Kimoa Racing F1 Team": 20,
+    "Red Bull Racing F1 Team": 21,
+    "Roma Astur": 22,
+    "00 FoxTrot GP": 23,
+    "21 Titan F1 Team by Vitality Motorsports": 24,
+    "PREMA RACING": 25,
+    "50 Titan F1 Team": 26,
+    "TheGoat Ferreira": 27,
+    "83 Lotus Cars": 28,
+    "01 FORD MUSTANG": 29,
+    "17 Jordan Grand Prix": 30,
+    "211 Scuderia Ferrari": 31,
+    "72 Foxtrot GP": 32,
+  },
+  vueltaRapida: "Infiniti Red Bull Racing F1 Team",
+  combustible: null,
+  sancionados: ["211 Scuderia Ferrari", "72 Foxtrot GP"],
+  fuente: "https://igpmanager.com/app/d=result&id=70355084&tier=1&tab=race",
+};
+
+aplicarResultado(SRS.jornadas[1], RESULTADO_J2_JAPON);
