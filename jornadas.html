@@ -75,16 +75,25 @@
           "</td><td>" + fila.puntos + "</td><td>" + fila.dinero.toLocaleString("es-ES") + " €</td></tr>";
       });
       document.getElementById("clasificacion").innerHTML = filas;
+
+      var prev = document.getElementById("prev");
+      var next = document.getElementById("next");
+      prev.disabled = indice === 0;
+      next.disabled = indice >= SRS.jornadas.length - 1 || !SRS.jornadas[indice + 1].completada && indice + 1 > actual;
+      prev.setAttribute("aria-label", prev.disabled ? "No hay jornadas anteriores" : "Ver jornada anterior");
+      next.setAttribute("aria-label", next.disabled ? "No hay jornadas disponibles" : "Ver jornada siguiente");
     }
 
-    document.getElementById("prev").disabled = true;
-    document.getElementById("prev").setAttribute("aria-label", "Solo se muestra la jornada actual");
-    document.getElementById("prev").addEventListener("click", function () {});
+    document.getElementById("prev").addEventListener("click", function () {
+      if (indice <= 0) return;
+      indice--;
+      pintarJornada();
+    });
     document.getElementById("next").addEventListener("click", function () {
-      var jornada = SRS.jornadas[indice];
-      if (!jornada.completada || indice >= SRS.jornadas.length - 1) return;
+      if (indice >= SRS.jornadas.length - 1) return;
+      var siguiente = SRS.jornadas[indice + 1];
+      if (!siguiente.completada && indice + 1 > actual) return;
       indice++;
-      actual = indice;
       pintarJornada();
     });
     pintarJornada();
