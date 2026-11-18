@@ -243,3 +243,47 @@ var RESULTADO_J2_JAPON = {
 };
 
 aplicarResultado(SRS.jornadas[1], RESULTADO_J2_JAPON);
+
+// Resultado importado de iGP Manager: J3 Brasil (id 70355085).
+var RESULTADO_J3_BRASIL = {
+  posiciones: {
+    "10 Scuderia Ferrari": 1,
+    "00 CRT Competition": 2,
+    "Tortuga": 3,
+    "00 FoxTrot GP": 4,
+    "55 Williams F1 Team": 5,
+    "50 Rizia Royal Racing": 6,
+    "43 Williams Racing": 7,
+    "11 Racing Club": 8,
+    "25 Kimoa Racing F1 Team": 9,
+    "TheGoat Ferreira": 10,
+    "17 Jordan Grand Prix": 11,
+    "Сектор Газ": 12,
+    "12 Kimoa Racing F1 Team": 13,
+    "72 Foxtrot GP": 14,
+    "01 FORD MUSTANG": 15,
+    "Roma Astur": 16,
+    "89 WILLIAMS RACING TEAM": 17,
+    "Red Bull Argen": 18,
+    "24 Andretti William Hill F2": 19,
+    "777 Cadillac Saint Laurent Kimoa": 20,
+    "99 Campos Racing F1": 21,
+    "ruiFerrari": 22,
+    "43 Campos Racing F1": 23,
+    "Williams Racing": 24,
+    "21 Titan F1 Team by Vitality Motorsports": 25,
+    "83 Lotus Cars": 26,
+    "Infiniti Red Bull Racing F1 Team": 27,
+    "50 Titan F1 Team": 28,
+    "Titán F1 Team": 29,
+    "Red Bull Racing F1 Team": 30,
+    "PREMA RACING": 31,
+    "211 Scuderia Ferrari": 32,
+  },
+  vueltaRapida: "83 Lotus Cars",
+  combustible: null,
+  sancionados: [],
+  fuente: "https://igpmanager.com/app/d=result&id=70355085&tier=1&tab=race",
+};
+
+aplicarResultado(SRS.jornadas[2], RESULTADO_J3_BRASIL);
