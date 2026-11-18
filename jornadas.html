@@ -57,8 +57,12 @@
       document.getElementById("estado").innerHTML = estado;
       var html = "";
       j.enfrentamientos.forEach(function (e) {
-        var ca = e.ganador === "A" ? "gana" : e.ganador === "B" ? "pierde" : "";
-        var cb = e.ganador === "B" ? "gana" : e.ganador === "A" ? "pierde" : "";
+        var ca = e.vueltaRapida === "A"
+          ? "fastlap"
+          : e.ganador === "A" ? "gana" : e.ganador === "B" ? "pierde" : "";
+        var cb = e.vueltaRapida === "B"
+          ? "fastlap"
+          : e.ganador === "B" ? "gana" : e.ganador === "A" ? "pierde" : "";
         var pa = e.posA ? "P" + e.posA : "";
         var pb = e.posB ? "P" + e.posB : "";
         html += '<div class="duelo">' +

@@ -85,6 +85,7 @@ main.ancho { max-width: 1440px; }
 .vs { align-items: center; background: var(--ink); color: var(--accent); display: flex; font-size: .7rem; font-weight: 900; padding: 0 10px; }
 .lado.gana { background: #f2f9d9; box-shadow: inset 3px 0 var(--accent-dark); }
 .lado.pierde { opacity: .45; }
+.lado.fastlap { background: #eee7f8; box-shadow: inset 3px 0 #8b5cf6; opacity: 1; }
 .vacio { color: var(--muted); padding: 40px; text-align: center; }
 .clasificacion { margin-top: 64px; }
 .clasificacion .section-heading { margin: 0 0 12px; }
