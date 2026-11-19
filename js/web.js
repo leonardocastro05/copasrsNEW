@@ -49,7 +49,7 @@ var INFO_HTML =
   "<h2>Cómo funciona la próxima Copa</h2>" +
   '<div class="info-step"><b>1 · 13 jornadas</b><p>Se disputan 13 carreras en días aleatorios. En cada una, tu resultado se compara con el de tu oponente.</p></div>' +
   '<div class="info-step"><b>2 · Sistema de puntos</b><p>Ganar el duelo suma 3 puntos. La vuelta rápida añade 1 punto. Un NC resta 5 puntos y quedarse sin combustible, sin NC, resta 2.</p></div>' +
-  '<div class="info-step"><b>3 · Dos caminos a la final</b><p>Los 16 mejores entran en la <strong>upper bracket</strong>. Los otros 16 disputan la <strong>lower bracket</strong> por una segunda oportunidad.</p></div>' +
+  '<div class="info-step"><b>3 · Dos caminos a la final</b><p>Los 16 mejores entran en la <strong>upper bracket</strong>. Los mejores 8 disputan la <strong>lower bracket</strong> por una segunda oportunidad.</p></div>' +
   '<div class="info-step"><b>4 · Gran final</b><p>La final es un 1v1v1: los dos finalistas de la upper bracket más el ganador de la lower bracket.</p></div>' +
   '<div class="info-step"><b>5 · Recompensa</b><p>La lower bracket no tiene premios económicos. Si su ganador vence la final, se lleva el premio de la Copa, pero no las recompensas previas de la upper bracket.</p></div>' +
   '<button type="button" id="info-cerrar" class="btn">¡A correr!</button>';

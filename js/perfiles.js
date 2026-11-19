@@ -83,8 +83,8 @@ var BRACKET = {
   ronda: 0,
   upper: {
     nombres: ["Octavos", "Cuartos", "Semis"],
-    cantidad: [16, 8, 4, 2],
-    cruces: [[], [], [], []],
+    cantidad: [8, 4, 2],
+    cruces: [[], [], []],
   },
   lower: {
     nombres: ["Lower round 1", "Lower round 2", "Lower final"],

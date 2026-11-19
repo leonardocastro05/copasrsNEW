@@ -68,19 +68,19 @@
 
 function crearJornadasTemporada() {
   var circuitos = [
-    ["China", "16/11 · 21:00"],
-    ["Turquía", "17/11 · 21:00"],
-    ["Brasil", "18/11 · 21:00"],
-    ["Japón", "19/11 · 21:00"],
-    ["Baréin", "20/11 · 21:00"],
-    ["Malasia", "23/11 · 21:00"],
-    ["Países Bajos", "24/11 · 21:00"],
-    ["México", "25/11 · 21:00"],
-    ["Singapur", "26/11 · 21:00"],
-    ["Mónaco", "27/11 · 21:00"],
-    ["Australia", "30/11 · 21:00"],
-    ["Abu Dabi", "01/12 · 21:00"],
-    ["Hungría", "02/12 · 21:00"],
+    ["China", "16/11"],
+    ["Turquía", "17/11"],
+    ["Brasil", "18/11"],
+    ["Japón", "19/11"],
+    ["Baréin", "20/11"],
+    ["Malasia", "23/11"],
+    ["Países Bajos", "24/11"],
+    ["México", "25/11"],
+    ["Singapur", "26/11"],
+    ["Mónaco", "27/11"],
+    ["Australia", "30/11"],
+    ["Abu Dabi", "01/12"],
+    ["Hungría", "02/12"],
   ];
   var equipos = SRS.pilotos.map(function (p) {
     return p.equipo;
