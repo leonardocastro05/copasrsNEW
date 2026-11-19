@@ -287,3 +287,47 @@ var RESULTADO_J3_BRASIL = {
 };
 
 aplicarResultado(SRS.jornadas[2], RESULTADO_J3_BRASIL);
+
+// Resultado importado de iGP Manager: J4 Japon (id 70355086).
+var RESULTADO_J4_JAPON = {
+  posiciones: {
+    "10 Scuderia Ferrari": 1,
+    "777 Cadillac Saint Laurent Kimoa": 2,
+    "11 Racing Club": 3,
+    "50 Rizia Royal Racing": 4,
+    "Сектор Газ": 5,
+    "Tortuga": 6,
+    "TheGoat Ferreira": 7,
+    "01 FORD MUSTANG": 8,
+    "17 Jordan Grand Prix": 9,
+    "211 Scuderia Ferrari": 10,
+    "24 Andretti William Hill F2": 11,
+    "55 Williams F1 Team": 12,
+    "00 FoxTrot GP": 13,
+    "72 Foxtrot GP": 14,
+    "12 Kimoa Racing F1 Team": 15,
+    "43 Williams Racing": 16,
+    "43 Campos Racing F1": 17,
+    "Red Bull Argen": 18,
+    "Roma Astur": 19,
+    "83 Lotus Cars": 20,
+    "21 Titan F1 Team by Vitality Motorsports": 21,
+    "ruiFerrari": 22,
+    "50 Titan F1 Team": 23,
+    "Williams Racing": 24,
+    "Titán F1 Team": 25,
+    "25 Kimoa Racing F1 Team": 26,
+    "PREMA RACING": 27,
+    "Red Bull Racing F1 Team": 28,
+    "99 Campos Racing F1": 29,
+    "Infiniti Red Bull Racing F1 Team": 30,
+    "00 CRT Competition": 31,
+    "89 WILLIAMS RACING TEAM": 32,
+  },
+  vueltaRapida: "83 Lotus Cars",
+  combustible: null,
+  sancionados: [],
+  fuente: "https://igpmanager.com/app/d=result&id=70355086&tier=1&tab=race",
+};
+
+aplicarResultado(SRS.jornadas[3], RESULTADO_J4_JAPON);
