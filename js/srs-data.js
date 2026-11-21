@@ -331,3 +331,47 @@ var RESULTADO_J4_JAPON = {
 };
 
 aplicarResultado(SRS.jornadas[3], RESULTADO_J4_JAPON);
+
+// Resultado importado de iGP Manager: J5 Barein (id 70355087).
+var RESULTADO_J5_BAREIN = {
+  posiciones: {
+    "777 Cadillac Saint Laurent Kimoa": 1,
+    "10 Scuderia Ferrari": 2,
+    "50 Rizia Royal Racing": 3,
+    "11 Racing Club": 4,
+    "17 Jordan Grand Prix": 5,
+    "Сектор Газ": 6,
+    "55 Williams F1 Team": 7,
+    "01 FORD MUSTANG": 8,
+    "TheGoat Ferreira": 9,
+    "211 Scuderia Ferrari": 10,
+    "25 Kimoa Racing F1 Team": 11,
+    "72 Foxtrot GP": 12,
+    "ruiFerrari": 13,
+    "Infiniti Red Bull Racing F1 Team": 14,
+    "12 Kimoa Racing F1 Team": 15,
+    "Tortuga": 16,
+    "Titán F1 Team": 17,
+    "00 CRT Competition": 18,
+    "21 Titan F1 Team by Vitality Motorsports": 19,
+    "24 Andretti William Hill F2": 20,
+    "43 Williams Racing": 21,
+    "83 Lotus Cars": 22,
+    "89 WILLIAMS RACING TEAM": 23,
+    "50 Titan F1 Team": 24,
+    "Red Bull Racing F1 Team": 25,
+    "Red Bull Argen": 26,
+    "43 Campos Racing F1": 27,
+    "PREMA RACING": 28,
+    "Roma Astur": 29,
+    "00 FoxTrot GP": 30,
+    "Williams Racing": 31,
+    "99 Campos Racing F1": 32,
+  },
+  vueltaRapida: "00 CRT Competition",
+  combustible: null,
+  sancionados: ["00 FoxTrot GP", "Williams Racing", "99 Campos Racing F1"],
+  fuente: "https://igpmanager.com/app/d=result&id=70355087&tier=1&tab=race",
+};
+
+aplicarResultado(SRS.jornadas[4], RESULTADO_J5_BAREIN);
