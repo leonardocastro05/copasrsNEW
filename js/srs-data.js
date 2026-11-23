@@ -375,3 +375,47 @@ var RESULTADO_J5_BAREIN = {
 };
 
 aplicarResultado(SRS.jornadas[4], RESULTADO_J5_BAREIN);
+
+// Resultado importado de iGP Manager: J6 Malasia (id 70355088).
+var RESULTADO_J6_MALASIA = {
+  posiciones: {
+    "11 Racing Club": 1,
+    "00 FoxTrot GP": 2,
+    "TheGoat Ferreira": 3,
+    "43 Williams Racing": 4,
+    "50 Rizia Royal Racing": 5,
+    "01 FORD MUSTANG": 6,
+    "777 Cadillac Saint Laurent Kimoa": 7,
+    "Сектор Газ": 8,
+    "72 Foxtrot GP": 9,
+    "25 Kimoa Racing F1 Team": 10,
+    "211 Scuderia Ferrari": 11,
+    "24 Andretti William Hill F2": 12,
+    "10 Scuderia Ferrari": 13,
+    "Roma Astur": 14,
+    "Red Bull Argen": 15,
+    "Williams Racing": 16,
+    "17 Jordan Grand Prix": 17,
+    "43 Campos Racing F1": 18,
+    "55 Williams F1 Team": 19,
+    "Tortuga": 20,
+    "ruiFerrari": 21,
+    "00 CRT Competition": 22,
+    "Red Bull Racing F1 Team": 23,
+    "12 Kimoa Racing F1 Team": 24,
+    "21 Titan F1 Team by Vitality Motorsports": 25,
+    "50 Titan F1 Team": 26,
+    "83 Lotus Cars": 27,
+    "89 WILLIAMS RACING TEAM": 28,
+    "Titán F1 Team": 29,
+    "99 Campos Racing F1": 30,
+    "Infiniti Red Bull Racing F1 Team": 31,
+    "PREMA RACING": 32,
+  },
+  vueltaRapida: "83 Lotus Cars",
+  combustible: null,
+  sancionados: [],
+  fuente: "https://igpmanager.com/app/d=result&id=70355088&tier=1&tab=race",
+};
+
+aplicarResultado(SRS.jornadas[5], RESULTADO_J6_MALASIA);
