@@ -419,3 +419,47 @@ var RESULTADO_J6_MALASIA = {
 };
 
 aplicarResultado(SRS.jornadas[5], RESULTADO_J6_MALASIA);
+
+// Resultado importado de iGP Manager: J7 Paises Bajos (id 70355089).
+var RESULTADO_J7_PAISES_BAJOS = {
+  posiciones: {
+    "43 Williams Racing": 1,
+    "777 Cadillac Saint Laurent Kimoa": 2,
+    "17 Jordan Grand Prix": 3,
+    "Tortuga": 4,
+    "50 Rizia Royal Racing": 5,
+    "00 FoxTrot GP": 6,
+    "TheGoat Ferreira": 7,
+    "211 Scuderia Ferrari": 8,
+    "01 FORD MUSTANG": 9,
+    "11 Racing Club": 10,
+    "Red Bull Racing F1 Team": 11,
+    "89 WILLIAMS RACING TEAM": 12,
+    "Red Bull Argen": 13,
+    "10 Scuderia Ferrari": 14,
+    "Сектор Газ": 15,
+    "00 CRT Competition": 16,
+    "Infiniti Red Bull Racing F1 Team": 17,
+    "24 Andretti William Hill F2": 18,
+    "55 Williams F1 Team": 19,
+    "ruiFerrari": 20,
+    "43 Campos Racing F1": 21,
+    "72 Foxtrot GP": 22,
+    "Williams Racing": 23,
+    "Roma Astur": 24,
+    "Titán F1 Team": 25,
+    "12 Kimoa Racing F1 Team": 26,
+    "PREMA RACING": 27,
+    "25 Kimoa Racing F1 Team": 28,
+    "50 Titan F1 Team": 29,
+    "99 Campos Racing F1": 30,
+    "21 Titan F1 Team by Vitality Motorsports": 31,
+    "83 Lotus Cars": 32,
+  },
+  vueltaRapida: "83 Lotus Cars",
+  combustible: null,
+  sancionados: [],
+  fuente: "https://igpmanager.com/app/d=result&id=70355089&tier=1&tab=race",
+};
+
+aplicarResultado(SRS.jornadas[6], RESULTADO_J7_PAISES_BAJOS);
