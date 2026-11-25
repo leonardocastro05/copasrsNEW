@@ -463,3 +463,54 @@ var RESULTADO_J7_PAISES_BAJOS = {
 };
 
 aplicarResultado(SRS.jornadas[6], RESULTADO_J7_PAISES_BAJOS);
+
+// Resultado importado de iGP Manager: J8 México (id 70355090).
+// Ojo: en iGP el 777 aparece ahora como "777 Andretti William Hill Kimoa",
+// "03 Williams Racing" es "Williams Racing" y "Сектор Газа" es "Сектор Газ";
+// se usan las claves de SRS.pilotos para que casen con los emparejamientos.
+var RESULTADO_J8_MEXICO = {
+  posiciones: {
+    "10 Scuderia Ferrari": 1,
+    "TheGoat Ferreira": 2,
+    "50 Rizia Royal Racing": 3,
+    "11 Racing Club": 4,
+    "Infiniti Red Bull Racing F1 Team": 5,
+    "Tortuga": 6,
+    "01 FORD MUSTANG": 7,
+    "777 Cadillac Saint Laurent Kimoa": 8,
+    "43 Williams Racing": 9,
+    "Сектор Газ": 10,
+    "55 Williams F1 Team": 11,
+    "24 Andretti William Hill F2": 12,
+    "00 CRT Competition": 13,
+    "211 Scuderia Ferrari": 14,
+    "99 Campos Racing F1": 15,
+    "43 Campos Racing F1": 16,
+    "Roma Astur": 17,
+    "Red Bull Argen": 18,
+    "Red Bull Racing F1 Team": 19,
+    "Titán F1 Team": 20,
+    "83 Lotus Cars": 21,
+    "12 Kimoa Racing F1 Team": 22,
+    "89 WILLIAMS RACING TEAM": 23,
+    "25 Kimoa Racing F1 Team": 24,
+    "PREMA RACING": 25,
+    "ruiFerrari": 26,
+    "50 Titan F1 Team": 27,
+    "72 Foxtrot GP": 28,
+    "Williams Racing": 29,
+    "00 FoxTrot GP": 30,
+    "17 Jordan Grand Prix": 31,
+    "21 Titan F1 Team by Vitality Motorsports": 32,
+  },
+  vueltaRapida: "43 Campos Racing F1",
+  combustible: null,
+  sancionados: [
+    "00 FoxTrot GP",
+    "17 Jordan Grand Prix",
+    "21 Titan F1 Team by Vitality Motorsports",
+  ],
+  fuente: "https://igpmanager.com/app/d=result&id=70355090&tier=1&tab=race",
+};
+
+aplicarResultado(SRS.jornadas[7], RESULTADO_J8_MEXICO);
