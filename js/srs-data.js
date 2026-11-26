@@ -179,15 +179,19 @@ function aplicarResultado(jornada, resultado) {
           ? "B"
           : null;
     enfrentamiento.sancionA =
-      resultado.combustible === enfrentamiento.equipoA ||
-      (resultado.sancionados && resultado.sancionados.includes(enfrentamiento.equipoA))
-        ? "combustible"
-        : null;
+      resultado.nc && resultado.nc.includes(enfrentamiento.equipoA)
+        ? "NC"
+        : resultado.combustible === enfrentamiento.equipoA ||
+            (resultado.sancionados && resultado.sancionados.includes(enfrentamiento.equipoA))
+          ? "combustible"
+          : null;
     enfrentamiento.sancionB =
-      resultado.combustible === enfrentamiento.equipoB ||
-      (resultado.sancionados && resultado.sancionados.includes(enfrentamiento.equipoB))
-        ? "combustible"
-        : null;
+      resultado.nc && resultado.nc.includes(enfrentamiento.equipoB)
+        ? "NC"
+        : resultado.combustible === enfrentamiento.equipoB ||
+            (resultado.sancionados && resultado.sancionados.includes(enfrentamiento.equipoB))
+          ? "combustible"
+          : null;
   });
   jornada.completada = jornada.enfrentamientos.every(function (enfrentamiento) {
     return enfrentamiento.posA && enfrentamiento.posB;
@@ -514,3 +518,56 @@ var RESULTADO_J8_MEXICO = {
 };
 
 aplicarResultado(SRS.jornadas[7], RESULTADO_J8_MEXICO);
+
+// Resultado importado de iGP Manager: J9 Singapur (id 70355091, deducido de la secuencia).
+// Claves de SRS.pilotos: "777 Cadillac Saint Laurent Kimoa" (iGP: 777 Andretti William Hill Kimoa),
+// "Williams Racing" (iGP: 03 Williams Racing) y "Сектор Газ" (iGP: Сектор Газа).
+// "89 WILLIAMS RACING TEAM" abandono la liga: DSQ = NC (-5 puntos), se le asigna la P32.
+var RESULTADO_J9_SINGAPUR = {
+  posiciones: {
+    "50 Rizia Royal Racing": 1,
+    "11 Racing Club": 2,
+    "TheGoat Ferreira": 3,
+    "10 Scuderia Ferrari": 4,
+    "Tortuga": 5,
+    "43 Williams Racing": 6,
+    "777 Cadillac Saint Laurent Kimoa": 7,
+    "24 Andretti William Hill F2": 8,
+    "01 FORD MUSTANG": 9,
+    "Сектор Газ": 10,
+    "17 Jordan Grand Prix": 11,
+    "43 Campos Racing F1": 12,
+    "55 Williams F1 Team": 13,
+    "Red Bull Argen": 14,
+    "211 Scuderia Ferrari": 15,
+    "Red Bull Racing F1 Team": 16,
+    "99 Campos Racing F1": 17,
+    "ruiFerrari": 18,
+    "12 Kimoa Racing F1 Team": 19,
+    "00 CRT Competition": 20,
+    "50 Titan F1 Team": 21,
+    "Titán F1 Team": 22,
+    "83 Lotus Cars": 23,
+    "Roma Astur": 24,
+    "25 Kimoa Racing F1 Team": 25,
+    "PREMA RACING": 26,
+    "Infiniti Red Bull Racing F1 Team": 27,
+    "00 FoxTrot GP": 28,
+    "Williams Racing": 29,
+    "21 Titan F1 Team by Vitality Motorsports": 30,
+    "72 Foxtrot GP": 31,
+    "89 WILLIAMS RACING TEAM": 32,
+  },
+  vueltaRapida: "50 Rizia Royal Racing",
+  combustible: null,
+  sancionados: [
+    "00 FoxTrot GP",
+    "Williams Racing",
+    "21 Titan F1 Team by Vitality Motorsports",
+    "72 Foxtrot GP",
+  ],
+  nc: ["89 WILLIAMS RACING TEAM"],
+  fuente: "https://igpmanager.com/app/d=result&id=70355091&tier=1&tab=race",
+};
+
+aplicarResultado(SRS.jornadas[8], RESULTADO_J9_SINGAPUR);
